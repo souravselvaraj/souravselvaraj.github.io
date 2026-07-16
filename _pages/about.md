@@ -13,7 +13,7 @@ profile:
     <p>Robotics Engineering</p>
     <p>Worcester, MA, USA</p>
 
-selected_papers: true # includes a list of papers marked as "selected={true}"
+selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true
 
 announcements:
@@ -28,4 +28,4 @@ At WPI, my research focuses on enabling legged robots to interact with the physi
 
 My research interests include legged locomotion, humanoid control, whole-body control, model predictive control, sim-to-real transfer, and physics-informed reinforcement learning. I am particularly interested in combining the structure and reliability of classical model-based control with the adaptability of learning-based methods.
 
-Before joining WPI, I completed my undergraduate studies at the [National Institute of Technology, Tiruchirappalli](https://www.nitt.edu/). More details about my research, projects, and experience can be found in my curriculum vitae.
+Before joining WPI, I completed my undergraduate studies at the [National Institute of Technology, Tiruchirappalli](https://www.nitt.edu/). More details about my research, projects, and experience can be found in my [curriculum vitae]({{ '/cv/' | relative_url }}).
