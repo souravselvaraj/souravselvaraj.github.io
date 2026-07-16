@@ -47,4 +47,4 @@ Evaluated in NVIDIA Isaac Lab across commanded velocities and missing-step terra
 
 ## Status
 
-A manuscript (O. Sullivan, S. Selvaraj, and M. Agheli) is in preparation, targeting *IEEE ICRA*.
+A manuscript (O. Sullivan, S. Selvaraj, and M. Agheli) is in preparation, targeting *IEEE ICRA 2027*.
