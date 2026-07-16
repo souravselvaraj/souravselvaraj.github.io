@@ -1,13 +1,11 @@
 ---
 layout: page
 title: Humanoid Ice Skating
-description: Emergent ice-skating locomotion for a Unitree G1 via blade-contact RL — no motion capture, no imitation data.
+description: Emergent ice-skating locomotion for a Unitree G1 via blade-contact RL — no motion capture, no imitation data. Skating falls out of the physics.
 img: assets/img/projects/g1_ice_skating.jpg
 importance: 3
 category: projects
 ---
-
-Training a **Unitree G1 humanoid to ice-skate** on passive 3 mm knife-edge blades with PPO in MuJoCo — with **no motion capture or imitation data**. Skating emerges purely from the physics: **anisotropic blade–ice contact** (elliptic friction cones — near-frictionless along the blade, high resistance across it) and a reward that separates forward glide from penalized lateral slip.
 
 <div class="row justify-content-center">
     <div class="col-sm-10 mt-3 mb-3">
@@ -15,16 +13,35 @@ Training a **Unitree G1 humanoid to ice-skate** on passive 3 mm knife-edge blade
     </div>
 </div>
 <div class="caption">
-    Emergent skating gait in MuJoCo — glide, push-off, and recovery arise from blade-contact physics alone.
+    Emergent skating in MuJoCo — glide, push-off, and recovery arise from blade-contact physics alone.
 </div>
+
+Can a humanoid learn to *ice-skate* without ever being shown how? This project trains a **Unitree G1** on passive 3 mm knife-edge blades with PPO in MuJoCo, using **no motion capture and no imitation data**. There is no reward term that says "look like a skater" — the skating gait *emerges* from the interaction between the contact physics and a task reward.
+
+## The key idea: let the physics do the talking
+
+Real ice skating exists because a blade is directionally selective: nearly frictionless along its length, and strongly resistant sideways. The simulation captures exactly this with **anisotropic blade–ice contact** — elliptic friction cones aligned with each blade — plus a reward that separates the two directions:
+
+- **Forward glide** along the blade is rewarded.
+- **Lateral slip** across the blade is penalized — and the penalty is *ungated* (always active), which closed a family of reward-hacking exploits where the policy "walked" on the blades instead of gliding.
+
+Given only this, PPO discovers push-off, glide, and weight transfer on its own.
 
 ## Engineered for hardware transfer
 
-- **Asymmetric actor–critic** with privileged blade velocities available to the critic only.
-- **Staged speed curriculum** from 0.15 to 1.2 m/s.
-- **Ungated slip penalties** that close reward-hacking exploits (policies that "walk" on the blades instead of gliding).
-- **Domain randomization** over PD gains, inertia, payload, actuator delay, and blade mounting.
+The training setup is built so the policy has a path to the real robot:
+
+- **Asymmetric actor–critic** — the critic sees privileged blade-velocity information; the actor only gets observations available onboard.
+- **Staged speed curriculum** from 0.15 m/s up to 1.2 m/s commanded speed.
+- **Domain randomization** over PD gains, link inertia, payload, actuator delay, and blade mounting geometry.
 
 ## Current results (simulation)
 
-Policies track a 0.9 m/s velocity command within **0.09 m/s** at **94% single-support**, holding lateral blade slip to **2–4 cm/s** and gliding for up to **70% of stance**.
+| Metric                             | Result                     |
+| ---------------------------------- | -------------------------- |
+| Velocity tracking @ 0.9 m/s command | within **0.09 m/s**       |
+| Single-support time                | **94%**                    |
+| Lateral blade slip                 | **2–4 cm/s**               |
+| Glide fraction of stance           | up to **70%**              |
+
+Active project (started July 2026) — hardware transfer is the next milestone.

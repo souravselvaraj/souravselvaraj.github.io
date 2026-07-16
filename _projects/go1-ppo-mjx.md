@@ -1,31 +1,39 @@
 ---
 layout: page
 title: Go1 PPO Locomotion
-description: PPO locomotion for the Unitree Go1 in JAX/MuJoCo MJX — asymmetric actor-critic, domain randomization, and real-robot deployment.
+description: PPO locomotion for the Unitree Go1 in JAX/MuJoCo MJX — asymmetric actor-critic, domain randomization, rough terrain, and real-robot deployment.
 img: assets/img/projects/go1_locomotion.jpg
 importance: 7
 category: projects
 ---
 
-End-to-end **PPO locomotion training for the Unitree Go1** quadruped using JAX, Brax PPO, and MuJoCo MJX, with keyboard teleoperation of trained policies and deployment on the real robot.
-
 <div class="row justify-content-center">
     <div class="col-sm-10 mt-3 mb-3">
-        <img src="https://raw.githubusercontent.com/souravselvaraj/unitree-go1-ppo-mjx/main/docs/media/go1_locomotion_demo.gif" alt="Real-world Go1 locomotion demo" class="img-fluid rounded z-depth-1" />
+        {% include video.liquid path="assets/video/projects/go1_locomotion.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
     </div>
 </div>
 <div class="caption">
-    Real-world Go1 walking with the trained policy.
+    The trained policy deployed on the real Go1.
 </div>
 
-## Highlights
+End-to-end **PPO locomotion training for the Unitree Go1** quadruped using JAX, Brax PPO, and MuJoCo MJX — from vectorized simulation through keyboard-teleoperated deployment on the real robot.
 
-- **JAX/MJX vectorized training** with `jax.vmap` for high-throughput simulation; Flax networks and Orbax checkpoints.
-- **Asymmetric actor–critic**: onboard-realistic policy observations plus privileged critic state.
-- **Domain randomization** over friction, inertia, center of mass, and mass for sim-to-real transfer.
-- **Gait shaping** with foot clearance, slip, air-time, and energy penalties.
-- Flat (`Go1JoystickFlatTerrain`) and rough-terrain (`Go1JoystickRoughTerrain`) environments with vendored MJCF/heightfield assets.
+## Training at JAX speed
 
-Related: a [ROS 2 Humble + Ignition Gazebo simulation stack](https://github.com/souravselvaraj/Unitree_Go1_Sim) for the Go1.
+The entire environment lives inside MJX, so simulation, reward computation, and PPO updates all run on-accelerator with `jax.vmap` across thousands of parallel environments — no CPU–GPU round trips. Flax networks, Orbax checkpointing.
+
+- **Action space**: joint-position offsets (±0.5 rad) around a nominal standing pose at a 50 Hz control rate (0.02 s control step over 0.004 s physics substeps) — the policy shapes posture rather than fighting for raw torques.
+- **Observations**: onboard-realistic policy inputs (IMU gyro, gravity vector in body frame, joint states, previous action, velocity command) with a **privileged critic** that additionally sees ground-truth velocities and contact state — asymmetric actor–critic for cleaner value estimates without cheating at deployment.
+- **Feet-only contact modeling** keeps the contact problem small and prevents spurious self-collisions from corrupting training.
+
+## Sim-to-real ingredients
+
+- **Domain randomization** over floor friction (μ ∈ [0.4, 1.0]), link inertia, center of mass, and mass.
+- **Gait shaping** rewards: foot clearance to a 10 cm swing target, slip and energy penalties, air-time terms — no reference trajectories.
+- **Rough-terrain variant** (`Go1JoystickRoughTerrain`): a procedurally generated heightfield (5 cm max feature height) with expanded contact-solver limits; the reward is identical to flat terrain, so robustness comes from the terrain distribution and randomization, not hand-tuned shaping.
+
+## Deployment
+
+Trained policies run through a keyboard teleoperation interface for velocity commands — the video above is the real robot walking with the learned policy. A companion [ROS 2 Humble + Ignition Gazebo simulation stack](https://github.com/souravselvaraj/Unitree_Go1_Sim) supports the same robot.
 
 Code: [github.com/souravselvaraj/unitree-go1-ppo-mjx](https://github.com/souravselvaraj/unitree-go1-ppo-mjx)
