@@ -16,7 +16,7 @@ category: research
     The surface-frame controller sliding the body-mounted tool along a cylindrical surface while regulating contact force (RViz visualization; commanded contact forces shown in magenta).
 </div>
 
-**ReSCoT-Q** (Reference-Guided Surface-Frame Control for Quadruped Robots) is my primary graduate research project in the ALMaS Research Group at WPI, advised by Dr. Mahdi Agheli. The goal: enable a quadruped to interact with the world through *sustained contact* — pressing a body-mounted tool against an external surface and sliding it along a reference path while regulating contact force, all while the robot keeps balancing on four legs.
+**ReSCoT-Q** (Reference-Guided Surface-Frame Control for Quadruped Robots) is my primary graduate research project in the [ALMaS Research Group](https://www.wpi.edu/people/faculty/mmaghelih) at [WPI](https://www.wpi.edu/), advised by Dr. Mahdi Agheli. The goal: enable a quadruped to interact with the world through *sustained contact* — pressing a body-mounted tool against an external surface and sliding it along a reference path while regulating contact force, all while the robot keeps balancing on four legs.
 
 This is a fundamentally different regime from locomotion or pick-and-place. The contact is persistent rather than intermittent, the interaction force must be actively regulated rather than avoided, and every stance transition of the gait perturbs the tool. Think of wiping a window, sanding a hull, or inspecting a pipeline — tasks that demand *force-controlled loco-manipulation*.
 

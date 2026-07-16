@@ -44,11 +44,12 @@ cv:
 
     Experience:
       - company: ALMaS Research Group, Worcester Polytechnic Institute
+        url: https://www.wpi.edu/people/faculty/mmaghelih
         position: Graduate Researcher — ReSCoT-Q, Reference-Guided Surface-Frame Control
         location: Worcester, MA
         start_date: 2025-08
         end_date: present
-        summary: "Advisor: Dr. Mahdi Agheli"
+        summary: "[ALMaS Research Group](https://www.wpi.edu/people/faculty/mmaghelih), [WPI](https://www.wpi.edu/) · Advisor: Dr. Mahdi Agheli"
         highlights:
           - Developed ReSCoT-Q, a surface-frame MPC and weighted whole-body controller (OCS2 SQP, 100 Hz)
             for force-controlled tool sliding on a Unitree Go1 with a body-mounted tool and force/torque
@@ -62,11 +63,12 @@ cv:
             a ~10% radius error in the surface prior.
 
       - company: ALMaS Research Group, Worcester Polytechnic Institute
+        url: https://www.wpi.edu/people/faculty/mmaghelih
         position: Graduate Researcher — GaitNet, Learning-Based Acyclic Footstep Planning
         location: Worcester, MA
         start_date: 2025-11
         end_date: 2026-05
-        summary: "Advisor: Dr. Mahdi Agheli"
+        summary: "[ALMaS Research Group](https://www.wpi.edu/people/faculty/mmaghelih), [WPI](https://www.wpi.edu/) · Advisor: Dr. Mahdi Agheli"
         highlights:
           - Co-developed (with O. Sullivan) a hybrid learning–control footstep planner for Unitree Go1
             acyclic locomotion over irregular terrain, combining leg-specific foothold cost-map prediction
@@ -80,6 +82,7 @@ cv:
             difficulties, achieving 69.4% survival versus 25.6% for a single-leg motion-planner baseline.
 
       - company: NIT Trichy
+        url: https://www.nitt.edu/
         position: Undergraduate Researcher — TOTO, Autonomous Mobile Robot
         location: Tiruchirappalli, India
         start_date: 2024-09
@@ -170,19 +173,19 @@ cv:
 
     Teaching Experience:
       - bullet: >-
-          **Teaching Assistant — Legged Robotics (Graduate)**, Worcester Polytechnic Institute,
+          **Teaching Assistant — Legged Robotics (Graduate)**, [Worcester Polytechnic Institute](https://www.wpi.edu/),
           Summer 2026. Instructor: Dr. Mahdi Agheli.
       - bullet: >-
-          **Laboratory Curriculum Developer**, Robotics Engineering Department, Worcester Polytechnic
-          Institute, 2026 – present. Designing hands-on lab modules for the *Legged Robotics* (Dr. Agheli)
-          and *Parallel Robotics* (Dr. McCann) courses.
+          **Laboratory Curriculum Developer**, Robotics Engineering Department, [Worcester Polytechnic
+          Institute](https://www.wpi.edu/), 2026 – present. Designing hands-on lab modules for the
+          *Legged Robotics* (Dr. Agheli) and *Parallel Robotics* (Dr. McCann) courses.
 
     Academic Service & Leadership:
       - bullet: >-
           **Reviewer**, IEEE Transactions on Automation Science and Engineering (T-ASE), Jan – Feb 2026.
           Reviewed one manuscript on data-driven predictive control for robotics automation.
       - bullet: >-
-          **Treasurer & Team Lead**, Robotics and Machine Intelligence Club, NIT Trichy,
+          **Treasurer & Team Lead**, Robotics and Machine Intelligence Club, [NIT Trichy](https://www.nitt.edu/),
           Aug 2024 – May 2025. Led the club's ISRO Robotics Challenge team; organized robotics workshops,
           seminars, and competitions.
 
