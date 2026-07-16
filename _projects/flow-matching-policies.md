@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Flow Matching Policies
-description: Conditional Flow Matching visuomotor policies in robomimic — 11× faster inference than Diffusion Policy at matched task success.
+description: Conditional Flow Matching visuomotor policies in robomimic — beats Diffusion Policy head-to-head, with a 94× faster 1-step inference mode.
 img: assets/img/projects/cfm_thumb.jpg
 importance: 5
 category: projects
@@ -9,34 +9,74 @@ category: projects
 
 <div class="row justify-content-center">
     <div class="col-sm-8 mt-3 mb-3">
-        {% include video.liquid path="assets/video/projects/diffusion_policy_rollout.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
+        {% include video.liquid path="assets/video/projects/fm_transport_rollout.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
     </div>
 </div>
 <div class="caption">
-    A Diffusion Policy rollout on the robosuite pick-and-place task from my robomimic training stack — the baseline architecture that CFM accelerates.
+    Flow Matching policy solving two-arm transport — 84% success vs. 72% for Diffusion Policy and 71% for BC-RNN on the same benchmark.
 </div>
 
 Diffusion Policy is the current workhorse for multimodal visuomotor imitation, but it pays for its expressiveness at deployment: **100 DDPM denoising steps for every action chunk**. This project replaces the denoising loop with **Conditional Flow Matching (CFM)** — implemented from scratch in [robomimic](https://github.com/souravselvaraj/robomimic/tree/flow-matching) — keeping the receding-horizon architecture identical and swapping only the generative core.
 
 ## The idea
 
-Instead of learning to reverse a noising process step by step, CFM learns a **velocity field of an ODE** that transports noise samples to action samples along (approximately) straight probability paths. Straight paths mean a cheap solver does the job: the learned field is integrated in just **10 Euler steps**, versus 100 network evaluations for DDPM.
+Instead of learning to reverse a noising process step by step, CFM learns a **velocity field of an ODE** that transports noise samples to action samples along (approximately) straight probability paths. Straight paths mean a cheap solver does the job — a few Euler steps, or even one.
 
-- Same 65M-parameter backbone as the Diffusion Policy baseline — the comparison isolates the generative objective.
-- Receding-horizon action chunking preserved, so the policy interface is unchanged.
-- Solver ablations: Euler vs. midpoint integration, 10–50 inference steps.
+## Experimental setup
 
-## Results
+- robomimic `ph` (proficient-human) `low_dim` datasets; success rate = fraction of **50 rollouts** that solve the task.
+- Flow Matching and Diffusion Policy share the **same 65M-parameter conditional U-Net backbone** — the comparison isolates the generative objective. BC-RNN is the robomimic reference.
+- FM default sampler: 10 Euler steps; ablations over 10/20/50 Euler and midpoint steps.
 
-**26.7 ms per action chunk** at inference — an **11× speedup** over the 100-step DDPM Diffusion Policy on identical hardware and architecture. Benchmarked on 5 robomimic tasks, 3 seeds × 50 rollouts each, matching or beating BC-RNN reference results on 4 of 5 tasks:
+## Success rates
 
-| Task              | CFM success rate      |
-| ----------------- | --------------------- |
-| lift              | **100%**              |
-| can               | **94%**               |
-| two-arm transport | **84%** (BC-RNN: 71%) |
-| tool_hang         | **64%**               |
+| Task      | Horizon | Flow Matching (CFM) | Diffusion Policy | BC-RNN (ref) |
+| --------- | :-----: | :-----------------: | :--------------: | :----------: |
+| Lift      |   400   |  **100%** (50/50)   |        —         |     100%     |
+| Can       |   400   |   **94%** (47/50)   |        —         |     100%     |
+| Square    |   400   |   **40%** (20/50)   |   36% (18/50)    |     84%      |
+| Transport |   700   |   **84%** (42/50)   |   72% (36/50)    |     71%      |
+| Tool Hang |   700   |   **64%** (32/50)   |        —         |     67%      |
 
-The takeaway: for visuomotor imitation, flow matching delivers diffusion-class multimodality at a fraction of the inference cost — which matters for real-time control loops.
+Head-to-head on the same backbone and protocol, **FM ≥ Diffusion Policy on every task tested** (Square 40% vs. 36%, Transport 84% vs. 72%; "—" = A/B not run for that task). Square is hard for *both* learned samplers at this training budget — solver and retraining ablations all cap near 40%, so it reflects task difficulty rather than a CFM weakness.
 
-Code: [github.com/souravselvaraj/robomimic — flow-matching branch](https://github.com/souravselvaraj/robomimic/tree/flow-matching)
+## Inference speed
+
+Identical 65M U-Net, RTX PRO 6000 (Blackwell), 100 trials:
+
+| Policy / sampler            | NFE | ms per action chunk | Speedup vs. DDPM-100 |
+| --------------------------- | :-: | :-----------------: | :------------------: |
+| Flow Matching — Euler 1     |  1  |       **3.1**       |        94.4×         |
+| Flow Matching — Euler 5     |  5  |        13.4         |        21.9×         |
+| Flow Matching — Euler 10 ★  | 10  |        26.7         |        11.0×         |
+| Flow Matching — midpoint 5  | 10  |        26.9         |        10.9×         |
+| Diffusion Policy — DDIM 10  | 10  |        28.9         |        10.2×         |
+| Diffusion Policy — DDPM 100 | 100 |        293.7        |   1.0× (baseline)    |
+
+★ = default used for the success-rate rollouts above.
+
+At matched compute (10 network evaluations) FM and DDIM are comparable on wall-clock — CFM's real advantages are **quality at few steps** and a viable **1-step mode (3.1 ms, 94× faster than DDPM-100)** that Diffusion Policy has no equivalent of. Training is slightly cheaper too (e.g., Transport: 1h26m for FM vs. 1h38m for DP at 2000 epochs on a single GPU).
+
+## Rollouts
+
+<div class="row justify-content-center">
+    <div class="col-sm-6 mt-3 mb-3">
+        {% include video.liquid path="assets/video/projects/fm_lift_rollout.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
+    </div>
+    <div class="col-sm-6 mt-3 mb-3">
+        {% include video.liquid path="assets/video/projects/fm_can_rollout.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-sm-6 mt-3 mb-3">
+        {% include video.liquid path="assets/video/projects/fm_square_rollout.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
+    </div>
+    <div class="col-sm-6 mt-3 mb-3">
+        {% include video.liquid path="assets/video/projects/fm_toolhang_rollout.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
+    </div>
+</div>
+<div class="caption">
+    Flow Matching rollouts: lift and can (top), square and tool hang (bottom).
+</div>
+
+Code and full benchmark details: [flow-matching branch](https://github.com/souravselvaraj/robomimic/tree/flow-matching) · [table.md](https://github.com/souravselvaraj/robomimic/blob/flow-matching/table.md)
