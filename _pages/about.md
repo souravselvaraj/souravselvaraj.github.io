@@ -13,8 +13,13 @@ profile:
     <p>Robotics Engineering</p>
     <p>Worcester, MA, USA</p>
 
-selected_papers: false
+selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true
+
+announcements:
+  enabled: true # includes a list of news items
+  scrollable: true # adds a vertical scroll bar if there are more than 3 news items
+  limit: 5 # leave blank to include all the news in the `_news` folder
 ---
 
 I am an M.S. Robotics Engineering student at [Worcester Polytechnic Institute](https://www.wpi.edu/), working on legged robot control, contact-aware locomotion, and learning-based methods for dynamic robotic systems.
