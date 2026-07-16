@@ -4,6 +4,7 @@
 # falls back to a generic renderer that only understands `bullet:` / `label:`
 # entries. Authors are not rendered for Publications entries (folded into
 # summary), and Education has no score field (GPA goes in highlights).
+# The web CV is a concise overview; the full detail lives in the PDF (cv_pdf).
 cv:
   name: Sourav Selvaraj
   label: M.S. Robotics Engineering Student
@@ -29,7 +30,6 @@ cv:
         studyType: Master of Science
         start_date: 2025-08
         end_date: 2027-05
-        courses: "Robot Control, Motion Planning, Optimal Control, Legged Robotics, Robot Learning"
         highlights:
           - "GPA: 4.0/4.0"
 
@@ -40,7 +40,6 @@ cv:
         studyType: Bachelor of Technology
         start_date: 2021-12
         end_date: 2025-05
-        courses: "Control Systems, Robotics, Signal Processing, Machine Learning, Embedded Systems"
 
     Experience:
       - company: ALMaS Research Group, Worcester Polytechnic Institute
@@ -50,17 +49,6 @@ cv:
         start_date: 2025-08
         end_date: present
         summary: "[ALMaS Research Group](https://www.wpi.edu/people/faculty/mmaghelih), [WPI](https://www.wpi.edu/) · Advisor: Dr. Mahdi Agheli"
-        highlights:
-          - Developed ReSCoT-Q, a surface-frame MPC and weighted whole-body controller (OCS2 SQP, 100 Hz)
-            for force-controlled tool sliding on a Unitree Go1 with a body-mounted tool and force/torque
-            sensor, resolving contact into normal-force regulation, tangential-slide tracking, and
-            cross-track stabilization.
-          - Designed a confidence-gated estimator fusing a nominal surface prior with online contact-wrench
-            and tool-motion measurements, and a contact-stability supervisor gating sliding during contact
-            acquisition, force recovery, and gait-induced dropouts.
-          - Demonstrated 109.9 s of sustained hardware contact spanning a 91.3° arc of a cylindrical test
-            surface, with 0.60 N normal-force RMS and 18.8 mm tracking RMS error at a 10 N target, despite
-            a ~10% radius error in the surface prior.
 
       - company: ALMaS Research Group, Worcester Polytechnic Institute
         url: https://www.wpi.edu/people/faculty/mmaghelih
@@ -69,17 +57,6 @@ cv:
         start_date: 2025-11
         end_date: 2026-05
         summary: "[ALMaS Research Group](https://www.wpi.edu/people/faculty/mmaghelih), [WPI](https://www.wpi.edu/) · Advisor: Dr. Mahdi Agheli"
-        highlights:
-          - Co-developed (with O. Sullivan) a hybrid learning–control footstep planner for Unitree Go1
-            acyclic locomotion over irregular terrain, combining leg-specific foothold cost-map prediction
-            with reinforcement-learning-based gait selection and model-based quadruped control.
-          - Owned the simulation deployment stack — ROS integration of the planner with OCS2 perceptive MPC
-            (foot-placement and collision constraints) and GPU elevation mapping from onboard depth sensing.
-          - Implemented terrain-aware footstep candidate generation using robot state, commanded velocity,
-            and raycast heightmaps, enabling real-time filtering and ranking of feasible leg-selection,
-            foot-displacement, and swing-duration actions.
-          - Evaluated GaitNet in NVIDIA Isaac Lab across commanded velocities and missing-step terrain
-            difficulties, achieving 69.4% survival versus 25.6% for a single-leg motion-planner baseline.
 
       - company: NIT Trichy
         url: https://www.nitt.edu/
@@ -88,10 +65,6 @@ cv:
         start_date: 2024-09
         end_date: 2025-05
         summary: "Advisor: Dr. D. Ezhilarasi"
-        highlights:
-          - Built an autonomous mobile robot combining ICP-based SLAM with an Iterated Kalman Filter fusing
-            wheel-encoder and RPLiDAR measurements for real-time mapping and localization.
-          - Achieved ±2% velocity-tracking error on uneven terrain with closed-loop speed control.
 
       - company: IIT Madras
         position: Research Intern — Bio-mimetic Autonomous Underwater Vehicle (BAUV)
@@ -99,9 +72,6 @@ cv:
         start_date: 2023-03
         end_date: 2023-09
         summary: "Advisor: Dr. Asokan Thondiyath"
-        highlights:
-          - Designed the Jetson Orin sensor-interface PCB (KiCad) and implemented CAN communication to
-            Maxon BLDC propulsion drives for a tuna-inspired biomimetic AUV.
 
     Publications:
       - title: "ReSCoT-Q: Reference-Guided Surface-Frame Control for Quadruped Robots"
@@ -121,55 +91,31 @@ cv:
       - name: Emergent Ice-Skating Locomotion for Humanoids via Blade-Contact RL (Jul 2026 – present)
         url: https://youtu.be/ghr8AGP4rIg
         summary: >-
-          Training a Unitree G1 to ice-skate on passive 3 mm knife-edge blades with PPO in MuJoCo — no
-          motion capture or imitation data; skating emerges from anisotropic blade–ice contact (elliptic
-          friction cones) and a reward separating forward glide from penalized lateral slip.
-        highlights:
-          - Engineered for hardware transfer — asymmetric actor–critic with privileged blade velocities
-            (critic-only), a staged 0.15–1.2 m/s speed curriculum, ungated slip penalties closing
-            reward-hacking exploits, and domain randomization over PD gains, inertia, payload, actuator
-            delay, and blade mounting.
-          - In simulation, current policies track a 0.9 m/s command within 0.09 m/s at 94% single-support,
-            holding lateral blade slip to 2–4 cm/s and gliding up to 70% of stance.
+          Unitree G1 trained to ice-skate on passive knife-edge blades with PPO in MuJoCo — no motion
+          capture or imitation data; skating emerges from anisotropic blade–ice contact.
 
       - name: Human-Like Bimanual Lifting for Humanoids via Residual AMP–PPO (May 2026 – Jul 2026)
         url: https://github.com/shuayyy/humanoid-amp-ppo
         summary: >-
-          Trained a Unitree G1 to squat, grasp, and carry objects bimanually in MuJoCo via a residual
-          policy over a frozen locomotion actor, with an AMP discriminator on human mocap as a capped
-          style regularizer so imitation never outpays task completion.
-        highlights:
-          - Stabilized training with success-adaptive curricula annealing a virtual object assist, an
-            asymmetric actor–critic with privileged contact forces, noisy object-state observations, and
-            domain randomization over object mass, friction, CoM, and base pushes.
-          - Closed successive reward-hacking exploits via gated posture penalties; converged policies
-            consistently hold objects at goal height, centered within 3 cm, with human-like posture.
+          Unitree G1 trained to squat, grasp, and carry objects bimanually via a residual policy over a
+          frozen locomotion actor, with an AMP discriminator as a capped style regularizer.
 
       - name: Conditional Flow Matching Policies for Robot Manipulation (Apr 2026 – May 2026)
         url: https://github.com/souravselvaraj/robomimic/tree/flow-matching
         summary: >-
-          Implemented a Conditional Flow Matching (CFM) visuomotor policy from scratch in robomimic —
-          Diffusion Policy's receding-horizon architecture with iterative denoising replaced by a learned
-          ODE velocity field integrated in 10 Euler steps.
-        highlights:
-          - Achieved 26.7 ms per action chunk at inference, an 11× speedup over the default 100-step DDPM
-            Diffusion Policy on an identical 65M-parameter backbone; ran solver and inference-step
-            ablations (Euler/midpoint, 10–50 steps) against Diffusion Policy baselines.
-          - Benchmarked on 5 robomimic tasks (3 seeds, 50 rollouts each), matching or beating BC-RNN
-            references on 4/5 — 100% lift, 94% can, 84% vs. 71% two-arm transport, 64% tool_hang.
+          Conditional Flow Matching visuomotor policy built from scratch in robomimic — 11× faster
+          inference than Diffusion Policy at matched or better task success.
 
       - name: Acrobatic Quadrotor Flight using Geometric Control and L1 Adaptive Augmentation (Oct 2025 – Dec 2025)
         url: https://github.com/souravselvaraj/crazyflie-se3-l1
         summary: >-
-          Implemented an SE(3) geometric controller with L1 adaptive augmentation on a Crazyflie 2.1 in
-          ROS 2 simulation (hover, zero-radius flip, recovery), achieving 2.2 cm position-tracking RMSE
-          and rejecting up to 94% of force-step disturbances.
+          SE(3) geometric controller with L1 adaptive augmentation on a Crazyflie 2.1 in ROS 2 simulation
+          — 2.2 cm tracking RMSE, up to 94% disturbance rejection.
 
       - name: Autonomous Rover — ISRO Robotics Challenge 2024 (Dec 2022 – Aug 2024)
         summary: >-
           Led a 10-member team building a 6-wheeled rocker-bogie autonomous rover with ORB-SLAM terrain
-          mapping (Intel RealSense D435i), kinodynamic path planning, and custom position/speed-control
-          electronics.
+          mapping, kinodynamic path planning, and custom control electronics.
 
     Teaching Experience:
       - bullet: >-
@@ -177,17 +123,14 @@ cv:
           Summer 2026. Instructor: Dr. Mahdi Agheli.
       - bullet: >-
           **Laboratory Curriculum Developer**, Robotics Engineering Department, [Worcester Polytechnic
-          Institute](https://www.wpi.edu/), 2026 – present. Designing hands-on lab modules for the
-          *Legged Robotics* (Dr. Agheli) and *Parallel Robotics* (Dr. McCann) courses.
+          Institute](https://www.wpi.edu/), 2026 – present.
 
     Academic Service & Leadership:
       - bullet: >-
           **Reviewer**, IEEE Transactions on Automation Science and Engineering (T-ASE), Jan – Feb 2026.
-          Reviewed one manuscript on data-driven predictive control for robotics automation.
       - bullet: >-
           **Treasurer & Team Lead**, Robotics and Machine Intelligence Club, [NIT Trichy](https://www.nitt.edu/),
-          Aug 2024 – May 2025. Led the club's ISRO Robotics Challenge team; organized robotics workshops,
-          seminars, and competitions.
+          Aug 2024 – May 2025.
 
     Skills:
       - name: Robotics Control
