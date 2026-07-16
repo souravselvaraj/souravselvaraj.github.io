@@ -1,3 +1,9 @@
+# NOTE: the al_folio_cv rendercv renderer dispatches templates on exact section
+# names: Education, Experience (+Volunteer), Publications, Projects, Skills,
+# Languages, Interests, Certificates, Awards, References. Any other section name
+# falls back to a generic renderer that only understands `bullet:` / `label:`
+# entries. Authors are not rendered for Publications entries (folded into
+# summary), and Education has no score field (GPA goes in highlights).
 cv:
   name: Sourav Selvaraj
   label: M.S. Robotics Engineering Student
@@ -23,8 +29,9 @@ cv:
         studyType: Master of Science
         start_date: 2025-08
         end_date: 2027-05
-        score: "GPA: 4.0/4.0"
         courses: "Robot Control, Motion Planning, Optimal Control, Legged Robotics, Robot Learning"
+        highlights:
+          - "GPA: 4.0/4.0"
 
       - institution: National Institute of Technology, Tiruchirappalli
         location: Tiruchirappalli, India
@@ -35,7 +42,7 @@ cv:
         end_date: 2025-05
         courses: "Control Systems, Robotics, Signal Processing, Machine Learning, Embedded Systems"
 
-    Research Experience:
+    Experience:
       - company: ALMaS Research Group, Worcester Polytechnic Institute
         position: Graduate Researcher — ReSCoT-Q, Reference-Guided Surface-Frame Control
         location: Worcester, MA
@@ -93,26 +100,23 @@ cv:
           - Designed the Jetson Orin sensor-interface PCB (KiCad) and implemented CAN communication to
             Maxon BLDC propulsion drives for a tuna-inspired biomimetic AUV.
 
-    Manuscripts:
+    Publications:
       - title: "ReSCoT-Q: Reference-Guided Surface-Frame Control for Quadruped Robots"
-        authors:
-          - Sourav Selvaraj
-          - Mahdi Agheli
-        publisher: First-author manuscript in preparation, targeting IEEE Robotics and Automation Letters (RA-L)
+        publisher: Manuscript in preparation
         releaseDate: 2026
+        summary: >-
+          S. Selvaraj and M. Agheli. First-author manuscript in preparation, targeting IEEE Robotics
+          and Automation Letters (RA-L).
 
       - title: "GaitNet: Learning-Based Acyclic Footstep Planning for Dynamic Quadruped Locomotion"
-        authors:
-          - O. Sullivan
-          - Sourav Selvaraj
-          - Mahdi Agheli
-        publisher: Manuscript in preparation, targeting IEEE ICRA
+        publisher: Manuscript in preparation
         releaseDate: 2026
+        summary: >-
+          O. Sullivan, S. Selvaraj, and M. Agheli. Manuscript in preparation, targeting IEEE ICRA.
 
-    Selected Projects:
-      - name: Emergent Ice-Skating Locomotion for Humanoids via Blade-Contact RL
-        start_date: 2026-07
-        end_date: present
+    Projects:
+      - name: Emergent Ice-Skating Locomotion for Humanoids via Blade-Contact RL (Jul 2026 – present)
+        url: https://youtu.be/ghr8AGP4rIg
         summary: >-
           Training a Unitree G1 to ice-skate on passive 3 mm knife-edge blades with PPO in MuJoCo — no
           motion capture or imitation data; skating emerges from anisotropic blade–ice contact (elliptic
@@ -125,9 +129,8 @@ cv:
           - In simulation, current policies track a 0.9 m/s command within 0.09 m/s at 94% single-support,
             holding lateral blade slip to 2–4 cm/s and gliding up to 70% of stance.
 
-      - name: Human-Like Bimanual Lifting for Humanoids via Residual AMP–PPO
-        start_date: 2026-05
-        end_date: 2026-07
+      - name: Human-Like Bimanual Lifting for Humanoids via Residual AMP–PPO (May 2026 – Jul 2026)
+        url: https://github.com/shuayyy/humanoid-amp-ppo
         summary: >-
           Trained a Unitree G1 to squat, grasp, and carry objects bimanually in MuJoCo via a residual
           policy over a frozen locomotion actor, with an AMP discriminator on human mocap as a capped
@@ -139,9 +142,8 @@ cv:
           - Closed successive reward-hacking exploits via gated posture penalties; converged policies
             consistently hold objects at goal height, centered within 3 cm, with human-like posture.
 
-      - name: Conditional Flow Matching Policies for Robot Manipulation
-        start_date: 2026-04
-        end_date: 2026-05
+      - name: Conditional Flow Matching Policies for Robot Manipulation (Apr 2026 – May 2026)
+        url: https://github.com/souravselvaraj/robomimic/tree/flow-matching
         summary: >-
           Implemented a Conditional Flow Matching (CFM) visuomotor policy from scratch in robomimic —
           Diffusion Policy's receding-horizon architecture with iterative denoising replaced by a learned
@@ -153,54 +155,36 @@ cv:
           - Benchmarked on 5 robomimic tasks (3 seeds, 50 rollouts each), matching or beating BC-RNN
             references on 4/5 — 100% lift, 94% can, 84% vs. 71% two-arm transport, 64% tool_hang.
 
-      - name: Acrobatic Quadrotor Flight using Geometric Control and L1 Adaptive Augmentation
-        start_date: 2025-10
-        end_date: 2025-12
+      - name: Acrobatic Quadrotor Flight using Geometric Control and L1 Adaptive Augmentation (Oct 2025 – Dec 2025)
+        url: https://github.com/souravselvaraj/crazyflie-se3-l1
         summary: >-
           Implemented an SE(3) geometric controller with L1 adaptive augmentation on a Crazyflie 2.1 in
           ROS 2 simulation (hover, zero-radius flip, recovery), achieving 2.2 cm position-tracking RMSE
           and rejecting up to 94% of force-step disturbances.
 
-      - name: Autonomous Rover — ISRO Robotics Challenge 2024
-        start_date: 2022-12
-        end_date: 2024-08
+      - name: Autonomous Rover — ISRO Robotics Challenge 2024 (Dec 2022 – Aug 2024)
         summary: >-
           Led a 10-member team building a 6-wheeled rocker-bogie autonomous rover with ORB-SLAM terrain
           mapping (Intel RealSense D435i), kinodynamic path planning, and custom position/speed-control
           electronics.
 
     Teaching Experience:
-      - company: Worcester Polytechnic Institute
-        position: Teaching Assistant — Legged Robotics (Graduate)
-        location: Worcester, MA
-        start_date: 2026-05
-        end_date: 2026-08
-        summary: "Instructor: Dr. Mahdi Agheli"
-
-      - company: Robotics Engineering Department, Worcester Polytechnic Institute
-        position: Laboratory Curriculum Developer
-        location: Worcester, MA
-        start_date: 2026-01
-        end_date: present
-        highlights:
-          - Designing hands-on lab modules for the Legged Robotics (Dr. Agheli) and Parallel Robotics
-            (Dr. McCann) courses.
+      - bullet: >-
+          **Teaching Assistant — Legged Robotics (Graduate)**, Worcester Polytechnic Institute,
+          Summer 2026. Instructor: Dr. Mahdi Agheli.
+      - bullet: >-
+          **Laboratory Curriculum Developer**, Robotics Engineering Department, Worcester Polytechnic
+          Institute, 2026 – present. Designing hands-on lab modules for the *Legged Robotics* (Dr. Agheli)
+          and *Parallel Robotics* (Dr. McCann) courses.
 
     Academic Service & Leadership:
-      - company: IEEE Transactions on Automation Science and Engineering (T-ASE)
-        position: Reviewer
-        start_date: 2026-01
-        end_date: 2026-02
-        highlights:
-          - Reviewed one manuscript on data-driven predictive control for robotics automation.
-
-      - company: Robotics and Machine Intelligence Club, NIT Trichy
-        position: Treasurer & Team Lead
-        start_date: 2024-08
-        end_date: 2025-05
-        highlights:
-          - Led the club's ISRO Robotics Challenge team; organized robotics workshops, seminars, and
-            competitions.
+      - bullet: >-
+          **Reviewer**, IEEE Transactions on Automation Science and Engineering (T-ASE), Jan – Feb 2026.
+          Reviewed one manuscript on data-driven predictive control for robotics automation.
+      - bullet: >-
+          **Treasurer & Team Lead**, Robotics and Machine Intelligence Club, NIT Trichy,
+          Aug 2024 – May 2025. Led the club's ISRO Robotics Challenge team; organized robotics workshops,
+          seminars, and competitions.
 
     Skills:
       - name: Robotics Control
