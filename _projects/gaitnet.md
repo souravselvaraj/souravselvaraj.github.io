@@ -7,7 +7,7 @@ category: research
 related_publications: false
 ---
 
-**GaitNet** is a hybrid learning–control footstep planner for acyclic Unitree Go1 locomotion over irregular terrain, co-developed with Owen Sullivan in the ALMaS Research Group at WPI (advisor: Dr. Mahdi Agheli). Instead of committing to a fixed gait cycle, the planner chooses *which* leg to move, *where* to place it, and *how long* the swing should take, based on the terrain ahead.
+**GaitNet** is a hybrid learning–control footstep planner for acyclic Unitree Go1 locomotion over irregular terrain, co-developed with O. Sullivan in the ALMaS Research Group at WPI (advisor: Dr. Mahdi Agheli). Instead of committing to a fixed gait cycle, the planner chooses *which* leg to move, *where* to place it, and *how long* the swing should take, based on the terrain ahead.
 
 ## What I built
 

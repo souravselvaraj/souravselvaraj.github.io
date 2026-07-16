@@ -1,9 +1,5 @@
-"AJP":
-  url: https://aapt.scitation.org/journal/ajp
-  color: "#00369f"
-
-"PhysRev":
-  url: https://journals.aps.org/
-
-"Vision":
-  color: "#009f36"
+# Maps venue abbreviations (abbr field in papers.bib) to URLs and badge colors.
+# Example:
+# "RA-L":
+#   url: https://www.ieee-ras.org/publications/ra-l
+#   color: "#00369f"
