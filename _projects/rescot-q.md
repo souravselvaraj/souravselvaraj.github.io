@@ -8,8 +8,8 @@ category: research
 ---
 
 <div class="row justify-content-center">
-    <div class="col-sm-10 mt-3 mb-3">
-        {% include video.liquid path="assets/video/projects/rescotq_cylinder.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
+    <div class="col-12 mt-3 mb-3">
+        {% include video.liquid path="assets/video/projects/rescotq_cylinder.mp4" class="img-fluid rounded z-depth-1" width="100%" controls=true muted=true %}
     </div>
 </div>
 <div class="caption">
@@ -35,8 +35,8 @@ Three components make this robust on real hardware:
 3. **Contact-stability supervisor.** A state machine gates sliding during contact acquisition, force recovery, and gait-induced contact dropouts, so transient force losses don't destabilize the slide.
 
 <div class="row justify-content-center">
-    <div class="col-sm-10 mt-3 mb-3">
-        {% include video.liquid path="assets/video/projects/rescotq_flatwall.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
+    <div class="col-12 mt-3 mb-3">
+        {% include video.liquid path="assets/video/projects/rescotq_flatwall.mp4" class="img-fluid rounded z-depth-1" width="100%" controls=true muted=true %}
     </div>
 </div>
 <div class="caption">

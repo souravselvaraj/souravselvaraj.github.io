@@ -9,7 +9,7 @@ category: projects
 
 <div class="row justify-content-center">
     <div class="col-sm-8 mt-3 mb-3">
-        {% include video.liquid path="assets/video/projects/fm_transport_rollout.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
+        {% include video.liquid path="assets/video/projects/fm_transport_rollout.mp4" class="img-fluid rounded z-depth-1" width="100%" controls=true muted=true %}
     </div>
 </div>
 <div class="caption">
@@ -61,18 +61,18 @@ At matched compute (10 network evaluations) FM and DDIM are comparable on wall-c
 
 <div class="row justify-content-center">
     <div class="col-sm-6 mt-3 mb-3">
-        {% include video.liquid path="assets/video/projects/fm_lift_rollout.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
+        {% include video.liquid path="assets/video/projects/fm_lift_rollout.mp4" class="img-fluid rounded z-depth-1" width="100%" controls=true muted=true %}
     </div>
     <div class="col-sm-6 mt-3 mb-3">
-        {% include video.liquid path="assets/video/projects/fm_can_rollout.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
+        {% include video.liquid path="assets/video/projects/fm_can_rollout.mp4" class="img-fluid rounded z-depth-1" width="100%" controls=true muted=true %}
     </div>
 </div>
 <div class="row justify-content-center">
     <div class="col-sm-6 mt-3 mb-3">
-        {% include video.liquid path="assets/video/projects/fm_square_rollout.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
+        {% include video.liquid path="assets/video/projects/fm_square_rollout.mp4" class="img-fluid rounded z-depth-1" width="100%" controls=true muted=true %}
     </div>
     <div class="col-sm-6 mt-3 mb-3">
-        {% include video.liquid path="assets/video/projects/fm_toolhang_rollout.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
+        {% include video.liquid path="assets/video/projects/fm_toolhang_rollout.mp4" class="img-fluid rounded z-depth-1" width="100%" controls=true muted=true %}
     </div>
 </div>
 <div class="caption">

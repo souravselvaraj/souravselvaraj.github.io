@@ -8,8 +8,8 @@ category: projects
 ---
 
 <div class="row justify-content-center">
-    <div class="col-sm-9 mt-3 mb-3">
-        {% include video.liquid path="assets/video/projects/crazyflie_demo.mp4" class="img-fluid rounded z-depth-1" controls=true muted=true %}
+    <div class="col-12 mt-3 mb-3">
+        {% include video.liquid path="assets/video/projects/crazyflie_demo.mp4" class="img-fluid rounded z-depth-1" width="100%" controls=true muted=true %}
     </div>
 </div>
 <div class="caption">

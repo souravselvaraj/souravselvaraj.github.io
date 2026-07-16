@@ -8,8 +8,15 @@ category: projects
 ---
 
 <div class="row justify-content-center">
-    <div class="col-sm-10 mt-3 mb-3">
-        {% include video.liquid path="https://www.youtube.com/embed/ghr8AGP4rIg" class="img-fluid rounded z-depth-1" %}
+    <div class="col-12 mt-3 mb-3">
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+            <iframe
+                src="https://www.youtube.com/embed/ghr8AGP4rIg"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                class="rounded z-depth-1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
     </div>
 </div>
 <div class="caption">
