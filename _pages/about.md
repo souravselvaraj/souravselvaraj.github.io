@@ -2,6 +2,7 @@
 layout: about
 title: about
 permalink: /
+description: M.S. Robotics Engineering student at WPI working on legged robot control, contact-aware locomotion, and learning-based methods for dynamic robotic systems.
 subtitle: 'M.S. Robotics Engineering, <a href="https://www.wpi.edu/">Worcester Polytechnic Institute</a>.'
 
 profile:
