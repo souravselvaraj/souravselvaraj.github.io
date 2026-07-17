@@ -128,7 +128,7 @@ pagination:
           <div class="col-sm-9">
 {% endif %}
         <h3>
-        {% if post.external_source or post.redirect == blank %}
+        {% if post.redirect == blank %}
           <a class="post-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
         {% elsif post.redirect contains '://' %}
           <a class="post-title" href="{{ post.redirect }}" target="_blank">{{ post.title }}</a>
