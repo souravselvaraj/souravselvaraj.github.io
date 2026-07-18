@@ -101,7 +101,7 @@ cv:
           frozen locomotion actor, with an AMP discriminator as a capped style regularizer.
 
       - name: Conditional Flow Matching Policies for Robot Manipulation (Apr 2026 – May 2026)
-        url: https://github.com/souravselvaraj/robomimic/tree/flow-matching
+        url: https://github.com/souravselvaraj/Robomimic-Flowmatching
         summary: >-
           Conditional Flow Matching visuomotor policy built from scratch in robomimic — 11× faster
           inference than Diffusion Policy at matched or better task success.

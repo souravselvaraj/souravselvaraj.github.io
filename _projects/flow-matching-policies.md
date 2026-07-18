@@ -16,7 +16,7 @@ category: projects
     Flow Matching policy solving two-arm transport — 84% success vs. 72% for Diffusion Policy and 71% for BC-RNN on the same benchmark.
 </div>
 
-Diffusion Policy is the current workhorse for multimodal visuomotor imitation, but it pays for its expressiveness at deployment: **100 DDPM denoising steps for every action chunk**. This project replaces the denoising loop with **Conditional Flow Matching (CFM)** — implemented from scratch in [robomimic](https://github.com/souravselvaraj/robomimic/tree/flow-matching) — keeping the receding-horizon architecture identical and swapping only the generative core.
+Diffusion Policy is the current workhorse for multimodal visuomotor imitation, but it pays for its expressiveness at deployment: **100 DDPM denoising steps for every action chunk**. This project replaces the denoising loop with **Conditional Flow Matching (CFM)** — implemented from scratch in [robomimic](https://github.com/souravselvaraj/Robomimic-Flowmatching) — keeping the receding-horizon architecture identical and swapping only the generative core.
 
 ## The idea
 
@@ -79,4 +79,4 @@ At matched compute (10 network evaluations) FM and DDIM are comparable on wall-c
     Flow Matching rollouts: lift and can (top), square and tool hang (bottom).
 </div>
 
-Code and full benchmark details: [flow-matching branch](https://github.com/souravselvaraj/robomimic/tree/flow-matching) · [table.md](https://github.com/souravselvaraj/robomimic/blob/flow-matching/table.md)
+Code and full benchmark details: [Robomimic-Flowmatching](https://github.com/souravselvaraj/Robomimic-Flowmatching) · [benchmark table](https://github.com/souravselvaraj/Robomimic-Flowmatching/blob/master/README.md)
