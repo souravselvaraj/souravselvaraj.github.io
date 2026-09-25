@@ -3,7 +3,7 @@ layout: page
 title: Acrobatic Quadrotor Flight
 description: SE(3) geometric control with L1 adaptive augmentation on a Crazyflie 2.1 — zero-radius flips, recovery, and 94% disturbance rejection in ROS 2 simulation.
 img: assets/img/projects/crazyflie_thumb.jpg
-importance: 6
+importance: 7
 category: projects
 ---
 

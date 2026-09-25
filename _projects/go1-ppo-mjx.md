@@ -3,7 +3,7 @@ layout: page
 title: Go1 PPO Locomotion
 description: PPO locomotion for the Unitree Go1 in JAX/MuJoCo MJX — asymmetric actor-critic, domain randomization, rough terrain, and real-robot deployment.
 img: assets/img/projects/go1_locomotion.jpg
-importance: 7
+importance: 8
 category: projects
 ---
 
