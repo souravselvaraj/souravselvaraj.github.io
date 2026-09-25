@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Humanoid Ice Skating
-description: Emergent ice-skating locomotion for a Unitree G1 via blade-contact RL — no motion capture, no imitation data. Skating falls out of the physics.
+description: Simulated ice-skating locomotion for a Unitree G1 via blade-contact RL — no motion capture, no imitation data. The skating gait emerges from anisotropic blade–ice contact.
 img: assets/img/projects/g1_ice_skating.jpg
 importance: 3
 category: projects

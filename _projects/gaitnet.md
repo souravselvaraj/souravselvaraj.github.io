@@ -7,7 +7,7 @@ importance: 2
 category: research
 ---
 
-**GaitNet** is a hybrid learning–control footstep planner for acyclic Unitree Go1 locomotion over irregular terrain, co-developed with Owen Sullivan in the [ALMaS Research Group](https://www.wpi.edu/people/faculty/mmaghelih) at [WPI](https://www.wpi.edu/) (advisor: Dr. Mahdi Agheli). Instead of committing to a fixed gait cycle, the planner decides *which* leg to move, *where* to place it, and *how long* the swing should take — step by step, based on the terrain ahead.
+**GaitNet** is a hybrid learning–control footstep planner for acyclic Unitree Go1 locomotion over irregular terrain, developed with Owen Sullivan (co-first authors, equal contribution) in the [ALMaS Research Group](https://www.wpi.edu/people/faculty/mmaghelih) at [WPI](https://www.wpi.edu/) (advisor: Dr. Mahdi Agheli). Instead of committing to a fixed gait cycle, the planner decides *which* leg to move, *where* to place it, and *how long* the swing should take — step by step, based on the terrain ahead.
 
 <div class="row justify-content-center">
     <div class="col-sm-11 mt-3 mb-3">
@@ -30,7 +30,7 @@ Fixed cyclic gaits (trot, crawl) waste the quadruped's freedom on broken terrain
 
 ## My role: the deployment stack
 
-I own the simulation deployment side of the project:
+I owned the simulation deployment side of the project:
 
 - **ROS integration** of the planner with OCS2 perceptive MPC (foot-placement and collision constraints) on a simulated Go1.
 - **GPU elevation mapping** from onboard depth sensing (elevation-mapping-cupy + grid_map + RealSense), producing the heightmaps the planner consumes.
@@ -47,4 +47,6 @@ Evaluated in NVIDIA Isaac Lab across commanded velocities and missing-step terra
 
 ## Status
 
-A manuscript (O. Sullivan, S. Selvaraj, and M. Agheli) is in preparation, targeting *IEEE ICRA 2027*.
+Manuscript (2026): O. Sullivan\*, S. Selvaraj\*, and M. Agheli, "GaitNet: Learning-Based Acyclic Footstep Planning for Dynamic Quadruped Locomotion." \*Equal contribution.
+
+Code: [github.com/opsullivan85/gaitnet](https://github.com/opsullivan85/gaitnet)

@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Serving as Teaching Assistant for the graduate *Legged Robotics* course at WPI this summer, and developing lab modules for the Legged Robotics and Parallel Robotics courses.
+Serving as Teaching Assistant and laboratory curriculum developer for the graduate course *RBE 521: Legged Robotics* at WPI this summer, building hands-on lab modules on the Unitree Go1 and G1.

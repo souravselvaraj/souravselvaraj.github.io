@@ -12,8 +12,9 @@ cv:
   location: Worcester, MA
   image: ""
   summary: >-
-    Robotics researcher working on contact-rich control and learning for legged robots —
-    MPC/WBC, force-controlled loco-manipulation, humanoid locomotion, and sim-to-real validation.
+    Research interests: legged robotics, whole-body control, and robot learning. Recent work spans
+    force-regulated body contact on quadruped hardware (SCRUB), learned footstep planning (GaitNet),
+    and reinforcement learning for humanoids.
 
   social_networks:
     - network: GitHub
@@ -40,19 +41,28 @@ cv:
         studyType: Bachelor of Technology
         start_date: 2021-12
         end_date: 2025-05
+        highlights:
+          - "CGPA: 8.2/10.0"
 
-    Awards & Honors:
-      - bullet: >-
-          **[Dr. Glenn Yee Graduate Student Tuition Award](https://www.wpi.edu/academics/departments/robotics-engineering/glenn-yee-graduate-awards)**,
-          Robotics Engineering Department, [Worcester Polytechnic Institute](https://www.wpi.edu/), Aug 2026.
+    Awards:
+      - title: Dr. Glenn Yee Graduate Student Tuition Award
+        url: https://www.wpi.edu/academics/departments/robotics-engineering/glenn-yee-graduate-awards
+        awarder: Robotics Engineering Department, Worcester Polytechnic Institute
+        date: 2026-08
+        summary: >-
           Competitive merit-based award for outstanding RBE graduate students, selected on research record —
           publications and successful projects — and academic standing. Carries one tuition credit for the
           Fall 2026 semester.
 
+      - title: Winner, Smart India Hackathon 2023
+        awarder: Ministry of Education, India
+        date: 2023
+        summary: Nationwide student innovation competition.
+
     Experience:
       - company: ALMaS Research Group, Worcester Polytechnic Institute
         url: https://www.wpi.edu/people/faculty/mmaghelih
-        position: Graduate Researcher — ReSCoT-Q, Reference-Guided Surface-Frame Control
+        position: Graduate Researcher — SCRUB, Armless Quadruped Body-Tool Sliding
         location: Worcester, MA
         start_date: 2025-08
         end_date: present
@@ -60,7 +70,7 @@ cv:
 
       - company: ALMaS Research Group, Worcester Polytechnic Institute
         url: https://www.wpi.edu/people/faculty/mmaghelih
-        position: Graduate Researcher — GaitNet, Learning-Based Acyclic Footstep Planning
+        position: Graduate Researcher — GaitNet, RL Footstep Planning
         location: Worcester, MA
         start_date: 2025-11
         end_date: 2026-05
@@ -82,77 +92,80 @@ cv:
         summary: "Advisor: Dr. Asokan Thondiyath"
 
     Publications:
-      - title: "ReSCoT-Q: Reference-Guided Surface-Frame Control for Quadruped Robots"
-        publisher: Manuscript in preparation
+      - title: "SCRUB: Surface Contact Regulation Using the Body for Armless Quadruped Force–Motion Control"
+        url: /projects/scrub/
+        publisher: Manuscript
         releaseDate: 2026
-        summary: >-
-          S. Selvaraj and M. Agheli. First-author manuscript in preparation, targeting IEEE Robotics
-          and Automation Letters (RA-L).
+        summary: S. Selvaraj and M. Agheli.
 
       - title: "GaitNet: Learning-Based Acyclic Footstep Planning for Dynamic Quadruped Locomotion"
-        publisher: Manuscript in preparation
+        url: /projects/gaitnet/
+        publisher: Manuscript
         releaseDate: 2026
         summary: >-
-          O. Sullivan, S. Selvaraj, and M. Agheli. Manuscript in preparation, targeting IEEE ICRA 2027.
+          O. Sullivan\*, S. Selvaraj\*, and M. Agheli (\*equal contribution).
 
     Projects:
-      - name: Emergent Ice-Skating Locomotion for Humanoids via Blade-Contact RL (Jul 2026 – present)
+      - name: Simulated Ice-Skating Locomotion for Humanoids via Blade-Contact RL (Jul 2026 – present)
         url: https://youtu.be/ghr8AGP4rIg
         summary: >-
-          Unitree G1 trained to ice-skate on passive knife-edge blades with PPO in MuJoCo — no motion
-          capture or imitation data; skating emerges from anisotropic blade–ice contact.
+          Unitree G1 trained with PPO in MuJoCo to skate on passive 3 mm blades without imitation data; the
+          skating gait emerges from anisotropic blade–ice contact. Tracks a 0.9 m/s command within 0.09 m/s
+          at 94% single support.
 
-      - name: Human-Like Bimanual Lifting for Humanoids via Residual AMP–PPO (May 2026 – Jul 2026)
+      - name: Simulated Bimanual Lifting for Humanoids via Residual AMP–PPO (May 2026 – Jul 2026)
         url: https://github.com/shuayyy/humanoid-amp-ppo
         summary: >-
-          Unitree G1 trained to squat, grasp, and carry objects bimanually via a residual policy over a
-          frozen locomotion actor, with an AMP discriminator as a capped style regularizer.
+          Unitree G1 trained to lift objects with residual AMP–PPO over a frozen locomotion actor, holding them
+          within 3 cm of target using adaptive curricula and dynamics randomization.
 
       - name: Conditional Flow Matching Policies for Robot Manipulation (Apr 2026 – May 2026)
         url: https://github.com/souravselvaraj/Robomimic-Flowmatching
         summary: >-
-          Conditional Flow Matching visuomotor policy built from scratch in robomimic — 11× faster
-          inference than Diffusion Policy at matched or better task success.
+          Conditional Flow Matching visuomotor policy built from scratch in robomimic — 11× faster inference
+          than 100-step DDPM Diffusion Policy on the same backbone, with equal or higher success on the tasks
+          compared head-to-head.
 
-      - name: Acrobatic Quadrotor Flight using Geometric Control and L1 Adaptive Augmentation (Oct 2025 – Dec 2025)
+      - name: Acrobatic Quadrotor Control with L1 Adaptive Augmentation (Oct 2025 – Dec 2025)
         url: https://github.com/souravselvaraj/crazyflie-se3-l1
         summary: >-
-          SE(3) geometric controller with L1 adaptive augmentation on a Crazyflie 2.1 in ROS 2 simulation
-          — 2.2 cm tracking RMSE, up to 94% disturbance rejection.
+          SE(3) geometric controller with L1 adaptive augmentation for a Crazyflie 2.1 in ROS 2 simulation
+          — 2.2 cm position RMSE, up to 94% of force-step disturbances rejected.
 
       - name: Autonomous Rover — ISRO Robotics Challenge 2024 (Dec 2022 – Aug 2024)
         summary: >-
-          Led a 10-member team building a 6-wheeled rocker-bogie autonomous rover with ORB-SLAM terrain
-          mapping, kinodynamic path planning, and custom control electronics.
+          6-wheeled rocker-bogie autonomous rover with ORB-SLAM terrain mapping, kinodynamic path planning,
+          and custom control electronics.
+
+      - name: Additional projects
+        summary: >-
+          Visuomotor imitation learning — Behavior Cloning vs. Diffusion Policy on robosuite
+          ([code](https://github.com/souravselvaraj/Visuomotor-Imitation-Learning)); task-and-motion
+          planning — PDDL + OMPL block assembly on a Franka Panda.
 
     Teaching Experience:
       - bullet: >-
-          **Teaching Assistant — Legged Robotics (Graduate)**, [Worcester Polytechnic Institute](https://www.wpi.edu/),
-          Summer 2026. Instructor: Dr. Mahdi Agheli.
-      - bullet: >-
-          **Laboratory Curriculum Developer**, Robotics Engineering Department, [Worcester Polytechnic
-          Institute](https://www.wpi.edu/), 2026 – present.
+          **Teaching Assistant & Laboratory Curriculum Developer — RBE 521: Legged Robotics**,
+          [Worcester Polytechnic Institute](https://www.wpi.edu/), May – Aug 2026. Instructor: Dr. Mahdi Agheli.
+          Developed hands-on lab modules using Unitree Go1 and G1 robots.
 
     Academic Service & Leadership:
       - bullet: >-
           **Reviewer**, IEEE Transactions on Automation Science and Engineering (T-ASE), Jan – Feb 2026.
       - bullet: >-
-          **Treasurer & Team Lead**, Robotics and Machine Intelligence Club, [NIT Trichy](https://www.nitt.edu/),
-          Aug 2024 – May 2025.
+          **Team Lead, ISRO Robotics Challenge 2024**, [NIT Trichy](https://www.nitt.edu/), Dec 2022 – Aug 2024.
+          Led a 10-member team building an autonomous rover.
 
     Skills:
-      - name: Robotics Control
-        icon: fa-solid fa-robot
-        keywords: "MPC, Whole-Body Control, OCS2, Trajectory Optimization"
-      - name: Robot Learning
-        icon: fa-solid fa-brain
-        keywords: "Reinforcement Learning (PPO, AMP), Behavior Cloning, Diffusion Policy, PyTorch, robomimic"
-      - name: Simulation & Middleware
+      - name: Software
         icon: fa-solid fa-cubes
-        keywords: "MuJoCo, NVIDIA Isaac Lab, Gazebo, ROS/ROS2"
-      - name: Hardware
-        icon: fa-solid fa-microchip
-        keywords: "Unitree Go1/G1, Force/Torque Sensing, Franka Panda, Crazyflie, Jetson Orin, Intel RealSense, CAN"
+        keywords: "ROS 2, MuJoCo, Isaac Lab, Gazebo, PyTorch, OCS2, Pinocchio, Docker"
       - name: Programming
         icon: fa-solid fa-code
-        keywords: "Python, C/C++, MATLAB, Docker"
+        keywords: "C/C++, Python, MATLAB/Simulink"
+      - name: Robotics
+        icon: fa-solid fa-robot
+        keywords: "MPC, Whole-Body Control, Trajectory Optimization, Reinforcement Learning, Imitation Learning"
+      - name: Hardware
+        icon: fa-solid fa-microchip
+        keywords: "Unitree Go1/G1, Franka Panda, Crazyflie 2.1, Jetson Orin, RealSense, F/T Sensors, CAN"

@@ -25,9 +25,11 @@ announcements:
 
 I am an M.S. Robotics Engineering student at [Worcester Polytechnic Institute](https://www.wpi.edu/), working on legged robot control, contact-aware locomotion, and learning-based methods for dynamic robotic systems.
 
-At WPI, my research focuses on enabling legged robots to interact with the physical world through sustained contact. My current work develops control frameworks for quadruped surface interaction, combining model predictive control, whole-body control, online surface-frame estimation, and force-torque sensing to regulate contact force while tracking motion along external surfaces. The broader goal of my research is to build robotic systems that are robust, physically grounded, and capable of adapting across tasks, environments, and morphologies.
+**I am applying to PhD programs for Fall 2027.**
 
-My research interests include legged locomotion, humanoid control, whole-body control, model predictive control, sim-to-real transfer, and physics-informed reinforcement learning. I am particularly interested in combining the structure and reliability of classical model-based control with the adaptability of learning-based methods.
+At WPI, my research focuses on enabling legged robots to interact with the physical world through sustained contact. In my current project, [SCRUB]({{ '/projects/scrub/' | relative_url }}), an armless quadruped uses its own body to press and slide a tool along surfaces it has no model of — estimating the surface frame online and regulating contact force with centroidal model predictive control and whole-body control on Unitree Go1 hardware. I am also co-first author of [GaitNet]({{ '/projects/gaitnet/' | relative_url }}), which combines learned foothold costs with reinforcement-learning gait selection on top of perceptive MPC. The broader goal of my research is to build robotic systems that are robust, physically grounded, and capable of adapting across tasks, environments, and morphologies.
+
+My research interests are legged robotics, whole-body control, and robot learning. I am particularly interested in combining the structure and reliability of classical model-based control with the adaptability of learning-based methods.
 
 Before joining WPI, I completed my undergraduate studies at the [National Institute of Technology, Tiruchirappalli](https://www.nitt.edu/). More details about my research, projects, and experience can be found in my [curriculum vitae]({{ '/cv/' | relative_url }}).
 

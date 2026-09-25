@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Bimanual Lifting
-description: Human-like bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy.
+description: Simulated bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy.
 img: assets/img/projects/g1_bimanual_lifting.jpg
 importance: 4
 category: projects
