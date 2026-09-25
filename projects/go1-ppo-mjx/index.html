@@ -102,8 +102,8 @@ ninja.data = [{
           section: "News",},{id: "news-served-as-a-reviewer-for-ieee-transactions-on-automation-science-and-engineering-t-ase",
           title: 'Served as a reviewer for IEEE Transactions on Automation Science and Engineering (T-ASE)....',
           description: "",
-          section: "News",},{id: "news-serving-as-teaching-assistant-for-the-graduate-legged-robotics-course-at-wpi-this-summer-and-developing-lab-modules-for-the-legged-robotics-and-parallel-robotics-courses",
-          title: 'Serving as Teaching Assistant for the graduate Legged Robotics course at WPI this...',
+          section: "News",},{id: "news-serving-as-teaching-assistant-and-laboratory-curriculum-developer-for-the-graduate-course-rbe-521-legged-robotics-at-wpi-this-summer-building-hands-on-lab-modules-on-the-unitree-go1-and-g1",
+          title: 'Serving as Teaching Assistant and laboratory curriculum developer for the graduate course RBE...',
           description: "",
           section: "News",},{id: "news-selected-by-the-robotics-engineering-department-at-wpi-to-receive-the-dr-glenn-yee-graduate-student-tuition-award-for-fall-2026",
           title: 'Selected by the Robotics Engineering Department at WPI to receive the Dr. Glenn...',
@@ -120,12 +120,12 @@ ninja.data = [{
               window.location.href = "/projects/flow-matching-policies/";
             },},{id: "projects-bimanual-lifting",
           title: 'Bimanual Lifting',
-          description: "Human-like bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy.",
+          description: "Simulated bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/g1-bimanual-lifting/";
             },},{id: "projects-humanoid-ice-skating",
           title: 'Humanoid Ice Skating',
-          description: "Emergent ice-skating locomotion for a Unitree G1 via blade-contact RL — no motion capture, no imitation data. Skating falls out of the physics.",
+          description: "Simulated ice-skating locomotion for a Unitree G1 via blade-contact RL — no motion capture, no imitation data. The skating gait emerges from anisotropic blade–ice contact.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/g1-ice-skating/";
             },},{id: "projects-gaitnet",
@@ -138,11 +138,16 @@ ninja.data = [{
           description: "PPO locomotion for the Unitree Go1 in JAX/MuJoCo MJX — asymmetric actor-critic, domain randomization, rough terrain, and real-robot deployment.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/go1-ppo-mjx/";
-            },},{id: "projects-rescot-q",
-          title: 'ReSCoT-Q',
-          description: "Reference-guided surface-frame control for quadrupeds — force-controlled tool sliding on Unitree Go1 hardware with MPC and whole-body control.",
+            },},{id: "projects-revolute",
+          title: 'Revolute',
+          description: "Flow-matching visuomotor policies for a Seeed B601 RS arm on LeRobot — teleoperated demonstrations, a controlled U-Net vs. transformer comparison, and models sized for a Jetson Orin Nano.",
           section: "Projects",handler: () => {
-              window.location.href = "/projects/rescot-q/";
+              window.location.href = "/projects/revolute/";
+            },},{id: "projects-scrub",
+          title: 'SCRUB',
+          description: "Blind force-regulated tool sliding on Unitree Go1 hardware — an armless quadruped presses and slides a body-mounted tool along surfaces it has no model of.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/scrub/";
             },},{
         id: 'social-email',
         title: 'email',
