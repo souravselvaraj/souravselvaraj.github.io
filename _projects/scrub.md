@@ -2,7 +2,7 @@
 layout: page
 title: SCRUB
 description: Blind force-regulated tool sliding on Unitree Go1 hardware — an armless quadruped presses and slides a body-mounted tool along surfaces it has no model of.
-img: assets/img/projects/rescotq_thumb.jpg
+img: assets/img/projects/scrub_thumb.jpg
 importance: 1
 category: research
 ---
