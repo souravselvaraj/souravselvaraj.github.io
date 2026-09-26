@@ -9,11 +9,19 @@ category: research
 
 <div class="row justify-content-center">
     <div class="col-12 mt-3 mb-3">
-        {% include video.liquid path="assets/video/projects/rescotq_cylinder.mp4" class="img-fluid rounded z-depth-1" width="100%" controls=true muted=true %}
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+            <iframe
+                src="https://www.youtube.com/embed/R2P-cebOBVM"
+                title="SCRUB: Surface Contact Regulation Using the Body for Armless Quadruped Force–Motion Control"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                class="rounded z-depth-1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
     </div>
 </div>
 <div class="caption">
-    The Go1 sliding its body-mounted tool around a column while regulating contact force (RViz visualization; commanded contact forces shown in magenta).
+    SCRUB on the Unitree Go1.
 </div>
 
 **SCRUB** (Surface Contact Regulation Using the Body) is my primary graduate research project in the [ALMaS Research Group](https://www.wpi.edu/people/faculty/mmaghelih) at [WPI](https://www.wpi.edu/), advised by Dr. Mahdi Agheli. The goal: let a quadruped with no arm do useful contact work — pressing a body-mounted tool against a surface and sliding it along while regulating the contact force, all while the robot keeps balancing on four legs.
@@ -27,12 +35,15 @@ This is a fundamentally different regime from locomotion or pick-and-place. The 
 - **Centroidal MPC over whole-body control.** A 100 Hz centroidal MPC (OCS2, SQP) runs over a 1 kHz whole-body-control QP on a Unitree Go1.
 
 <div class="row justify-content-center">
-    <div class="col-12 mt-3 mb-3">
+    <div class="col-sm-6 mt-3 mb-3">
+        {% include video.liquid path="assets/video/projects/rescotq_cylinder.mp4" class="img-fluid rounded z-depth-1" width="100%" controls=true muted=true %}
+    </div>
+    <div class="col-sm-6 mt-3 mb-3">
         {% include video.liquid path="assets/video/projects/rescotq_flatwall.mp4" class="img-fluid rounded z-depth-1" width="100%" controls=true muted=true %}
     </div>
 </div>
 <div class="caption">
-    Sliding against a planar wall (RViz visualization).
+    RViz visualizations of sliding around a column (left) and against a planar wall (right); commanded contact forces shown in magenta.
 </div>
 
 ## Hardware results
@@ -49,3 +60,5 @@ Baselines with a **fixed normal** or with **friction compensation** completed **
 ## Status
 
 Manuscript (2026): S. Selvaraj and M. Agheli, "SCRUB: Surface Contact Regulation Using the Body for Armless Quadruped Force–Motion Control."
+
+Video: [youtu.be/R2P-cebOBVM](https://youtu.be/R2P-cebOBVM)
