@@ -15,7 +15,7 @@ category: research
     </div>
 </div>
 <div class="caption">
-    The GaitNet pipeline: perception feeds a CNN foothold-cost predictor and an RL gait-selection policy, which drive a model-based perceptive MPC.
+    The GaitNet pipeline: a per-leg terrain mask feeds a PPO-trained network that scores every valid foothold plus a no-op and issues the single best footstep to an NMPC/WBC tracker.
 </div>
 
 ## Why acyclic?
