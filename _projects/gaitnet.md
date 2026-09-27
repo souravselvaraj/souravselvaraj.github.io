@@ -15,7 +15,7 @@ category: research
     </div>
 </div>
 <div class="caption">
-    The GaitNet pipeline: a per-leg terrain mask feeds a PPO-trained network that scores every valid foothold plus a no-op and issues the single best footstep to an NMPC/WBC tracker.
+    GaitNet system overview. (a) Deployment: a height scan becomes a per-leg validity mask; GaitNet scores every valid cell plus a no-op option in one pass and issues the argmax as a single footstep to the NMPC/WBC controller. (b) The network: state and candidate embeddings feed a shared trunk with value and duration heads. (c) Training: PPO in NVIDIA Isaac Lab over a sampled 65-candidate set; only the actor is deployed, frozen.
 </div>
 
 ## Why acyclic?
