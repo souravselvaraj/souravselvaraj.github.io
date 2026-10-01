@@ -107,7 +107,7 @@ cv:
 
     Projects:
       - name: Simulated Ice-Skating Locomotion for Humanoids via Blade-Contact RL (Jul 2026 – present)
-        url: https://youtu.be/ghr8AGP4rIg
+        url: https://youtu.be/F5EM3TZRRbE
         summary: >-
           Unitree G1 trained with PPO in MuJoCo to skate on passive 3 mm blades without imitation data; the
           skating gait emerges from anisotropic blade–ice contact. Tracks a 0.9 m/s command within 0.09 m/s

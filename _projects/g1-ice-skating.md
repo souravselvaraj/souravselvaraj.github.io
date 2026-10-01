@@ -11,7 +11,7 @@ category: projects
     <div class="col-12 mt-3 mb-3">
         <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
             <iframe
-                src="https://www.youtube.com/embed/ghr8AGP4rIg"
+                src="https://www.youtube.com/embed/F5EM3TZRRbE"
                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
                 class="rounded z-depth-1"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -20,7 +20,7 @@ category: projects
     </div>
 </div>
 <div class="caption">
-    Emergent skating in MuJoCo — glide, push-off, and recovery arise from blade-contact physics alone.
+    Emergent skating in simulation (Isaac Lab + MuJoCo, rendered in Blender Cycles) — glide, push-off, and recovery arise from blade-contact physics alone.
 </div>
 
 Can a humanoid learn to *ice-skate* without ever being shown how? This project trains a **Unitree G1** on passive 3 mm knife-edge blades with PPO in MuJoCo, using **no motion capture and no imitation data**. There is no reward term that says "look like a skater" — the skating gait *emerges* from the interaction between the contact physics and a task reward.
