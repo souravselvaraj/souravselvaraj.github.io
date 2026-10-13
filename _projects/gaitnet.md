@@ -1,13 +1,13 @@
 ---
 layout: page
 title: GaitNet
-description: Learning-based acyclic footstep planning for dynamic quadruped locomotion — CNN foothold cost maps + RL gait selection on top of perceptive MPC.
+description: Attention-based acyclic footstep planning for dynamic quadruped locomotion — candidate self-attention, motion history, and inverse footstep dynamics on top of perceptive MPC.
 img: assets/img/projects/gaitnet_pipeline.jpg
 importance: 2
 category: research
 ---
 
-**GaitNet** is a hybrid learning–control footstep planner for acyclic Unitree Go1 locomotion over irregular terrain, developed with Owen Sullivan (co-first authors, equal contribution) in the [ALMaS Research Group](https://www.wpi.edu/people/faculty/mmaghelih) at [WPI](https://www.wpi.edu/) (advisor: Dr. Mahdi Agheli). Instead of committing to a fixed gait cycle, the planner decides *which* leg to move, *where* to place it, and *how long* the swing should take — step by step, based on the terrain ahead.
+**GaitNet-T** is an attention-based footstep planner for acyclic Unitree Go1 locomotion over irregular terrain, developed with Owen Sullivan (co-first authors, equal contribution) in the [ALMaS Research Group](https://www.wpi.edu/people/faculty/mmaghelih) at [WPI](https://www.wpi.edu/) (advisor: Dr. Mahdi Agheli). Instead of following a fixed gait cycle, the policy decides _which_ leg to move, _where_ to place it, and _how long_ the swing should take — one footstep at a time.
 
 <div class="row justify-content-center">
     <div class="col-sm-11 mt-3 mb-3">
@@ -15,38 +15,48 @@ category: research
     </div>
 </div>
 <div class="caption">
-    GaitNet system overview. (a) Deployment: a height scan becomes a per-leg validity mask; GaitNet scores every valid cell plus a no-op option in one pass and issues the argmax as a single footstep to the NMPC/WBC controller. (b) The network: state and candidate embeddings feed a shared trunk with value and duration heads. (c) Training: PPO in NVIDIA Isaac Lab over a sampled 65-candidate set; only the actor is deployed, frozen.
+    Original GaitNet system overview. GaitNet-T preserves the same candidate-based decision interface while adding attention across footholds, a one-second motion history, and an inverse footstep model before execution.
 </div>
 
 ## Why acyclic?
 
-Fixed cyclic gaits (trot, crawl) waste the quadruped's freedom on broken terrain: when footholds are scarce — gaps, missing steps, rubble — the *sequence* of leg movements matters as much as the footholds themselves. GaitNet treats gait selection itself as a learned decision.
+Fixed cyclic gaits (trot, crawl) waste the quadruped's freedom on broken terrain: when footholds are scarce — gaps, missing steps, rubble — the _sequence_ of leg movements matters as much as the footholds themselves. GaitNet treats gait selection itself as a learned decision.
 
 ## Method
 
-- **ContactNet CNN** predicts leg-specific foothold cost maps from local heightmap patches, trained on footstep tree-search rollouts generated in NVIDIA Isaac Lab.
-- **RL gait selection** (actor–critic, masked categorical policy) chooses among per-leg foothold candidates plus a no-op, effectively selecting the next swing leg, its foothold, and swing timing.
-- **Model-based execution**: the selected footstep is executed by an OCS2 perceptive MPC with foot-placement and collision constraints, retaining the stability guarantees of model-based quadruped control.
+- **Candidate-based action space.** At each 25 Hz policy tick, the planner samples up to 16 valid footholds for every eligible leg. Together with a no-op, this produces 65 slots. A masked categorical policy selects a slot, while a Gaussian head selects its swing duration.
+- **GaitNet-T attention architecture.** A 464k-parameter actor uses two pre-normalized Transformer encoder layers with four attention heads to compare candidate footholds. Its context combines the current robot state with one second of motion and touchdown-error history.
+- **Inverse footstep model (IDM).** A learned inverse model maps each desired landing location to the command required by the active controller. This separates _where the policy wants the foot to land_ from _what must be sent to the controller_.
+- **Model-based execution.** The selected step is passed to OCS2 perceptive MPC and whole-body control. The policy chooses the gait online; no periodic contact sequence is prescribed.
 
-## My role: the deployment stack
+## My role: attention and inverse dynamics
 
-I owned the simulation deployment side of the project:
+I implemented the two additions at the center of the current system:
 
-- **ROS integration** of the planner with OCS2 perceptive MPC (foot-placement and collision constraints) on a simulated Go1.
-- **GPU elevation mapping** from onboard depth sensing (elevation-mapping-cupy + grid_map + RealSense), producing the heightmaps the planner consumes.
-- **Terrain-aware footstep candidate generation** from robot state, commanded velocity, and raycast heightmaps — real-time filtering and ranking of feasible leg-selection, foot-displacement, and swing-duration actions.
+- **GaitNet-T**, including candidate self-attention, the motion-history encoder, masking, weight-preserving conversion from the original GaitNet actor, and memory-efficient PPO training.
+- **The IDM pipeline**, including footstep-data collection, hindsight-relabeled inverse-model fitting, integration into training and deployment, and evaluation across controller configurations. The model reduced held-out command-to-landing RMS error from **2.61 cm to 0.89 cm**.
+- **Deployment integration** with the ROS GaitNet service, OCS2 perceptive MPC, and camera-based terrain mapping on the simulated Go1.
 
 ## Results
 
-Evaluated in NVIDIA Isaac Lab across commanded velocities and missing-step terrain difficulties:
+The final GaitNet-T policy was evaluated in Isaac Lab and through the complete Gazebo + OCS2 deployment stack:
 
-| Planner                          | Survival (no fall into gaps) |
-| -------------------------------- | ---------------------------- |
-| **GaitNet**                      | **69.4%**                    |
-| Single-leg motion-planner baseline | 25.6%                      |
+| Evaluation                                                      |      Success       |
+| --------------------------------------------------------------- | :----------------: |
+| Isaac Lab, 10–30% void terrain                                  |      **99%**       |
+| Isaac Lab, 40% void terrain                                     |      **≈88%**      |
+| Isaac Lab, 50% void terrain                                     |      **≈75%**      |
+| Gazebo + OCS2, held-out worlds with exact terrain               |  **82%** [70, 89]  |
+| Gazebo + OCS2, onboard perception and leg odometry (330 trials) | **80.3%** [76, 84] |
+
+Bracketed values are 95% Wilson confidence intervals.
+
+Although no gait was specified, the learned policy spontaneously coordinated almost every paired swing diagonally, producing a trot from step-by-step decisions.
 
 ## Status
 
 Manuscript (2026): O. Sullivan\*, S. Selvaraj\*, and M. Agheli, "GaitNet: Learning-Based Acyclic Footstep Planning for Dynamic Quadruped Locomotion." \*Equal contribution.
 
-Code: [github.com/opsullivan85/gaitnet](https://github.com/opsullivan85/gaitnet)
+Technical documentation: [github.com/souravselvaraj/gaitnet-docs](https://github.com/souravselvaraj/gaitnet-docs)
+
+Code: [github.com/souravselvaraj/gaitnet](https://github.com/souravselvaraj/gaitnet/tree/train-port)
