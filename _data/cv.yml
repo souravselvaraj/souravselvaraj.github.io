@@ -116,7 +116,7 @@ cv:
       - name: Bimanual Lifting for Humanoids via Residual AMP–PPO (May 2026 – Jul 2026)
         url: https://github.com/shuayyy/humanoid-amp-ppo
         summary: >-
-          Unitree G1 trained to lift objects with residual AMP–PPO over a frozen locomotion actor, holding them
+          Collaborated on training a Unitree G1 to lift objects with residual AMP–PPO over a frozen locomotion actor, holding them
           within 3 cm of target in simulation using adaptive curricula and dynamics randomization, then run on
           the real G1 with a box.
 

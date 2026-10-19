@@ -16,7 +16,7 @@ category: projects
     Converged policies squatting, grasping, and carrying objects bimanually in MuJoCo.
 </div>
 
-Whole-body lifting is a coordination problem: a humanoid must bend its legs, lean its torso, close both arms around an object, and stand back up — without the arms fighting the balance controller. This project trains a **Unitree G1** to squat, grasp, and carry objects bimanually in MuJoCo, structured as a **residual policy over a frozen locomotion actor**: the pretrained locomotion policy keeps the robot balanced and walking, while a residual network adds the manipulation behavior on top.
+Whole-body lifting is a coordination problem: a humanoid must bend its legs, lean its torso, close both arms around an object, and stand back up — without the arms fighting the balance controller. This collaborative project trains a **Unitree G1** to squat, grasp, and carry objects bimanually in MuJoCo, structured as a **residual policy over a frozen locomotion actor**: the pretrained locomotion policy keeps the robot balanced and walking, while a residual network adds the manipulation behavior on top.
 
 ## Style without imitation traps
 
@@ -31,6 +31,6 @@ An **AMP discriminator** trained on human motion capture acts as a style regular
 
 ## Results
 
-In simulation, converged policies consistently hold objects at goal height, centered within **3 cm**, with human-like posture — torso pitch stays inside the mocap prior's 2–13° range. I have since run the lifting policy on the real Unitree G1, lifting a box.
+In simulation, converged policies consistently hold objects at goal height, centered within **3 cm**, with human-like posture — torso pitch stays inside the mocap prior's 2–13° range. We have since run the lifting policy on the real Unitree G1, lifting a box.
 
 Code: [github.com/shuayyy/humanoid-amp-ppo](https://github.com/shuayyy/humanoid-amp-ppo)
