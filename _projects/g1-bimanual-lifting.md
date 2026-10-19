@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Bimanual Lifting
-description: Simulated bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy.
+description: Bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy, trained in simulation and run on the real robot.
 img: assets/img/projects/g1_bimanual_lifting.jpg
 importance: 4
 category: projects
@@ -29,8 +29,8 @@ An **AMP discriminator** trained on human motion capture acts as a style regular
 - **Domain randomization** over object mass, friction, center of mass, and external base pushes.
 - **Reward-hacking whack-a-mole** — successive exploits (lunging, waist-folding instead of squatting) were closed with gated posture penalties that activate only when the task is being cheated, not during legitimate motion.
 
-## Results (simulation)
+## Results
 
-Converged policies consistently hold objects at goal height, centered within **3 cm**, with human-like posture — torso pitch stays inside the mocap prior's 2–13° range. This project is simulation-only; no sim-to-real transfer was attempted.
+In simulation, converged policies consistently hold objects at goal height, centered within **3 cm**, with human-like posture — torso pitch stays inside the mocap prior's 2–13° range. I have since run the lifting policy on the real Unitree G1, lifting a box.
 
 Code: [github.com/shuayyy/humanoid-amp-ppo](https://github.com/shuayyy/humanoid-amp-ppo)

@@ -73,7 +73,7 @@ cv:
         position: Graduate Researcher — GaitNet, RL Footstep Planning
         location: Worcester, MA
         start_date: 2025-11
-        end_date: 2026-05
+        end_date: present
         summary: "Advisor: Dr. Mahdi Agheli"
 
       - company: NIT Trichy
@@ -92,15 +92,15 @@ cv:
         summary: "Advisor: Dr. Asokan Thondiyath"
 
     Publications:
-      - title: "SCRUB: Surface Contact Regulation Using the Body for Armless Quadruped Force–Motion Control"
+      - title: "SCRUB: Contact-Based Surface-Frame Estimation for Force–Motion Control with an Armless Quadruped"
         url: /projects/scrub/
-        publisher: Manuscript
+        publisher: To be submitted to IEEE RA-L
         releaseDate: 2026
         summary: S. Selvaraj and M. Agheli.
 
-      - title: "GaitNet: Learning-Based Acyclic Footstep Planning for Dynamic Quadruped Locomotion"
+      - title: "GaitNet: Where Do I Step?"
         url: /projects/gaitnet/
-        publisher: Manuscript
+        publisher: To be submitted to RSS 2027
         releaseDate: 2026
         summary: >-
           O. Sullivan\*, S. Selvaraj\*, and M. Agheli (\*equal contribution).
@@ -113,11 +113,12 @@ cv:
           skating gait emerges from anisotropic blade–ice contact. Tracks a 0.9 m/s command within 0.09 m/s
           at 94% single support.
 
-      - name: Simulated Bimanual Lifting for Humanoids via Residual AMP–PPO (May 2026 – Jul 2026)
+      - name: Bimanual Lifting for Humanoids via Residual AMP–PPO (May 2026 – Jul 2026)
         url: https://github.com/shuayyy/humanoid-amp-ppo
         summary: >-
           Unitree G1 trained to lift objects with residual AMP–PPO over a frozen locomotion actor, holding them
-          within 3 cm of target using adaptive curricula and dynamics randomization.
+          within 3 cm of target in simulation using adaptive curricula and dynamics randomization, then run on
+          the real G1 with a box.
 
       - name: Conditional Flow Matching Policies for Robot Manipulation (Apr 2026 – May 2026)
         url: https://github.com/souravselvaraj/Robomimic-Flowmatching
