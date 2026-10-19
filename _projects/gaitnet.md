@@ -41,13 +41,13 @@ On OCS2 with a simulated depth camera, over 0–70% voids and commanded speeds o
 
 | Planner       | Success at 40–70% voids |
 | ------------- | :---------------------: |
-| **GaitNet**   |         **71%**         |
+| **GaitNet** (mean of 5 training seeds) |         **71%**         |
 | OCS2 trot     |           38%           |
 
 The inverse footstep model cuts held-out landing error from 2.61 cm to 0.89 cm RMS; without it, GaitNet's success on OCS2 falls from 83% to 55%, averaged over void levels. These numbers are from simulation. We have also run the frozen policy on a real Go1 with OCS2, walking acyclically over 40–50 mm blocks.
 
 ## Status
 
-To be submitted to RSS 2027: O. Sullivan\*, S. Selvaraj\*, and M. Agheli, "GaitNet: Where Do I Step?" \*Equal contribution.
+To be submitted to L4DC 2027: O. Sullivan\*, S. Selvaraj\*, and M. Agheli, "GaitNet: Where Do I Step?" \*Equal contribution.
 
 Code: [github.com/opsullivan85/gaitnet](https://github.com/opsullivan85/gaitnet)
