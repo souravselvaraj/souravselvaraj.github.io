@@ -1,0 +1,2831 @@
+/*
+ * site.css: the whole visual layer of souravselvaraj.github.io, on top of the pinned al_folio_core gem.
+ *
+ * Loaded in <head> through _config.yml third_party_libraries.google_fonts.url.fonts: the gem prints that
+ * URL as a plain render-blocking <link rel=stylesheet>, after the icon sheets and BEFORE main.css. It is
+ * kept out of assets/css/ because PurgeCSS and the gem's AssetsGenerators rewrite that folder on deploy.
+ *
+ * It works without JavaScript (static light.day.clear, or dark.night.clear when the OS prefers dark).
+ * The inline boot in footer_text and assets/ambient/ambient.js only set attributes on <html>:
+ *   data-amb-phase = dawn | day | dusk | night     (sun elevation at the visitor's approximate place)
+ *   data-amb-wx    = partly | overcast | rain | snow | fog | storm   (absent = clear or unknown)
+ *   data-theme     = light | dark                  (the gem's theme.js; "system" made automatic by the boot)
+ *   data-amb-page  = about | projects | project | publications | cv | blog | photography | news | other
+ *
+ * Specificity: main.css (unlayered) loads AFTER this file, so ties lose. Rules that must beat the gem use
+ * the prefix html:root:root (0,2,1); navbar rules add #navbar. Everything in tailwind.css is in @layer, so
+ * any rule here beats its normal declarations, but its !important ones (.collapse, .navbar-expand-sm
+ * .navbar-collapse, .p-3, .mt-*, .w-100, .h-100) win: work around them with other properties.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+/* ------------------------------------------------------------------------------------------ tokens */
+
+/* Registered so a palette change can fade by transitioning the tokens on <html> alone (see Motion).
+   Initial values = light.day.clear. */
+@property --amb-bg {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f8f7f1;
+}
+@property --amb-surface {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #fcfbf6;
+}
+@property --amb-text {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #33312b;
+}
+@property --amb-muted {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #605d53;
+}
+@property --amb-accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #0c66a1;
+}
+@property --amb-link {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #075d94;
+}
+@property --amb-border {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #dad7cf;
+}
+@property --amb-border-strong {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #8b887f;
+}
+@property --amb-code-bg {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #efede6;
+}
+@property --amb-accent-soft {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #d7e3e6;
+}
+@property --amb-on-accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f8f7f1;
+}
+@property --amb-sky {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #c4e3f6;
+}
+@property --amb-glow {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #fdf6dc;
+}
+@property --amb-cloud {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #dfecf3;
+}
+
+/* Layout tokens and the static light palette (light.day.clear): no JS, or no data-amb-phase yet. */
+:root {
+  color-scheme: light;
+  --amb-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --amb-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --amb-frame: 920px; /* content width of header and main; _config.yml max_width matches */
+  --amb-gutter: 1.5rem;
+  --amb-measure: 34em; /* ~70 characters per rendered line of Inter at 17 px (measured; 38em gave ~78) */
+  --amb-nav-h: 3.5rem;
+  --amb-radius: 6px;
+  --amb-fade: 1.6s;
+
+  --amb-bg: #f8f7f1;
+  --amb-surface: #fcfbf6;
+  --amb-text: #33312b;
+  --amb-muted: #605d53;
+  --amb-accent: #0c66a1;
+  --amb-link: #075d94;
+  --amb-border: #dad7cf;
+  --amb-border-strong: #8b887f;
+  --amb-code-bg: #efede6;
+  --amb-accent-soft: #d7e3e6;
+  --amb-on-accent: #f8f7f1;
+  --amb-sky: #c4e3f6;
+  --amb-glow: #fdf6dc;
+  --amb-cloud: #dfecf3;
+}
+/* Static dark palette (dark.night.clear): theme.js chose dark but no phase is known (e.g. ?amb=0). */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --amb-bg: #1a1713;
+  --amb-surface: #221f1c;
+  --amb-text: #c3bcb5;
+  --amb-muted: #a2988e;
+  --amb-accent: #b4905d;
+  --amb-link: #bf9d6c;
+  --amb-border: #37322c;
+  --amb-border-strong: #746c62;
+  --amb-code-bg: #27231e;
+  --amb-accent-soft: #30281d;
+  --amb-on-accent: #1a1713;
+  --amb-sky: #19223d;
+  --amb-glow: #242f3d;
+  --amb-cloud: #292d38;
+}
+/* No JS at all (no data-theme): follow the OS. */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    color-scheme: dark;
+    --amb-bg: #1a1713;
+    --amb-surface: #221f1c;
+    --amb-text: #c3bcb5;
+    --amb-muted: #a2988e;
+    --amb-accent: #b4905d;
+    --amb-link: #bf9d6c;
+    --amb-border: #37322c;
+    --amb-border-strong: #746c62;
+    --amb-code-bg: #27231e;
+    --amb-accent-soft: #30281d;
+    --amb-on-accent: #1a1713;
+    --amb-sky: #19223d;
+    --amb-glow: #242f3d;
+    --amb-cloud: #292d38;
+  }
+}
+@media (max-width: 575.98px) {
+  :root {
+    --amb-gutter: 1rem;
+  }
+}
+@media (max-width: 767.98px) {
+  :root {
+    --amb-nav-h: 3.25rem;
+  }
+}
+
+/* BEGIN GENERATED by bin/build_palette.py: do not edit by hand */
+/* 4 phases x 7 weather classes x 2 modes = 56 states; html[data-amb-phase] and html[data-amb-wx] are set by
+   the inline boot in _config.yml footer_text and by ambient.js, html[data-theme] by the gem's theme.js. */
+html[data-amb-phase="dawn"][data-theme="light"] {
+  --amb-bg: #fbf2f0;
+  --amb-surface: #fef7f5;
+  --amb-text: #3d3331;
+  --amb-muted: #675955;
+  --amb-accent: #9c4254;
+  --amb-link: #8f3c4d;
+  --amb-border: #dfd2cf;
+  --amb-border-strong: #938480;
+  --amb-code-bg: #f3e9e6;
+  --amb-accent-soft: #eed9da;
+  --amb-on-accent: #fbf2f0;
+  --amb-sky: #f9d6d7;
+  --amb-glow: #ffecde;
+  --amb-cloud: #f6e7e8;
+}
+html[data-amb-phase="dawn"][data-amb-wx="partly"][data-theme="light"] {
+  --amb-bg: #f9f2f0;
+  --amb-surface: #fcf6f4;
+  --amb-text: #3b3432;
+  --amb-muted: #645956;
+  --amb-accent: #914a57;
+  --amb-link: #85434f;
+  --amb-border: #dcd2cf;
+  --amb-border-strong: #908380;
+  --amb-code-bg: #f0e8e6;
+  --amb-accent-soft: #eadadb;
+  --amb-on-accent: #f9f2f0;
+  --amb-sky: #f7d8d9;
+  --amb-glow: #fbe2dc;
+  --amb-cloud: #f3e6e6;
+}
+html[data-amb-phase="dawn"][data-amb-wx="overcast"][data-theme="light"] {
+  --amb-bg: #f5f1f0;
+  --amb-surface: #f8f5f4;
+  --amb-text: #383332;
+  --amb-muted: #5f5957;
+  --amb-accent: #7c545a;
+  --amb-link: #724c52;
+  --amb-border: #d7d1d0;
+  --amb-border-strong: #8b8382;
+  --amb-code-bg: #ece7e6;
+  --amb-accent-soft: #e4dbdb;
+  --amb-on-accent: #f5f1f0;
+  --amb-sky: #e6dbdc;
+  --amb-glow: #e6dbdc;
+  --amb-cloud: #e8e3e3;
+}
+html[data-amb-phase="dawn"][data-amb-wx="rain"][data-theme="light"] {
+  --amb-bg: #f5f0ee;
+  --amb-surface: #f8f4f3;
+  --amb-text: #383331;
+  --amb-muted: #615856;
+  --amb-accent: #2b6196;
+  --amb-link: #265889;
+  --amb-border: #d8d0ce;
+  --amb-border-strong: #8c8280;
+  --amb-code-bg: #ece6e5;
+  --amb-accent-soft: #d9dce2;
+  --amb-on-accent: #f5f0ee;
+  --amb-sky: #dedbeb;
+  --amb-glow: #dedbeb;
+  --amb-cloud: #e0dfe5;
+}
+html[data-amb-phase="dawn"][data-amb-wx="snow"][data-theme="light"] {
+  --amb-bg: #f9f5f3;
+  --amb-surface: #fcf9f8;
+  --amb-text: #3a3635;
+  --amb-muted: #635b59;
+  --amb-accent: #86516a;
+  --amb-link: #7b4961;
+  --amb-border: #dbd5d3;
+  --amb-border-strong: #8e8684;
+  --amb-code-bg: #f0ebea;
+  --amb-accent-soft: #e9dee0;
+  --amb-on-accent: #f9f5f3;
+  --amb-sky: #e2e6f3;
+  --amb-glow: #e2e6f3;
+  --amb-cloud: #f0f1f7;
+}
+html[data-amb-phase="dawn"][data-amb-wx="fog"][data-theme="light"] {
+  --amb-bg: #f5f2f2;
+  --amb-surface: #f9f6f6;
+  --amb-text: #373434;
+  --amb-muted: #5f5a59;
+  --amb-accent: #78565b;
+  --amb-link: #6e4e53;
+  --amb-border: #d7d3d2;
+  --amb-border-strong: #8a8584;
+  --amb-code-bg: #ece9e8;
+  --amb-accent-soft: #e4dcdd;
+  --amb-on-accent: #f5f2f2;
+  --amb-sky: #e5dede;
+  --amb-glow: #e5dede;
+  --amb-cloud: #edeaea;
+}
+html[data-amb-phase="dawn"][data-amb-wx="storm"][data-theme="light"] {
+  --amb-bg: #f4eeed;
+  --amb-surface: #f7f3f2;
+  --amb-text: #373230;
+  --amb-muted: #605755;
+  --amb-accent: #645393;
+  --amb-link: #5c4b87;
+  --amb-border: #d6cfcd;
+  --amb-border-strong: #8b817f;
+  --amb-code-bg: #ebe5e3;
+  --amb-accent-soft: #e0d8e0;
+  --amb-on-accent: #f4eeed;
+  --amb-sky: #e2d8e9;
+  --amb-glow: #e2d8e9;
+  --amb-cloud: #ded9e0;
+}
+html[data-amb-phase="day"][data-theme="light"] {
+  --amb-bg: #f8f7f1;
+  --amb-surface: #fcfbf6;
+  --amb-text: #33312b;
+  --amb-muted: #605d53;
+  --amb-accent: #0c66a1;
+  --amb-link: #075d94;
+  --amb-border: #dad7cf;
+  --amb-border-strong: #8b887f;
+  --amb-code-bg: #efede6;
+  --amb-accent-soft: #d7e3e6;
+  --amb-on-accent: #f8f7f1;
+  --amb-sky: #c8e7fa;
+  --amb-glow: #fdf6dc;
+  --amb-cloud: #dfecf3;
+}
+html[data-amb-phase="day"][data-amb-wx="partly"][data-theme="light"] {
+  --amb-bg: #f7f6f1;
+  --amb-surface: #fbfaf6;
+  --amb-text: #33312c;
+  --amb-muted: #5f5c55;
+  --amb-accent: #2a6593;
+  --amb-link: #255c87;
+  --amb-border: #d8d6d0;
+  --amb-border-strong: #8a8780;
+  --amb-code-bg: #eeece7;
+  --amb-accent-soft: #dae2e4;
+  --amb-on-accent: #f7f6f1;
+  --amb-sky: #cae5f5;
+  --amb-glow: #e4eee8;
+  --amb-cloud: #dfeaf0;
+}
+html[data-amb-phase="day"][data-amb-wx="overcast"][data-theme="light"] {
+  --amb-bg: #f5f4f1;
+  --amb-surface: #f9f8f6;
+  --amb-text: #30302d;
+  --amb-muted: #5d5c58;
+  --amb-accent: #46637d;
+  --amb-link: #3f5a72;
+  --amb-border: #d6d5d1;
+  --amb-border-strong: #898783;
+  --amb-code-bg: #ecebe8;
+  --amb-accent-soft: #dce0e1;
+  --amb-on-accent: #f5f4f1;
+  --amb-sky: #d8e1e7;
+  --amb-glow: #d8e1e7;
+  --amb-cloud: #e0e3e6;
+}
+html[data-amb-phase="day"][data-amb-wx="rain"][data-theme="light"] {
+  --amb-bg: #f4f3f0;
+  --amb-surface: #f8f7f5;
+  --amb-text: #302f2c;
+  --amb-muted: #5d5b56;
+  --amb-accent: #00678a;
+  --amb-link: #005e7e;
+  --amb-border: #d5d4cf;
+  --amb-border-strong: #878680;
+  --amb-code-bg: #ebeae6;
+  --amb-accent-soft: #d2dfe2;
+  --amb-on-accent: #f4f3f0;
+  --amb-sky: #d0e0eb;
+  --amb-glow: #d0e0eb;
+  --amb-cloud: #d9dfe3;
+}
+html[data-amb-phase="day"][data-amb-wx="snow"][data-theme="light"] {
+  --amb-bg: #f9f8f5;
+  --amb-surface: #fdfcfa;
+  --amb-text: #33322f;
+  --amb-muted: #605e5a;
+  --amb-accent: #2f6888;
+  --amb-link: #295f7d;
+  --amb-border: #dad9d4;
+  --amb-border-strong: #8b8985;
+  --amb-code-bg: #f0efeb;
+  --amb-accent-soft: #dde4e6;
+  --amb-on-accent: #f9f8f5;
+  --amb-sky: #d9e7ef;
+  --amb-glow: #d9e7ef;
+  --amb-cloud: #ebf1f4;
+}
+html[data-amb-phase="day"][data-amb-wx="fog"][data-theme="light"] {
+  --amb-bg: #f6f5f4;
+  --amb-surface: #faf9f8;
+  --amb-text: #31302f;
+  --amb-muted: #5d5c5a;
+  --amb-accent: #4b6379;
+  --amb-link: #445a6e;
+  --amb-border: #d7d6d3;
+  --amb-border-strong: #898885;
+  --amb-code-bg: #edecea;
+  --amb-accent-soft: #dee1e3;
+  --amb-on-accent: #f6f5f4;
+  --amb-sky: #dce2e5;
+  --amb-glow: #dce2e5;
+  --amb-cloud: #e7eaeb;
+}
+html[data-amb-phase="day"][data-amb-wx="storm"][data-theme="light"] {
+  --amb-bg: #f3f2ef;
+  --amb-surface: #f7f6f3;
+  --amb-text: #2f2f2b;
+  --amb-muted: #5c5b55;
+  --amb-accent: #5c5798;
+  --amb-link: #544f8c;
+  --amb-border: #d4d3ce;
+  --amb-border-strong: #878580;
+  --amb-code-bg: #eae9e5;
+  --amb-accent-soft: #dedce3;
+  --amb-on-accent: #f3f2ef;
+  --amb-sky: #d6ddf0;
+  --amb-glow: #d6ddf0;
+  --amb-cloud: #dbdde5;
+}
+html[data-amb-phase="dusk"][data-theme="light"] {
+  --amb-bg: #f9efe6;
+  --amb-surface: #fbf4ec;
+  --amb-text: #40352b;
+  --amb-muted: #685748;
+  --amb-accent: #97471e;
+  --amb-link: #8b401a;
+  --amb-border: #ddcfc2;
+  --amb-border-strong: #938172;
+  --amb-code-bg: #f1e6db;
+  --amb-accent-soft: #ebd7ca;
+  --amb-on-accent: #f9efe6;
+  --amb-sky: #f9d5b9;
+  --amb-glow: #ffe1d1;
+  --amb-cloud: #f3e5da;
+}
+html[data-amb-phase="dusk"][data-amb-wx="partly"][data-theme="light"] {
+  --amb-bg: #f6efe7;
+  --amb-surface: #f9f3ed;
+  --amb-text: #3e352e;
+  --amb-muted: #64574b;
+  --amb-accent: #8c4d2f;
+  --amb-link: #814529;
+  --amb-border: #dacfc4;
+  --amb-border-strong: #908175;
+  --amb-code-bg: #eee5dc;
+  --amb-accent-soft: #e7d8cd;
+  --amb-on-accent: #f6efe7;
+  --amb-sky: #f4d6be;
+  --amb-glow: #fadcc8;
+  --amb-cloud: #f0e4da;
+}
+html[data-amb-phase="dusk"][data-amb-wx="overcast"][data-theme="light"] {
+  --amb-bg: #f2eeea;
+  --amb-surface: #f5f2ee;
+  --amb-text: #3a3530;
+  --amb-muted: #5f5751;
+  --amb-accent: #785545;
+  --amb-link: #6e4d3e;
+  --amb-border: #d4cec8;
+  --amb-border-strong: #89817b;
+  --amb-code-bg: #e9e4df;
+  --amb-accent-soft: #e1d9d3;
+  --amb-on-accent: #f2eeea;
+  --amb-sky: #e4d9d0;
+  --amb-glow: #e4d9d0;
+  --amb-cloud: #e5e0dd;
+}
+html[data-amb-phase="dusk"][data-amb-wx="rain"][data-theme="light"] {
+  --amb-bg: #f2ede7;
+  --amb-surface: #f6f1ed;
+  --amb-text: #3b342f;
+  --amb-muted: #60564d;
+  --amb-accent: #295f94;
+  --amb-link: #235687;
+  --amb-border: #d6cdc5;
+  --amb-border-strong: #8b8078;
+  --amb-code-bg: #eae3dd;
+  --amb-accent-soft: #d6d9db;
+  --amb-on-accent: #f2ede7;
+  --amb-sky: #e1d5e9;
+  --amb-glow: #e1d5e9;
+  --amb-cloud: #dfdae2;
+}
+html[data-amb-phase="dusk"][data-amb-wx="snow"][data-theme="light"] {
+  --amb-bg: #f6f1ed;
+  --amb-surface: #faf6f2;
+  --amb-text: #3c3632;
+  --amb-muted: #625952;
+  --amb-accent: #685687;
+  --amb-link: #5f4e7c;
+  --amb-border: #d9d2cb;
+  --amb-border-strong: #8d847c;
+  --amb-code-bg: #eee8e3;
+  --amb-accent-soft: #e2dbdf;
+  --amb-on-accent: #f6f1ed;
+  --amb-sky: #d2e9e3;
+  --amb-glow: #d2e9e3;
+  --amb-cloud: #e8f1ee;
+}
+html[data-amb-phase="dusk"][data-amb-wx="fog"][data-theme="light"] {
+  --amb-bg: #f2efec;
+  --amb-surface: #f6f3f1;
+  --amb-text: #393533;
+  --amb-muted: #5d5854;
+  --amb-accent: #755749;
+  --amb-link: #6a4f42;
+  --amb-border: #d4d0cc;
+  --amb-border-strong: #89837f;
+  --amb-code-bg: #e9e6e3;
+  --amb-accent-soft: #e0dad5;
+  --amb-on-accent: #f2efec;
+  --amb-sky: #e2dbd5;
+  --amb-glow: #e2dbd5;
+  --amb-cloud: #eae7e5;
+}
+html[data-amb-phase="dusk"][data-amb-wx="storm"][data-theme="light"] {
+  --amb-bg: #f1ebe6;
+  --amb-surface: #f4efeb;
+  --amb-text: #3a332d;
+  --amb-muted: #5f564c;
+  --amb-accent: #704d89;
+  --amb-link: #67457e;
+  --amb-border: #d4ccc4;
+  --amb-border-strong: #8b8077;
+  --amb-code-bg: #e9e2db;
+  --amb-accent-soft: #dfd5d9;
+  --amb-on-accent: #f1ebe6;
+  --amb-sky: #e6d1e6;
+  --amb-glow: #e6d1e6;
+  --amb-cloud: #ddd5dd;
+}
+html[data-amb-phase="night"][data-theme="light"] {
+  --amb-bg: #f0e8e0;
+  --amb-surface: #f2ece6;
+  --amb-text: #3d342b;
+  --amb-muted: #605345;
+  --amb-accent: #7b5100;
+  --amb-link: #704900;
+  --amb-border: #d4c8bc;
+  --amb-border-strong: #8b7e6f;
+  --amb-code-bg: #e8dfd5;
+  --amb-accent-soft: #e0d3c1;
+  --amb-on-accent: #f0e8e0;
+  --amb-sky: #cfd5ee;
+  --amb-glow: #e1e6f4;
+  --amb-cloud: #dee1eb;
+}
+html[data-amb-phase="night"][data-amb-wx="partly"][data-theme="light"] {
+  --amb-bg: #eee7e1;
+  --amb-surface: #f0ece6;
+  --amb-text: #3b342d;
+  --amb-muted: #5e5348;
+  --amb-accent: #7a5107;
+  --amb-link: #6f4903;
+  --amb-border: #d1c8be;
+  --amb-border-strong: #897d72;
+  --amb-code-bg: #e5ded6;
+  --amb-accent-soft: #ded2c2;
+  --amb-on-accent: #eee7e1;
+  --amb-sky: #cfd4ea;
+  --amb-glow: #d8ddef;
+  --amb-cloud: #dddfe8;
+}
+html[data-amb-phase="night"][data-amb-wx="overcast"][data-theme="light"] {
+  --amb-bg: #eae6e2;
+  --amb-surface: #edeae7;
+  --amb-text: #37332f;
+  --amb-muted: #59534d;
+  --amb-accent: #6b5436;
+  --amb-link: #614c30;
+  --amb-border: #ccc7c1;
+  --amb-border-strong: #837d77;
+  --amb-code-bg: #e1ddd8;
+  --amb-accent-soft: #d8d2ca;
+  --amb-on-accent: #eae6e2;
+  --amb-sky: #d1d3da;
+  --amb-glow: #d1d3da;
+  --amb-cloud: #dadadd;
+}
+html[data-amb-phase="night"][data-amb-wx="rain"][data-theme="light"] {
+  --amb-bg: #eae5e0;
+  --amb-surface: #ede9e5;
+  --amb-text: #37332d;
+  --amb-muted: #5a524a;
+  --amb-accent: #006076;
+  --amb-link: #00576b;
+  --amb-border: #cdc6bf;
+  --amb-border-strong: #857c74;
+  --amb-code-bg: #e1dcd6;
+  --amb-accent-soft: #c9d2d1;
+  --amb-on-accent: #eae5e0;
+  --amb-sky: #cad3df;
+  --amb-glow: #cad3df;
+  --amb-cloud: #d2d6db;
+}
+html[data-amb-phase="night"][data-amb-wx="snow"][data-theme="light"] {
+  --amb-bg: #eeeae6;
+  --amb-surface: #f1eeeb;
+  --amb-text: #3a3632;
+  --amb-muted: #5c554e;
+  --amb-accent: #26607f;
+  --amb-link: #205774;
+  --amb-border: #d0cbc5;
+  --amb-border-strong: #868079;
+  --amb-code-bg: #e5e1dc;
+  --amb-accent-soft: #d2d7d8;
+  --amb-on-accent: #eeeae6;
+  --amb-sky: #d4dee6;
+  --amb-glow: #d4dee6;
+  --amb-cloud: #e4e8ec;
+}
+html[data-amb-phase="night"][data-amb-wx="fog"][data-theme="light"] {
+  --amb-bg: #eae8e5;
+  --amb-surface: #eeecea;
+  --amb-text: #373432;
+  --amb-muted: #58544f;
+  --amb-accent: #69563d;
+  --amb-link: #5f4e37;
+  --amb-border: #ccc9c5;
+  --amb-border-strong: #827e7a;
+  --amb-code-bg: #e1dedb;
+  --amb-accent-soft: #d8d4cd;
+  --amb-on-accent: #eae8e5;
+  --amb-sky: #d4d5db;
+  --amb-glow: #d4d5db;
+  --amb-cloud: #e1e1e3;
+}
+html[data-amb-phase="night"][data-amb-wx="storm"][data-theme="light"] {
+  --amb-bg: #e9e4df;
+  --amb-surface: #ece8e4;
+  --amb-text: #37322d;
+  --amb-muted: #595149;
+  --amb-accent: #5a4e8e;
+  --amb-link: #514683;
+  --amb-border: #cbc5bd;
+  --amb-border-strong: #847b73;
+  --amb-code-bg: #e0dbd5;
+  --amb-accent-soft: #d5cfd4;
+  --amb-on-accent: #e9e4df;
+  --amb-sky: #ced0e0;
+  --amb-glow: #ced0e0;
+  --amb-cloud: #d0d1d8;
+}
+html[data-amb-phase="dawn"][data-theme="dark"] {
+  --amb-bg: #211a18;
+  --amb-surface: #282221;
+  --amb-text: #d6c8c4;
+  --amb-muted: #ae9b95;
+  --amb-accent: #d0848f;
+  --amb-link: #db929c;
+  --amb-border: #413532;
+  --amb-border-strong: #7f6e69;
+  --amb-code-bg: #302624;
+  --amb-accent-soft: #3a2929;
+  --amb-on-accent: #211a18;
+  --amb-sky: #3b2539;
+  --amb-glow: #4a2518;
+  --amb-cloud: #342c33;
+}
+html[data-amb-phase="dawn"][data-amb-wx="partly"][data-theme="dark"] {
+  --amb-bg: #201a18;
+  --amb-surface: #272221;
+  --amb-text: #d3c8c5;
+  --amb-muted: #ab9c97;
+  --amb-accent: #c68991;
+  --amb-link: #d1969e;
+  --amb-border: #3f3533;
+  --amb-border-strong: #7d6e6b;
+  --amb-code-bg: #2e2725;
+  --amb-accent-soft: #372a29;
+  --amb-on-accent: #201a18;
+  --amb-sky: #3a2838;
+  --amb-glow: #422628;
+  --amb-cloud: #342c33;
+}
+html[data-amb-phase="dawn"][data-amb-wx="overcast"][data-theme="dark"] {
+  --amb-bg: #1d1a19;
+  --amb-surface: #252222;
+  --amb-text: #cfc9c7;
+  --amb-muted: #a59c99;
+  --amb-accent: #b39094;
+  --amb-link: #be9da1;
+  --amb-border: #3b3534;
+  --amb-border-strong: #786f6d;
+  --amb-code-bg: #2b2726;
+  --amb-accent-soft: #322b2a;
+  --amb-on-accent: #1d1a19;
+  --amb-sky: #332c32;
+  --amb-glow: #332c32;
+  --amb-cloud: #302e30;
+}
+html[data-amb-phase="dawn"][data-amb-wx="rain"][data-theme="dark"] {
+  --amb-bg: #1e1918;
+  --amb-surface: #252221;
+  --amb-text: #d0c8c5;
+  --amb-muted: #a69b98;
+  --amb-accent: #719cc8;
+  --amb-link: #80a8d3;
+  --amb-border: #3c3533;
+  --amb-border-strong: #786e6b;
+  --amb-code-bg: #2c2625;
+  --amb-accent-soft: #2a2b31;
+  --amb-on-accent: #1e1918;
+  --amb-sky: #2b2d3b;
+  --amb-glow: #2b2d3b;
+  --amb-cloud: #2d2e33;
+}
+html[data-amb-phase="dawn"][data-amb-wx="snow"][data-theme="dark"] {
+  --amb-bg: #1f1b1a;
+  --amb-surface: #272423;
+  --amb-text: #d1cac8;
+  --amb-muted: #a79e9b;
+  --amb-accent: #ba8da1;
+  --amb-link: #c69aad;
+  --amb-border: #3d3735;
+  --amb-border-strong: #79706d;
+  --amb-code-bg: #2d2827;
+  --amb-accent-soft: #352b2d;
+  --amb-on-accent: #1f1b1a;
+  --amb-sky: #282f39;
+  --amb-glow: #282f39;
+  --amb-cloud: #2d2f33;
+}
+html[data-amb-phase="dawn"][data-amb-wx="fog"][data-theme="dark"] {
+  --amb-bg: #1d1b1a;
+  --amb-surface: #252323;
+  --amb-text: #cecac8;
+  --amb-muted: #a39e9c;
+  --amb-accent: #b19194;
+  --amb-link: #bd9ea1;
+  --amb-border: #3a3635;
+  --amb-border-strong: #75706e;
+  --amb-code-bg: #2a2827;
+  --amb-accent-soft: #322c2b;
+  --amb-on-accent: #1d1b1a;
+  --amb-sky: #312d30;
+  --amb-glow: #312d30;
+  --amb-cloud: #2f2e2f;
+}
+html[data-amb-phase="dawn"][data-amb-wx="storm"][data-theme="dark"] {
+  --amb-bg: #1d1918;
+  --amb-surface: #252120;
+  --amb-text: #d0c7c5;
+  --amb-muted: #a69b97;
+  --amb-accent: #9d90c6;
+  --amb-link: #a99dd2;
+  --amb-border: #3b3432;
+  --amb-border-strong: #796e6b;
+  --amb-code-bg: #2b2624;
+  --amb-accent-soft: #2f2a30;
+  --amb-on-accent: #1d1918;
+  --amb-sky: #302b3b;
+  --amb-glow: #302b3b;
+  --amb-cloud: #2e2d33;
+}
+html[data-amb-phase="day"][data-theme="dark"] {
+  --amb-bg: #1f1e19;
+  --amb-surface: #282622;
+  --amb-text: #d4d2c7;
+  --amb-muted: #a5a294;
+  --amb-accent: #66a1d1;
+  --amb-link: #76aedd;
+  --amb-border: #3d3b32;
+  --amb-border-strong: #767467;
+  --amb-code-bg: #2d2b25;
+  --amb-accent-soft: #293033;
+  --amb-on-accent: #1f1e19;
+  --amb-sky: #1d3343;
+  --amb-glow: #38301c;
+  --amb-cloud: #293238;
+}
+html[data-amb-phase="day"][data-amb-wx="partly"][data-theme="dark"] {
+  --amb-bg: #1f1e1a;
+  --amb-surface: #272623;
+  --amb-text: #d4d2c9;
+  --amb-muted: #a4a296;
+  --amb-accent: #72a0c6;
+  --amb-link: #81add2;
+  --amb-border: #3c3a33;
+  --amb-border-strong: #767469;
+  --amb-code-bg: #2c2b26;
+  --amb-accent-soft: #2b3032;
+  --amb-on-accent: #1f1e1a;
+  --amb-sky: #1f323f;
+  --amb-glow: #2c312e;
+  --amb-cloud: #2a3136;
+}
+html[data-amb-phase="day"][data-amb-wx="overcast"][data-theme="dark"] {
+  --amb-bg: #1e1d1b;
+  --amb-surface: #262523;
+  --amb-text: #d2d1cc;
+  --amb-muted: #a2a19a;
+  --amb-accent: #859eb3;
+  --amb-link: #93aabf;
+  --amb-border: #3a3936;
+  --amb-border-strong: #75746e;
+  --amb-code-bg: #2b2a27;
+  --amb-accent-soft: #2c2f30;
+  --amb-on-accent: #1e1d1b;
+  --amb-sky: #2b3136;
+  --amb-glow: #2b3136;
+  --amb-cloud: #2e3132;
+}
+html[data-amb-phase="day"][data-amb-wx="rain"][data-theme="dark"] {
+  --amb-bg: #1e1d1a;
+  --amb-surface: #262523;
+  --amb-text: #d2d1ca;
+  --amb-muted: #a3a198;
+  --amb-accent: #61a3c1;
+  --amb-link: #72afcd;
+  --amb-border: #3b3934;
+  --amb-border-strong: #75746c;
+  --amb-code-bg: #2b2a26;
+  --amb-accent-soft: #273031;
+  --amb-on-accent: #1e1d1a;
+  --amb-sky: #26313a;
+  --amb-glow: #26313a;
+  --amb-cloud: #2c3034;
+}
+html[data-amb-phase="day"][data-amb-wx="snow"][data-theme="dark"] {
+  --amb-bg: #1f1f1c;
+  --amb-surface: #272725;
+  --amb-text: #d4d3cd;
+  --amb-muted: #a4a39c;
+  --amb-accent: #75a2bc;
+  --amb-link: #84afc8;
+  --amb-border: #3c3b37;
+  --amb-border-strong: #76756f;
+  --amb-code-bg: #2d2c28;
+  --amb-accent-soft: #2b3132;
+  --amb-on-accent: #1f1f1c;
+  --amb-sky: #283339;
+  --amb-glow: #283339;
+  --amb-cloud: #2e3235;
+}
+html[data-amb-phase="day"][data-amb-wx="fog"][data-theme="dark"] {
+  --amb-bg: #1e1e1c;
+  --amb-surface: #262625;
+  --amb-text: #d2d2ce;
+  --amb-muted: #a3a19d;
+  --amb-accent: #869eb2;
+  --amb-link: #94abbe;
+  --amb-border: #3b3a37;
+  --amb-border-strong: #747470;
+  --amb-code-bg: #2b2b29;
+  --amb-accent-soft: #2d3031;
+  --amb-on-accent: #1e1e1c;
+  --amb-sky: #2d3135;
+  --amb-glow: #2d3135;
+  --amb-cloud: #2e3031;
+}
+html[data-amb-phase="day"][data-amb-wx="storm"][data-theme="dark"] {
+  --amb-bg: #1d1c19;
+  --amb-surface: #252522;
+  --amb-text: #d1d0c9;
+  --amb-muted: #a3a198;
+  --amb-accent: #9694cc;
+  --amb-link: #a2a2d7;
+  --amb-border: #3a3934;
+  --amb-border-strong: #74736b;
+  --amb-code-bg: #2b2a26;
+  --amb-accent-soft: #2e2d32;
+  --amb-on-accent: #1d1c19;
+  --amb-sky: #2a2f3d;
+  --amb-glow: #2a2f3d;
+  --amb-cloud: #2d2f35;
+}
+html[data-amb-phase="dusk"][data-theme="dark"] {
+  --amb-bg: #1e1a15;
+  --amb-surface: #26221e;
+  --amb-text: #d2c8c0;
+  --amb-muted: #a89b90;
+  --amb-accent: #cc8869;
+  --amb-link: #d89678;
+  --amb-border: #3d352e;
+  --amb-border-strong: #796e63;
+  --amb-code-bg: #2c2621;
+  --amb-accent-soft: #362921;
+  --amb-on-accent: #1e1a15;
+  --amb-sky: #402218;
+  --amb-glow: #4d210a;
+  --amb-cloud: #372b27;
+}
+html[data-amb-phase="dusk"][data-amb-wx="partly"][data-theme="dark"] {
+  --amb-bg: #1d1916;
+  --amb-surface: #25221f;
+  --amb-text: #cfc8c1;
+  --amb-muted: #a59c92;
+  --amb-accent: #c28b72;
+  --amb-link: #ce9881;
+  --amb-border: #3b352f;
+  --amb-border-strong: #786f66;
+  --amb-code-bg: #2b2622;
+  --amb-accent-soft: #342923;
+  --amb-on-accent: #1d1916;
+  --amb-sky: #3f251c;
+  --amb-glow: #462313;
+  --amb-cloud: #352b27;
+}
+html[data-amb-phase="dusk"][data-amb-wx="overcast"][data-theme="dark"] {
+  --amb-bg: #1b1917;
+  --amb-surface: #232120;
+  --amb-text: #ccc8c4;
+  --amb-muted: #a19c96;
+  --amb-accent: #b09183;
+  --amb-link: #bc9e90;
+  --amb-border: #383532;
+  --amb-border-strong: #756f6b;
+  --amb-code-bg: #292624;
+  --amb-accent-soft: #302a26;
+  --amb-on-accent: #1b1917;
+  --amb-sky: #342b28;
+  --amb-glow: #342b28;
+  --amb-cloud: #302c2b;
+}
+html[data-amb-phase="dusk"][data-amb-wx="rain"][data-theme="dark"] {
+  --amb-bg: #1c1916;
+  --amb-surface: #23211f;
+  --amb-text: #cdc8c3;
+  --amb-muted: #a39b94;
+  --amb-accent: #709bc7;
+  --amb-link: #7fa8d2;
+  --amb-border: #393430;
+  --amb-border-strong: #766f68;
+  --amb-code-bg: #292622;
+  --amb-accent-soft: #282b2f;
+  --amb-on-accent: #1c1916;
+  --amb-sky: #312a39;
+  --amb-glow: #312a39;
+  --amb-cloud: #2e2c31;
+}
+html[data-amb-phase="dusk"][data-amb-wx="snow"][data-theme="dark"] {
+  --amb-bg: #1d1b18;
+  --amb-surface: #252321;
+  --amb-text: #cecac5;
+  --amb-muted: #a49e98;
+  --amb-accent: #a093bc;
+  --amb-link: #ad9fc7;
+  --amb-border: #3a3633;
+  --amb-border-strong: #76716b;
+  --amb-code-bg: #2a2825;
+  --amb-accent-soft: #2f2c2f;
+  --amb-on-accent: #1d1b18;
+  --amb-sky: #2d2e3a;
+  --amb-glow: #2d2e3a;
+  --amb-cloud: #2e2e33;
+}
+html[data-amb-phase="dusk"][data-amb-wx="fog"][data-theme="dark"] {
+  --amb-bg: #1b1a19;
+  --amb-surface: #232221;
+  --amb-text: #cbc9c6;
+  --amb-muted: #a09d99;
+  --amb-accent: #af9285;
+  --amb-link: #bb9f92;
+  --amb-border: #383633;
+  --amb-border-strong: #73706d;
+  --amb-code-bg: #292725;
+  --amb-accent-soft: #302b28;
+  --amb-on-accent: #1b1a19;
+  --amb-sky: #322c2a;
+  --amb-glow: #322c2a;
+  --amb-cloud: #302d2c;
+}
+html[data-amb-phase="dusk"][data-amb-wx="storm"][data-theme="dark"] {
+  --amb-bg: #1b1816;
+  --amb-surface: #23211f;
+  --amb-text: #ccc7c2;
+  --amb-muted: #a29b94;
+  --amb-accent: #a98cbf;
+  --amb-link: #b499ca;
+  --amb-border: #393430;
+  --amb-border-strong: #746e67;
+  --amb-code-bg: #292522;
+  --amb-accent-soft: #2f282e;
+  --amb-on-accent: #1b1816;
+  --amb-sky: #332636;
+  --amb-glow: #332636;
+  --amb-cloud: #302b31;
+}
+html[data-amb-phase="night"][data-theme="dark"] {
+  --amb-bg: #1a1713;
+  --amb-surface: #221f1c;
+  --amb-text: #c3bcb5;
+  --amb-muted: #a2988e;
+  --amb-accent: #b4905d;
+  --amb-link: #bf9d6c;
+  --amb-border: #37322c;
+  --amb-border-strong: #746c62;
+  --amb-code-bg: #27231e;
+  --amb-accent-soft: #30281d;
+  --amb-on-accent: #1a1713;
+  --amb-sky: #19223d;
+  --amb-glow: #222d3b;
+  --amb-cloud: #282c37;
+}
+html[data-amb-phase="night"][data-amb-wx="partly"][data-theme="dark"] {
+  --amb-bg: #191613;
+  --amb-surface: #211e1c;
+  --amb-text: #c1bcb6;
+  --amb-muted: #a09890;
+  --amb-accent: #ad9169;
+  --amb-link: #b99e78;
+  --amb-border: #36322d;
+  --amb-border-strong: #736c65;
+  --amb-code-bg: #26231f;
+  --amb-accent-soft: #2e271f;
+  --amb-on-accent: #191613;
+  --amb-sky: #1b243a;
+  --amb-glow: #1e283a;
+  --amb-cloud: #282b35;
+}
+html[data-amb-phase="night"][data-amb-wx="overcast"][data-theme="dark"] {
+  --amb-bg: #171614;
+  --amb-surface: #1f1e1d;
+  --amb-text: #bebcb8;
+  --amb-muted: #9d9994;
+  --amb-accent: #a4927a;
+  --amb-link: #b09f88;
+  --amb-border: #34312f;
+  --amb-border-strong: #706d68;
+  --amb-code-bg: #252321;
+  --amb-accent-soft: #2b2722;
+  --amb-on-accent: #171614;
+  --amb-sky: #252830;
+  --amb-glow: #252830;
+  --amb-cloud: #292a2e;
+}
+html[data-amb-phase="night"][data-amb-wx="rain"][data-theme="dark"] {
+  --amb-bg: #181613;
+  --amb-surface: #1f1e1c;
+  --amb-text: #bfbcb7;
+  --amb-muted: #9d9892;
+  --amb-accent: #619eb1;
+  --amb-link: #70aabc;
+  --amb-border: #34312d;
+  --amb-border-strong: #716b66;
+  --amb-code-bg: #25221f;
+  --amb-accent-soft: #222929;
+  --amb-on-accent: #181613;
+  --amb-sky: #1c2734;
+  --amb-glow: #1c2734;
+  --amb-cloud: #282c31;
+}
+html[data-amb-phase="night"][data-amb-wx="snow"][data-theme="dark"] {
+  --amb-bg: #191715;
+  --amb-surface: #211f1e;
+  --amb-text: #c0bdb9;
+  --amb-muted: #9e9a95;
+  --amb-accent: #769bb1;
+  --amb-link: #84a7bc;
+  --amb-border: #363330;
+  --amb-border-strong: #716d69;
+  --amb-code-bg: #262422;
+  --amb-accent-soft: #26292b;
+  --amb-on-accent: #191715;
+  --amb-sky: #212c36;
+  --amb-glow: #212c36;
+  --amb-cloud: #282c30;
+}
+html[data-amb-phase="night"][data-amb-wx="fog"][data-theme="dark"] {
+  --amb-bg: #171615;
+  --amb-surface: #1f1f1e;
+  --amb-text: #bdbcb9;
+  --amb-muted: #9b9996;
+  --amb-accent: #a4927b;
+  --amb-link: #b09f88;
+  --amb-border: #343230;
+  --amb-border-strong: #6f6d6a;
+  --amb-code-bg: #252322;
+  --amb-accent-soft: #2b2723;
+  --amb-on-accent: #171615;
+  --amb-sky: #292b30;
+  --amb-glow: #292b30;
+  --amb-cloud: #2a2b2d;
+}
+html[data-amb-phase="night"][data-amb-wx="storm"][data-theme="dark"] {
+  --amb-bg: #171513;
+  --amb-surface: #1f1d1b;
+  --amb-text: #bebbb6;
+  --amb-muted: #9d9892;
+  --amb-accent: #948fbd;
+  --amb-link: #a19cc8;
+  --amb-border: #34302d;
+  --amb-border-strong: #706b65;
+  --amb-code-bg: #24221f;
+  --amb-accent-soft: #28262b;
+  --amb-on-accent: #171513;
+  --amb-sky: #202234;
+  --amb-glow: #202234;
+  --amb-cloud: #292a31;
+}
+/* END GENERATED */
+
+/* The gem's colour tokens, mapped onto ours. (0,2,1) beats the gem's :root (0,1,0) and
+   html[data-theme=dark] (0,1,1) even though main.css loads later. */
+html:root:root {
+  --global-bg-color: var(--amb-bg);
+  --global-card-bg-color: var(--amb-surface);
+  --global-code-bg-color: var(--amb-code-bg);
+  --global-text-color: var(--amb-text);
+  --global-text-color-light: var(--amb-muted);
+  --global-theme-color: var(--amb-link);
+  --global-hover-color: var(--amb-link); /* one link colour; the gem hovers to its theme colour */
+  --global-hover-text-color: var(--amb-on-accent);
+  --global-divider-color: var(--amb-border);
+  --global-highlight-color: var(--amb-border-strong); /* .btn borders; was #b71c1c in both modes */
+  --global-distill-app-color: var(--amb-muted);
+  --global-back-to-top-bg-color: var(--amb-surface);
+  --global-back-to-top-text-color: var(--amb-muted);
+  --global-newsletter-bg-color: var(--amb-surface);
+  --global-newsletter-text-color: var(--amb-text);
+  background-color: var(--amb-bg); /* overscroll areas */
+}
+
+/* ------------------------------------------------------------------------------------------ motion */
+
+/* Automatic palette changes (phase crossing, weather arriving) fade slowly. ambient.js adds amb-live two
+   frames after it starts, so the first palette never fades. A theme-toggle click still uses the gem's
+   html.transition (240 ms, !important longhands), which overrides this for 260 ms. */
+html.amb-live {
+  transition:
+    --amb-bg var(--amb-fade) ease,
+    --amb-surface var(--amb-fade) ease,
+    --amb-text var(--amb-fade) ease,
+    --amb-muted var(--amb-fade) ease,
+    --amb-accent var(--amb-fade) ease,
+    --amb-link var(--amb-fade) ease,
+    --amb-border var(--amb-fade) ease,
+    --amb-border-strong var(--amb-fade) ease,
+    --amb-code-bg var(--amb-fade) ease,
+    --amb-accent-soft var(--amb-fade) ease,
+    --amb-on-accent var(--amb-fade) ease,
+    --amb-sky var(--amb-fade) ease,
+    --amb-glow var(--amb-fade) ease,
+    --amb-cloud var(--amb-fade) ease;
+}
+html:root:root :is(a, .nav-link, .card-title) {
+  transition:
+    color 0.15s ease,
+    text-decoration-color 0.15s ease,
+    background-color 0.15s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.amb-live {
+    transition: none;
+  }
+  /* The gem's toggle transition (main.css: html.transition ... 240ms !important) is unlayered, has
+     specificity (0,1,1) and loads after this file, so the same selector would lose on source order.
+     (0,3,1) wins among unlayered !important rules. */
+  html:root:root.transition,
+  html:root:root.transition *,
+  html:root:root.transition *::before,
+  html:root:root.transition *::after {
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+  html:root:root * {
+    scroll-behavior: auto !important;
+  }
+  html:root:root :is(a, .nav-link, .card-title) {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------------------------- base type */
+
+html:root:root body {
+  font-family: var(--amb-font);
+  font-weight: 400;
+  font-size: 1.0625rem; /* 17 px */
+  line-height: 1.65;
+  color: var(--amb-text);
+  background-color: transparent; /* the page colour is on <html>, so the sky layers below show */
+  text-rendering: optimizeLegibility;
+}
+html:root:root[data-theme="dark"] body {
+  /* light-on-dark text looks heavy with subpixel smoothing */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html:root:root :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--amb-font);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--amb-text);
+}
+html:root:root :is(h1, h2, h3, h4, [id]) {
+  scroll-margin-top: calc(var(--amb-nav-h) + 1.5rem);
+}
+html:root:root :is(strong, b, .font-weight-bold) {
+  font-weight: 600;
+}
+/* Nothing renders below 400 (the gem uses 300 and "lighter" in many places). */
+html:root:root :is(.font-weight-light, .font-weight-lighter) {
+  font-weight: 400;
+}
+
+/* Page header: title, then the dek. */
+html:root:root .post-header {
+  margin-bottom: 2rem;
+}
+html:root:root .post-header .post-title {
+  margin: 0;
+  font-size: clamp(1.75rem, 1.45rem + 1.1vw, 2.25rem);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+html:root:root .post-header .post-title::first-letter {
+  text-transform: uppercase; /* front-matter titles are lower case ("projects") */
+}
+html:root:root .post-header .post-title .font-weight-bold {
+  font-weight: 600;
+}
+html:root:root .post-header :is(.post-description, .desc) {
+  margin: 0.5rem 0 0;
+  max-width: var(--amb-measure);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--amb-muted);
+}
+html:root:root .post-header :is(.post-description, .desc) a {
+  color: inherit;
+}
+
+/* Prose: DIRECT children only, so kickers, card titles and list hairlines inside .projects,
+   .publications, .cv and .news keep the full frame and line up with their rows. */
+html:root:root .post article > :is(p, ul, ol, dl, blockquote, h2, h3, h4, h5, h6),
+html:root:root .post article > .clearfix > :is(p, ul, ol, dl, blockquote),
+html:root:root :is(.post-description, .desc, .caption, figcaption) {
+  max-width: var(--amb-measure);
+}
+/* Running text outside .post article: news-item pages wrap their body in div#markdown-content, and the CV
+   puts paragraphs inside cards and list items. */
+html:root:root :is(#markdown-content > :is(p, ul, ol, blockquote), .cv .card > p, .cv .list-group-item p) {
+  max-width: var(--amb-measure);
+}
+/* CV items whose text sits directly in the list item (teaching, service) and skill lines. Dated entries
+   (a .row with the date column) keep the full frame. */
+html:root:root .cv :is(ul.card-text > li.list-group-item:not(:has(> .row)), .skill-item) {
+  max-width: var(--amb-measure);
+}
+/* News rows: Chrome ignores max-width on <td>, so cap the wrapper instead.
+   7.5rem date column + 1rem gap + ~70 characters of the 15 px row text (31em at the wrapper's 17 px). */
+html:root:root .news .table-responsive {
+  max-width: calc(8.5rem + 31em);
+}
+html:root:root .post article :is(p, li, dd) {
+  overflow-wrap: break-word;
+}
+html:root:root .post article > h2 {
+  margin: 2.5rem 0 0.75rem;
+  font-size: 1.375rem;
+  line-height: 1.3;
+}
+html:root:root .post article > h3 {
+  margin: 2rem 0 0.5rem;
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+html:root:root .post article > :is(h4, h5, h6) {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+html:root:root .post article > :is(ul, ol) {
+  padding-left: 1.25rem;
+}
+html:root:root .post article li + li {
+  margin-top: 0.3rem;
+}
+
+/* ------------------------------------------------------------------------------- links and focus */
+
+html:root:root a,
+html:root:root a:hover {
+  color: var(--amb-link);
+}
+/* Links in running text: link colour plus a resting underline (not colour alone, WCAG 1.4.1). */
+html:root:root
+  :is(.post article :is(p, li, td, dd, figcaption, .caption), .post-header, .contact-note, .news)
+  a:not([class]):not(.bibliography a, .amb-crumb a):not(:is(h1, h2, h3, h4, h5, h6) a) {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+html:root:root
+  :is(.post article :is(p, li, td, dd, figcaption, .caption), .post-header, .contact-note, .news)
+  a:not([class]):not(.bibliography a, .amb-crumb a):not(:is(h1, h2, h3, h4, h5, h6) a):is(:hover, :focus-visible) {
+  text-decoration-color: currentColor;
+}
+html:root:root :focus-visible {
+  outline: 2px solid var(--amb-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+html:root:root ::selection {
+  background: var(--amb-accent-soft);
+  color: var(--amb-text);
+}
+
+/* ------------------------------------------------------------------------------- code and quotes */
+
+html:root:root :is(code, kbd, pre, samp) {
+  font-family: var(--amb-mono);
+}
+html:root:root :not(pre) > code {
+  font-size: 0.9em;
+  font-weight: 400;
+  color: var(--amb-text);
+  background: var(--amb-code-bg);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+html:root:root :is(pre, figure.highlight, div.highlight) {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--amb-text);
+  background: var(--amb-code-bg) !important;
+  border: 1px solid var(--amb-border);
+  border-radius: var(--amb-radius);
+}
+html:root:root :is(figure.highlight, div.highlight) pre {
+  margin: 0;
+  border: 0;
+  background: transparent !important;
+}
+/* Syntax highlighting: the stock github/native Pygments tokens fall to 1.4:1 on these backgrounds.
+   Three roles only: comments muted, keywords and builtins in the link colour, everything else text. */
+html:root:root .highlight :is(.c, .c1, .cm, .cs, .cp, .ch, .cpf) {
+  color: var(--amb-muted);
+  font-style: italic;
+}
+html:root:root .highlight :is(.k, .kc, .kd, .kn, .kp, .kr, .kt, .ow, .nt, .bp, .nb) {
+  color: var(--amb-link);
+  font-weight: 500;
+}
+html:root:root
+  .highlight
+  :is(
+    .s,
+    .s1,
+    .s2,
+    .sa,
+    .sb,
+    .sc,
+    .sd,
+    .se,
+    .sh,
+    .si,
+    .sx,
+    .sr,
+    .ss,
+    .m,
+    .mb,
+    .mf,
+    .mh,
+    .mi,
+    .mo,
+    .il,
+    .na,
+    .nv,
+    .vc,
+    .vg,
+    .vi,
+    .no,
+    .nf,
+    .fm,
+    .nc,
+    .nn,
+    .ne,
+    .nd,
+    .ni,
+    .nl,
+    .gu,
+    .gh,
+    .go,
+    .gp,
+    .w,
+    .err,
+    .gd,
+    .gi,
+    .gr,
+    .gt,
+    .ge,
+    .gs,
+    .o,
+    .p
+  ) {
+  color: var(--amb-text);
+  background: none;
+}
+html:root:root blockquote {
+  margin: 1.75rem 0;
+  padding: 0.25rem 0 0.25rem 1rem;
+  border-left: 2px solid var(--amb-accent);
+  background: none;
+  font-size: inherit;
+  color: var(--amb-text);
+}
+html:root:root hr {
+  border: 0;
+  border-top: 1px solid var(--amb-border);
+}
+/* No shadows or lift: hierarchy comes from type and whitespace. */
+html:root:root :is(.z-depth-1, .z-depth-2, .z-depth-3, .card) {
+  box-shadow: none;
+}
+html:root:root .hoverable:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* ---------------------------------------------------------------------------------------- layout */
+
+html:root:root .container {
+  max-width: calc(var(--amb-frame) + 2 * var(--amb-gutter));
+  padding-inline: var(--amb-gutter);
+}
+html:root:root body.fixed-top-nav {
+  padding-top: calc(var(--amb-nav-h) + 1px); /* + the header's bottom border */
+  padding-bottom: 4rem; /* the gem reserved 70 px for the fixed footer, which is hidden */
+}
+/* The footer is hidden on request; footer_text's <script> tags inside it still run. */
+html:root:root footer[role="contentinfo"] {
+  display: none !important;
+}
+html:root:root #progress {
+  display: none; /* enable_progressbar is false; guard in case it comes back */
+}
+/* Media rows: drop the grid gutters so figures line up with the text (col-sm-11 has no gem padding
+   rule, so the row's -15px margins would push it past the page gutter on phones). */
+html:root:root .post article .row.justify-content-center,
+html:root:root .post article .row.justify-content-center > [class*="col"] {
+  margin-inline: 0;
+  padding-inline: 0;
+}
+/* Side-by-side media (two or more columns) get a 16 px gutter between them; the outer edges stay flush with
+   the frame. 576 px is the gem's sm breakpoint (col-sm-6 stacks below it, so no gutter is needed there). */
+@media (min-width: 576px) {
+  html:root:root .post article .row.justify-content-center > [class*="col"]:not(:only-child) {
+    padding-inline: 0.5rem;
+  }
+  html:root:root .post article .row.justify-content-center > [class*="col"]:not(:only-child):first-child {
+    padding-left: 0;
+  }
+  html:root:root .post article .row.justify-content-center > [class*="col"]:not(:only-child):last-child {
+    padding-right: 0;
+  }
+}
+/* A lone figure narrower than the frame starts on the shared left edge, like its caption and the prose. */
+html:root:root .post article .row.justify-content-center:has(> [class*="col"]:only-child) {
+  justify-content: flex-start;
+}
+
+/* Skip link (injected by ambient.js as the first child of body). */
+html:root:root .amb-skip {
+  position: absolute;
+  left: -9999px;
+  top: 0.5rem;
+  z-index: 2000;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--amb-border-strong);
+  border-radius: var(--amb-radius);
+  background: var(--amb-surface);
+  color: var(--amb-link);
+  font-weight: 500;
+}
+html:root:root .amb-skip:focus {
+  left: 1rem;
+}
+
+/* ------------------------------------------------------------------------------------------- sky */
+
+/* A fixed sky behind every page, from the build_palette.py tokens: --amb-sky at the top of the
+   window fading to the page colour by 80% of its height, a sun or moon glow in the top-right corner
+   (clear and partly cloudy only: elsewhere --amb-glow equals --amb-sky), and a weather layer. All
+   static CSS keyed on the <html> attributes, so it is there on first paint and fades with the
+   tokens. Every text colour is checked against sky, glow and cloud (>= 7:1 text, >= 4.5:1 the rest).
+   Layers, back to front (z-index -2, then -1 in document order):
+     html::before   sky gradient
+     html::after    sun or moon glow, with rays at dawn, day and dusk in clear or partly cloudy weather
+     body::before   clouds (partly, overcast, rain, storm) or fog bands
+     canvas         assets/ambient/motion.js: rain, snow, wind gusts, stars (while html.amb-motion)
+     body::after    static rain or snow, masked to the side margins (when motion.js is not running) */
+html:root:root::before,
+html:root:root::after,
+html:root:root body::before,
+html:root:root body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+html:root:root::before {
+  z-index: -2;
+  background: linear-gradient(to bottom, var(--amb-sky) 0, color-mix(in oklab, var(--amb-sky) 55%, var(--amb-bg)) 38%, var(--amb-bg) 80%);
+}
+/* a square centred on the sun, so rotating it turns the rays about the sun */
+html:root:root::after {
+  z-index: -2;
+  inset: auto;
+  top: -42vmin;
+  right: -30vmin;
+  width: 84vmin;
+  height: 84vmin;
+  background: radial-gradient(closest-side, var(--amb-glow), transparent);
+}
+html:root:root:is([data-amb-phase="dawn"], [data-amb-phase="day"], [data-amb-phase="dusk"]):is(
+    :not([data-amb-wx]),
+    [data-amb-wx="clear"],
+    [data-amb-wx="partly"]
+  )::after {
+  background:
+    radial-gradient(closest-side, var(--amb-glow), transparent),
+    repeating-conic-gradient(from 0deg, color-mix(in srgb, var(--amb-glow) 70%, transparent) 0deg 5deg, transparent 5deg 20deg);
+  -webkit-mask-image: radial-gradient(closest-side, #000 25%, transparent);
+  mask-image: radial-gradient(closest-side, #000 25%, transparent);
+}
+
+/* clouds: soft ellipses of --amb-cloud */
+html:root:root[data-amb-wx="partly"] body::before {
+  background:
+    radial-gradient(closest-side, var(--amb-cloud) 35%, transparent) no-repeat 4% 7% / 380px 86px,
+    radial-gradient(closest-side, var(--amb-cloud) 35%, transparent) no-repeat 12% 4% / 220px 70px,
+    radial-gradient(closest-side, var(--amb-cloud) 35%, transparent) no-repeat 64% 17% / 420px 96px,
+    radial-gradient(closest-side, var(--amb-cloud) 35%, transparent) no-repeat 72% 13% / 240px 74px;
+}
+html:root:root:is([data-amb-wx="overcast"], [data-amb-wx="rain"], [data-amb-wx="storm"]) body::before {
+  background:
+    radial-gradient(closest-side, var(--amb-cloud) 45%, transparent) no-repeat -12% 0 / 72% 220px,
+    radial-gradient(closest-side, var(--amb-cloud) 45%, transparent) no-repeat 112% 5% / 76% 240px,
+    radial-gradient(closest-side, var(--amb-cloud) 40%, transparent) no-repeat 46% 21% / 62% 170px;
+}
+html:root:root[data-amb-wx="fog"] body::before {
+  background: linear-gradient(
+    to bottom,
+    transparent 6%,
+    color-mix(in srgb, var(--amb-cloud) 90%, transparent) 15%,
+    transparent 25%,
+    transparent 31%,
+    color-mix(in srgb, var(--amb-cloud) 75%, transparent) 40%,
+    transparent 52%
+  );
+}
+
+/* precipitation: --amb-precip fading out by 65% of the window height, masked to a tile of streaks or
+   flakes intersected with the side margins (never behind the text column, so it costs no contrast;
+   none on phones). Chromium drops the layer entirely with a third mask, hence the fade in background. */
+html:root:root:is([data-amb-wx="rain"], [data-amb-wx="storm"], [data-amb-wx="snow"]) body::after {
+  --amb-precip: color-mix(in srgb, var(--amb-text) 16%, transparent);
+  background: linear-gradient(var(--amb-precip), transparent 65%);
+  -webkit-mask-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='128'%3E%3Cpath d='M10 6l-3 14M42 30l-3 14M74 4l-3 14M26 70l-3 14M58 56l-3 14M88 84l-3 14M14 104l-3 14M50 100l-3 14' stroke='%23000' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E"),
+    linear-gradient(
+      to right,
+      #000 calc(50% - var(--amb-frame) / 2 - 1rem),
+      transparent calc(50% - var(--amb-frame) / 2),
+      transparent calc(50% + var(--amb-frame) / 2),
+      #000 calc(50% + var(--amb-frame) / 2 + 1rem)
+    );
+  mask-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='128'%3E%3Cpath d='M10 6l-3 14M42 30l-3 14M74 4l-3 14M26 70l-3 14M58 56l-3 14M88 84l-3 14M14 104l-3 14M50 100l-3 14' stroke='%23000' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E"),
+    linear-gradient(
+      to right,
+      #000 calc(50% - var(--amb-frame) / 2 - 1rem),
+      transparent calc(50% - var(--amb-frame) / 2),
+      transparent calc(50% + var(--amb-frame) / 2),
+      #000 calc(50% + var(--amb-frame) / 2 + 1rem)
+    );
+  -webkit-mask-size:
+    96px 128px,
+    100% 100%;
+  mask-size:
+    96px 128px,
+    100% 100%;
+  -webkit-mask-repeat: repeat, no-repeat;
+  mask-repeat: repeat, no-repeat;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+html:root:root[data-amb-wx="snow"] body::after {
+  -webkit-mask-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='%23000'%3E%3Ccircle cx='12' cy='18' r='1.6'/%3E%3Ccircle cx='64' cy='8' r='1.2'/%3E%3Ccircle cx='98' cy='40' r='1.8'/%3E%3Ccircle cx='36' cy='56' r='1.3'/%3E%3Ccircle cx='80' cy='78' r='1.5'/%3E%3Ccircle cx='18' cy='96' r='1.9'/%3E%3Ccircle cx='58' cy='108' r='1.2'/%3E%3Ccircle cx='108' cy='112' r='1.4'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(
+      to right,
+      #000 calc(50% - var(--amb-frame) / 2 - 1rem),
+      transparent calc(50% - var(--amb-frame) / 2),
+      transparent calc(50% + var(--amb-frame) / 2),
+      #000 calc(50% + var(--amb-frame) / 2 + 1rem)
+    );
+  mask-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='%23000'%3E%3Ccircle cx='12' cy='18' r='1.6'/%3E%3Ccircle cx='64' cy='8' r='1.2'/%3E%3Ccircle cx='98' cy='40' r='1.8'/%3E%3Ccircle cx='36' cy='56' r='1.3'/%3E%3Ccircle cx='80' cy='78' r='1.5'/%3E%3Ccircle cx='18' cy='96' r='1.9'/%3E%3Ccircle cx='58' cy='108' r='1.2'/%3E%3Ccircle cx='108' cy='112' r='1.4'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(
+      to right,
+      #000 calc(50% - var(--amb-frame) / 2 - 1rem),
+      transparent calc(50% - var(--amb-frame) / 2),
+      transparent calc(50% + var(--amb-frame) / 2),
+      #000 calc(50% + var(--amb-frame) / 2 + 1rem)
+    );
+  -webkit-mask-size:
+    120px 120px,
+    100% 100%;
+  mask-size:
+    120px 120px,
+    100% 100%;
+}
+html:root:root[data-amb-wx="snow"][data-theme="light"] body::after {
+  --amb-precip: color-mix(in srgb, #fff 85%, var(--amb-sky)); /* white flakes on a pale sky */
+}
+html:root:root[data-amb-wx="snow"][data-theme="dark"] body::after {
+  --amb-precip: color-mix(in srgb, var(--amb-text) 30%, transparent);
+}
+
+/* motion: only while motion.js runs (it sets html.amb-motion, and removes it under reduced motion).
+   Compositor-only properties (transform, rotate, scale, opacity), so a drifting layer is not repainted. */
+html:root:root body::before {
+  left: -12vw;
+  right: -12vw;
+}
+html:root:root.amb-motion body::before {
+  animation: amb-drift var(--amb-drift, 70s) ease-in-out infinite alternate;
+}
+html:root:root[data-amb-wind="breezy"] {
+  --amb-drift: 40s;
+}
+html:root:root[data-amb-wind="windy"] {
+  --amb-drift: 18s;
+}
+html:root:root.amb-motion::after {
+  animation:
+    amb-breathe 9s ease-in-out infinite alternate,
+    amb-turn 240s linear infinite;
+}
+html:root:root.amb-motion body::after {
+  display: none; /* the canvas draws moving rain and snow instead */
+}
+@keyframes amb-drift {
+  from {
+    transform: translateX(-7vw);
+  }
+  to {
+    transform: translateX(7vw);
+  }
+}
+@keyframes amb-breathe {
+  from {
+    opacity: 0.8;
+    scale: 0.95;
+  }
+  to {
+    opacity: 1;
+    scale: 1.04;
+  }
+}
+@keyframes amb-turn {
+  to {
+    rotate: 1turn;
+  }
+}
+html:root:root canvas.amb-motion {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html:root:root::after,
+  html:root:root body::before {
+    animation: none !important;
+  }
+}
+@media print {
+  html:root:root::before,
+  html:root:root::after,
+  html:root:root body::before,
+  html:root:root body::after,
+  html:root:root canvas.amb-motion {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------------------- header */
+
+html:root:root #navbar {
+  opacity: 1; /* the gem uses .95, which let content show through the open phone menu */
+  min-height: var(--amb-nav-h);
+  padding: 0;
+  /* sky-tinted glass: the header reads as the top of the sky, not a strip of page colour */
+  background-color: color-mix(in srgb, var(--amb-sky) 80%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid color-mix(in srgb, var(--amb-border) 55%, transparent);
+  box-shadow: none;
+}
+html:root:root #navbar > .container {
+  min-height: var(--amb-nav-h);
+  flex-wrap: nowrap;
+  padding-inline: var(--amb-gutter);
+}
+html:root:root #navbar .navbar-brand {
+  margin-right: auto;
+  padding: 0;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: var(--amb-nav-h);
+  letter-spacing: -0.005em;
+  color: var(--amb-text);
+  text-decoration: none;
+}
+html:root:root #navbar .navbar-brand :is(span, .font-weight-bold) {
+  font-weight: 600;
+  color: inherit;
+}
+html:root:root #navbar .navbar-collapse-main {
+  justify-content: flex-end;
+}
+html:root:root #navbar .navbar-menu-list {
+  align-items: center;
+  gap: 0.125rem;
+  width: auto;
+  margin-left: auto;
+}
+html:root:root #navbar .navbar-nav .nav-item .nav-link {
+  position: relative;
+  display: block;
+  padding: 0 0.6rem;
+  line-height: var(--amb-nav-h);
+  font-size: 0.9375rem;
+  font-weight: 500; /* the current page keeps 500 too, so widths never change between pages */
+  color: var(--amb-muted);
+  text-transform: capitalize; /* "about" -> "About"; "CV" is unchanged */
+  text-decoration: none;
+  white-space: nowrap;
+}
+html:root:root #navbar .navbar-nav .nav-item .nav-link:hover {
+  color: var(--amb-text);
+}
+/* Current page (the gem also marks Projects on /projects/<slug>/): text colour plus a 2 px accent bar on
+   the header's bottom edge. Shape and colour, never colour alone. */
+html:root:root #navbar .navbar-nav .nav-item.active > .nav-link {
+  color: var(--amb-text);
+  font-weight: 500;
+  background: none;
+}
+html:root:root #navbar .navbar-nav .nav-item.active > .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  right: 0.6rem;
+  bottom: -1px;
+  height: 2px;
+  background: var(--amb-accent);
+}
+/* Search and theme: 40x40 icon buttons. */
+html:root:root #navbar :is(#search-toggle, #light-toggle) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--amb-radius);
+  background: transparent;
+  color: var(--amb-muted);
+  transform: none;
+  cursor: pointer;
+}
+html:root:root #navbar :is(#search-toggle, #light-toggle):hover {
+  background: var(--amb-surface);
+  color: var(--amb-text);
+}
+html:root:root #navbar #search-toggle .nav-link {
+  padding: 0;
+  line-height: 1;
+  font-size: 0; /* hides the "ctrl k" text node until ambient.js removes it; icon and label set their own */
+  color: inherit;
+  text-transform: none;
+}
+html:root:root #navbar #search-toggle .nav-link i,
+html:root:root #navbar #light-toggle i {
+  font-size: 1rem;
+  color: inherit;
+}
+html:root:root #navbar #search-toggle .nav-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: inherit;
+}
+html:root:root #navbar .fa-half-sun-moon::before,
+html:root:root #navbar .fa-half-sun-moon::after {
+  color: currentColor;
+}
+html:root:root #navbar .toggle-container {
+  display: flex;
+  align-items: center;
+}
+html:root:root #navbar .navbar-toggler .icon-bar {
+  background-color: var(--amb-text);
+}
+@media (min-width: 768px) {
+  html:root:root #navbar .nav-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+/* Phones and small tablets (< 768 px): hamburger and a full-width opaque panel. The gem expands the nav at
+   >= 576 px with a layered display:flex !important, so between 576 and 767 px the closed panel is hidden
+   with height and visibility instead of display. */
+@media (max-width: 767.98px) {
+  html:root:root #navbar > .container {
+    flex-wrap: wrap;
+  }
+  html:root:root #navbar .navbar-toggler {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-right: -0.5rem;
+    padding: 0;
+  }
+  html:root:root #navbar .navbar-toggler .icon-bar {
+    width: 20px;
+    height: 2px;
+    margin: 2px 0;
+  }
+  html:root:root #navbar .navbar-collapse-main {
+    flex-basis: 100%;
+    width: 100%;
+    text-align: left;
+    background: var(--amb-sky);
+    max-height: calc(100vh - var(--amb-nav-h));
+    max-height: calc(100dvh - var(--amb-nav-h));
+    overflow-y: auto;
+  }
+  html:root:root #navbar .navbar-collapse-main:not(.show) {
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+  }
+  html:root:root #navbar .navbar-collapse-main.show {
+    border-top: 1px solid var(--amb-border);
+    padding: 0.5rem 0 0.75rem;
+  }
+  /* one link per row; search and theme share the last row */
+  html:root:root #navbar .navbar-menu-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    margin: 0;
+  }
+  html:root:root #navbar .navbar-menu-list > .nav-item {
+    flex: 0 0 100%;
+  }
+  html:root:root #navbar .navbar-nav .nav-item .nav-link {
+    line-height: 3rem; /* 48 px targets */
+    padding: 0 0.75rem;
+    font-size: 1rem;
+    border-radius: var(--amb-radius);
+  }
+  html:root:root #navbar .navbar-nav .nav-item.active > .nav-link {
+    background: var(--amb-surface);
+  }
+  html:root:root #navbar .navbar-nav .nav-item.active > .nav-link::after {
+    left: 0;
+    right: auto;
+    top: 0.75rem;
+    bottom: 0.75rem;
+    width: 3px;
+    height: auto;
+  }
+  html:root:root #navbar .navbar-menu-list > .nav-item:has(#search-toggle) {
+    flex: 1 1 auto;
+  }
+  html:root:root #navbar .navbar-menu-list > :is(.nav-item:has(#search-toggle), .toggle-container) {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--amb-border);
+  }
+  html:root:root #navbar .navbar-menu-list > .toggle-container {
+    flex: 0 0 auto;
+  }
+  html:root:root #navbar #search-toggle {
+    width: 100%;
+    height: 3rem;
+    justify-content: flex-start;
+    padding: 0 0.75rem;
+  }
+  html:root:root #navbar #search-toggle .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  html:root:root #navbar #light-toggle {
+    width: auto;
+    height: 3rem;
+    gap: 0.75rem;
+    padding: 0 0.75rem;
+  }
+  html:root:root #navbar #light-toggle::after {
+    content: attr(data-label);
+    font-size: 1rem;
+    font-weight: 500;
+    color: inherit;
+  }
+}
+
+/* ------------------------------------------------------------------------- project-page navigation */
+
+/* "<- Projects" above the title (ambient.js). */
+html:root:root .amb-crumb {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+html:root:root .amb-crumb a {
+  color: var(--amb-link);
+  text-decoration: none;
+}
+html:root:root .amb-crumb a:is(:hover, :focus-visible) {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+/* Previous / next project and "All projects" after the article (ambient.js, from projects.json). */
+html:root:root .amb-pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem;
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--amb-border);
+}
+html:root:root .amb-pager a {
+  display: block;
+  margin: 0;
+  padding: 0.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+}
+html:root:root .amb-pager a:hover {
+  background: var(--amb-surface);
+}
+html:root:root .amb-pager :is(.amb-prev, .amb-next) span {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--amb-muted);
+}
+html:root:root .amb-pager :is(.amb-prev, .amb-next) b {
+  display: block;
+  margin-top: 0.125rem;
+  font-weight: 600;
+  color: var(--amb-link);
+}
+html:root:root .amb-pager .amb-prev {
+  grid-column: 1;
+  margin-left: -0.75rem; /* text lines up with the frame; the hover fill extends outward */
+}
+html:root:root .amb-pager .amb-next {
+  grid-column: 2;
+  margin-right: -0.75rem;
+  text-align: right;
+}
+html:root:root .amb-pager .amb-all {
+  grid-column: 1 / -1;
+  justify-self: center;
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--amb-link);
+}
+@media (max-width: 575.98px) {
+  html:root:root .amb-pager {
+    grid-template-columns: 1fr;
+  }
+  html:root:root .amb-pager :is(.amb-prev, .amb-next, .amb-all) {
+    grid-column: 1;
+    justify-self: stretch;
+    margin: 0 -0.75rem;
+    text-align: left;
+  }
+}
+
+/* ----------------------------------------------------------------------------------------- about */
+
+html:root:root .profile img {
+  border-radius: 8px;
+  box-shadow: none;
+}
+html:root:root .profile figure {
+  margin: 0;
+}
+html:root:root .profile .more-info {
+  margin: 0.75rem 0 0;
+  font-family: var(--amb-font);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+html:root:root .profile .more-info p {
+  display: block;
+  margin: 0;
+  color: var(--amb-muted);
+}
+html:root:root .profile .more-info a {
+  color: inherit;
+}
+@media (min-width: 576px) {
+  html:root:root .profile.float-right {
+    width: 13rem;
+    margin: 0.25rem 0 1.25rem 2rem;
+  }
+}
+/* Phone: photo and details side by side, so the bio starts on the first screen. */
+@media (max-width: 575.98px) {
+  html:root:root .profile.float-right {
+    float: none;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: 0 1rem;
+    align-items: end;
+    margin: 0 0 1.5rem;
+  }
+  html:root:root .profile img {
+    width: 6rem;
+    height: 6rem;
+    object-fit: cover;
+    object-position: 50% 25%;
+  }
+  html:root:root .profile .more-info {
+    margin: 0;
+  }
+}
+/* Contact icons: 40x40 targets. ambient.js moves .social into .profile (under .more-info). */
+html:root:root .social {
+  margin-top: 2.5rem;
+  text-align: left;
+}
+html:root:root .social .contact-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  font-size: 1.25rem;
+}
+html:root:root .social .contact-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--amb-radius);
+  color: var(--amb-muted);
+  text-decoration: none;
+}
+html:root:root .social .contact-icons a:hover {
+  background: var(--amb-surface);
+  color: var(--amb-link);
+}
+html:root:root .social .contact-icons a i,
+html:root:root .social .contact-icons a i::before {
+  color: inherit;
+}
+html:root:root .social .contact-note {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--amb-muted);
+}
+html:root:root .profile .social {
+  grid-column: 1 / -1;
+  margin: 0.75rem 0 0 -0.6rem;
+}
+html:root:root .profile .social .contact-note {
+  margin-left: 0.6rem;
+}
+
+/* Kickers: small uppercase labels that separate groups (news, project categories, publication years). */
+html:root:root .post article > h2:has(> a[href$="/news/"]),
+html:root:root .projects h2.category,
+html:root:root .publications h2.bibliography {
+  font-family: var(--amb-font);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--amb-muted);
+}
+html:root:root .post article > h2:has(> a[href$="/news/"]) {
+  clear: both;
+  margin: 3rem 0 0;
+  padding: 0 0 0.6rem;
+}
+html:root:root .post article > h2 > a[href$="/news/"] {
+  color: inherit; /* muted, like the other kickers */
+  text-decoration: none;
+}
+
+/* News table (About and /news/). */
+html:root:root .news table {
+  width: 100%;
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  background: transparent;
+}
+/* .table-borderless sets border:0 as a layered !important, which beats any unlayered !important here:
+   draw the row hairline with an inset shadow instead. */
+html:root:root .news :is(th, td) {
+  padding: 0.6rem 1rem 0.6rem 0 !important;
+  box-shadow: inset 0 1px 0 var(--amb-border);
+  color: var(--amb-text);
+  vertical-align: top;
+}
+html:root:root .news th[scope="row"] {
+  width: 7.5rem !important; /* beats the inline width:20% */
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--amb-muted);
+  font-variant-numeric: tabular-nums;
+}
+html:root:root .news .table-responsive {
+  overflow: visible;
+}
+@media (max-width: 575.98px) {
+  html:root:root .news :is(table, tbody, tr, th, td) {
+    display: block;
+    width: 100% !important;
+  }
+  html:root:root .news th[scope="row"] {
+    width: 100% !important;
+    padding-bottom: 0 !important;
+  }
+  html:root:root .news td {
+    box-shadow: none;
+    padding-top: 0.15rem !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------------------- tables */
+
+html:root:root :is(table, .table, .table-dark) {
+  color: var(--amb-text);
+  background: transparent;
+}
+html:root:root .table-dark :is(th, td) {
+  border-color: var(--amb-border);
+}
+/* Markdown tables on project pages. At DOMContentLoaded the gem's no_defer.js adds .table.table-hover to them
+   and .table-responsive (overflow-x:auto) to their parent, the <article>: the table scrolls by itself
+   instead, so the whole article never swipes sideways on a phone. */
+html:root:root .post article > table {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1.5rem 0 2rem;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums lining-nums;
+  background: none;
+}
+/* Scroll cue for tables wider than their column (mobile Safari hides scrollbars): ambient.js marks each edge
+   that has more columns behind it (amb-more-l, amb-more-r) and the table fades out toward it. A mask rather
+   than painted covers, so it works over the sky; a table that fits gets no class and no mask. */
+html:root:root .post article > table.amb-more-r {
+  -webkit-mask-image: linear-gradient(to left, transparent, #000 2.5rem);
+  mask-image: linear-gradient(to left, transparent, #000 2.5rem);
+}
+html:root:root .post article > table.amb-more-l {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 2.5rem);
+  mask-image: linear-gradient(to right, transparent, #000 2.5rem);
+}
+html:root:root .post article > table.amb-more-l.amb-more-r {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 2.5rem, #000 calc(100% - 2.5rem), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 2.5rem, #000 calc(100% - 2.5rem), transparent);
+}
+html:root:root .post article > table th {
+  font-size: inherit;
+  font-weight: 600;
+  text-align: left;
+  border-top: 0;
+  border-bottom: 1px solid var(--amb-border-strong);
+  padding: 0.5rem 1rem 0.5rem 0;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+html:root:root .post article > table td {
+  font-size: inherit;
+  border-top: 1px solid var(--amb-border);
+  padding: 0.5rem 1rem 0.5rem 0;
+  vertical-align: top;
+}
+html:root:root .post article.table-responsive {
+  overflow: visible;
+}
+
+/* --------------------------------------------------------------------------------- projects index */
+
+/* The gem's card grid restyled as a scannable list: thumbnail, title, one or two lines of text. */
+html:root:root .projects h2.category {
+  border-bottom: 1px solid var(--amb-border);
+  padding: 0 0 0.6rem;
+  margin: 3rem 0 0;
+}
+html:root:root .projects > a:first-of-type h2.category {
+  margin-top: 0;
+}
+html:root:root .projects > a[id] {
+  display: block;
+  text-decoration: none;
+}
+html:root:root .projects .row {
+  display: block;
+  margin: 0;
+}
+html:root:root .projects .row > .col {
+  max-width: none;
+  flex: none;
+  padding: 0;
+}
+html:root:root .projects .col > a {
+  display: block;
+  margin-inline: -0.75rem;
+  padding-inline: 0.75rem;
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+}
+html:root:root .projects .col > a:hover {
+  background: var(--amb-surface);
+}
+html:root:root .projects .card {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: 0 1.25rem;
+  align-items: start;
+  padding: 1rem 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+html:root:root .projects .col + .col .card {
+  border-top: 1px solid var(--amb-border);
+}
+html:root:root .projects .card figure {
+  margin: 0;
+}
+html:root:root .projects .card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--amb-radius);
+  outline: 1px solid var(--amb-border);
+  outline-offset: -1px;
+}
+html:root:root .projects .card-body {
+  padding: 0;
+}
+html:root:root .projects .card-title {
+  margin: 0 0 0.3rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--amb-text);
+}
+html:root:root .projects .card-text {
+  max-width: var(--amb-measure);
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--amb-muted);
+}
+html:root:root .projects .col > a:is(:hover, :focus-visible) .card-title {
+  color: var(--amb-link);
+}
+html:root:root .projects .card .row:not(:has(*)) {
+  display: none; /* the empty GitHub row; a future `github:` row stays visible */
+}
+html:root:root[data-theme="dark"] .projects .card img {
+  filter: brightness(0.9);
+}
+@media (max-width: 575.98px) {
+  html:root:root .projects .card {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: 0 0.875rem;
+  }
+  html:root:root .projects .card img {
+    aspect-ratio: 1;
+  }
+  html:root:root .projects .card-title {
+    font-size: 1.0625rem;
+  }
+  html:root:root .projects .card-text {
+    font-size: 0.875rem;
+  }
+}
+
+/* ----------------------------------------------------------------------------- project pages, media */
+
+html:root:root .post article :is(figure img, picture img, video, iframe) {
+  border-radius: var(--amb-radius);
+}
+/* A hairline keeps the edges of white diagrams visible on paper. */
+html:root:root .post article :is(figure img, video) {
+  outline: 1px solid var(--amb-border);
+  outline-offset: -1px;
+}
+html:root:root .post article video {
+  background: var(--amb-code-bg);
+}
+html:root:root .post article figure {
+  margin-bottom: 0;
+}
+html:root:root :is(.caption, figcaption) {
+  margin: 0.5rem 0 2rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  text-align: left;
+  color: var(--amb-muted);
+}
+html:root:root .caption :is(p, div, span, em, strong, li) {
+  color: inherit;
+}
+/* Dark mode: dim project figures slightly. Never video, iframes or photographs. */
+html:root:root[data-theme="dark"][data-amb-page="project"] .post article img {
+  filter: brightness(0.9);
+}
+
+/* ---------------------------------------------------------------------------------- publications */
+
+html:root:root .publications h2.bibliography {
+  margin: 2.5rem 0 0;
+  padding: 0 0 0.6rem;
+  border-top: 0;
+  border-bottom: 1px solid var(--amb-border);
+}
+html:root:root .publications ol.bibliography {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+html:root:root .publications ol.bibliography > li {
+  margin: 0;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--amb-border);
+}
+html:root:root .publications ol.bibliography li > .row {
+  display: block;
+  margin: 0;
+}
+html:root:root .publications ol.bibliography li > .row > :is(.abbr, [class*="col-"]) {
+  flex: none;
+  width: auto;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+html:root:root .publications ol.bibliography li .abbr .badge {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none !important;
+  color: var(--amb-muted) !important;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+html:root:root .publications ol.bibliography li .abbr :is(abbr, a) {
+  color: inherit !important;
+  text-decoration: none;
+}
+html:root:root .publications ol.bibliography li .title {
+  margin-top: 0.15rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--amb-text);
+}
+html:root:root .publications ol.bibliography li .author {
+  font-size: 0.9375rem;
+  color: var(--amb-text);
+}
+html:root:root .publications ol.bibliography li .author > em {
+  font-weight: 600;
+  font-style: normal;
+  border-bottom: 0;
+}
+html:root:root .publications ol.bibliography li .author a {
+  color: var(--amb-text);
+  border-bottom: 1px dashed var(--amb-muted);
+  text-decoration: none;
+}
+html:root:root .publications ol.bibliography li .periodical {
+  font-size: 0.875rem;
+  color: var(--amb-muted);
+}
+html:root:root .publications ol.bibliography li .periodical * {
+  color: inherit;
+}
+html:root:root .publications ol.bibliography li .links a.btn {
+  margin: 0.5rem 0.375rem 0 0;
+  padding: 0.2rem 0.7rem;
+  border: 1px solid var(--amb-border-strong) !important;
+  border-radius: 4px;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--amb-text);
+}
+html:root:root .publications ol.bibliography li .links a.btn:hover {
+  border-color: var(--amb-accent) !important;
+  color: var(--amb-link);
+}
+html:root:root .publications ol.bibliography li .badges span {
+  color: var(--amb-text);
+}
+html:root:root #bibsearch {
+  width: min(100%, 22rem);
+  max-width: 100%;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--amb-border-strong);
+  border-radius: var(--amb-radius);
+  background: var(--amb-surface);
+  color: var(--amb-text);
+  font-size: 0.9375rem;
+  box-shadow: none;
+}
+html:root:root #bibsearch::placeholder {
+  color: var(--amb-muted);
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------------------------------------- CV */
+
+/* Rules for the CV live here, not in assets/css/al-folio-cv.css: the gem's AssetsGenerator overwrites that
+   file in _site. Sections are "card mt-3 p-3" (layered !important 1rem padding): pull each card out by its
+   padding so text lines up with the title, and draw the hairline over the content area only. */
+html:root:root .cv .card {
+  margin-inline: -1rem;
+  border: 0;
+  border-radius: 0;
+  background: linear-gradient(var(--amb-border), var(--amb-border)) 1rem 0 / calc(100% - 2rem) 1px no-repeat;
+}
+html:root:root .cv .card .card-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--amb-text);
+}
+html:root:root .cv .card .list-group-item {
+  padding: 0.5rem 0;
+  border: 0;
+  background: transparent;
+}
+html:root:root .cv ul.card-text {
+  overflow: visible;
+  white-space: normal;
+}
+html:root:root .cv ul.list-group {
+  padding-left: 0;
+  list-style: none;
+}
+html:root:root .cv .card .list-group-item {
+  display: block;
+  list-style: none;
+}
+html:root:root .cv .list-group-item > .row {
+  flex-wrap: nowrap;
+  margin: 0;
+}
+/* Date column (Awards and Publications use a plain col-sm-2 without .date-column). At >= 768 px the gem's
+   ml-md-4 (layered !important 1.5rem) on the entry text is the gutter; below that, the column's padding. */
+html:root:root .cv .list-group-item > .row > :is(.date-column, .col-sm-2) {
+  flex: 0 0 8.5rem;
+  max-width: 8.5rem;
+  width: auto;
+  padding: 0 1.25rem 0 0;
+  text-align: left;
+  transform: none;
+}
+@media (min-width: 768px) {
+  html:root:root .cv .list-group-item > .row > :is(.date-column, .col-sm-2) {
+    padding-right: 0;
+  }
+}
+html:root:root .cv .list-group-item > .row > :is(.date-column, .col-sm-2) + div {
+  flex: 1 1 0;
+  max-width: none;
+  min-width: 0;
+  padding: 0;
+}
+html:root:root .cv .card .list-group-item .badge {
+  min-width: 0 !important;
+  padding: 0;
+  background: none !important;
+  color: var(--amb-muted) !important;
+  font-size: 0.8125rem;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em;
+  white-space: normal;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+html:root:root .cv :is(p.location, i.iconlocation, i.iconinstitution, i.icondepartment) {
+  color: var(--amb-muted);
+}
+html:root:root .cv p.location {
+  margin: 0.15rem 0 0;
+  font-size: 0.8125rem;
+  white-space: normal;
+}
+html:root:root .cv .table-cv :is(td, th) {
+  padding: 0;
+  border: 0;
+}
+html:root:root .cv .list-group-item :is(h6, p) {
+  margin-left: 0;
+}
+/* Phones: the date (and place) sit on one line above the entry. */
+@media (max-width: 575.98px) {
+  html:root:root .cv .list-group-item > .row {
+    flex-wrap: wrap;
+  }
+  html:root:root .cv .list-group-item > .row > :is(.date-column, .col-sm-2) {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 0 0.25rem;
+  }
+  html:root:root .cv .list-group-item > .row > :is(.date-column, .col-sm-2) tbody {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 1rem;
+  }
+  html:root:root .cv .list-group-item > .row > :is(.date-column, .col-sm-2) + div {
+    flex: 0 0 100%;
+    margin-top: 0 !important;
+  }
+}
+html:root:root .cv h6 {
+  margin-bottom: 0.15rem;
+  font-size: 0.875rem !important; /* beats the inline 0.95rem */
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--amb-muted);
+}
+html:root:root .cv h6.title {
+  font-size: 1rem !important;
+  font-weight: 600;
+  color: var(--amb-text);
+}
+html:root:root .cv h6.title a {
+  color: var(--amb-text);
+  text-decoration: none;
+}
+html:root:root .cv h6.title a:hover {
+  color: var(--amb-link);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+html:root:root .cv .table-cv {
+  margin: 0;
+}
+html:root:root .cv table.table-cv:not(.table-sm) {
+  width: auto;
+}
+html:root:root .cv .table-sm :is(td, th) {
+  padding: 0.25rem 0.75rem 0.25rem 0 !important;
+}
+html:root:root .cv a.btncv {
+  border: 1px solid var(--amb-border-strong) !important;
+  color: var(--amb-text) !important;
+}
+html:root:root .cv a.btncv:hover {
+  border-color: var(--amb-accent) !important;
+  color: var(--amb-link) !important;
+}
+html:root:root .post-header .post-title a.float-right {
+  font-size: 1.5rem;
+  color: var(--amb-link);
+}
+/* Section index (tocbot), left column on wide screens. */
+html:root:root #toc-sidebar {
+  top: calc(var(--amb-nav-h) + 1.5rem);
+}
+html:root:root #toc-sidebar .toc-link {
+  font-size: 0.875rem;
+  color: var(--amb-muted);
+}
+html:root:root #toc-sidebar .toc-link:hover {
+  color: var(--amb-text);
+}
+html:root:root #toc-sidebar .toc-link.is-active-link {
+  color: var(--amb-text);
+  font-weight: 600;
+}
+html:root:root #toc-sidebar .toc-link::before {
+  background-color: var(--amb-border) !important;
+}
+html:root:root #toc-sidebar .toc-link.is-active-link::before {
+  background-color: var(--amb-accent) !important;
+}
+/* Narrower than 992 px: one horizontally scrollable row of sections above the content. */
+@media (max-width: 991.98px) {
+  html:root:root [role="main"] > .row:has(#toc-sidebar) {
+    margin: 0;
+  }
+  html:root:root [role="main"] > .row:has(#toc-sidebar) > :is(.col-sm-3, .col-sm-9) {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+  html:root:root #toc-sidebar {
+    position: static;
+    visibility: visible;
+    height: auto;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--amb-border);
+  }
+  html:root:root #toc-sidebar > .toc-list {
+    display: flex;
+    gap: 0.25rem 1rem;
+    overflow-x: auto;
+    padding: 0 0 0.5rem !important;
+    white-space: nowrap;
+    scrollbar-width: thin;
+  }
+  html:root:root #toc-sidebar .toc-link {
+    padding: 0.25rem 0;
+  }
+  html:root:root #toc-sidebar .toc-link::before {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------------------------- blog, news */
+
+html:root:root .header-bar {
+  padding: 0 0 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--amb-border);
+  text-align: left;
+}
+html:root:root .header-bar h1 {
+  margin: 0;
+  font-size: clamp(1.75rem, 1.45rem + 1.1vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--amb-text);
+}
+html:root:root .header-bar h2 {
+  margin: 0.5rem 0 0;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--amb-muted);
+}
+html:root:root .tag-category-list {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--amb-border);
+  font-size: 0.8125rem;
+}
+html:root:root .tag-category-list ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.25rem 0.75rem;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+html:root:root .tag-category-list ul :is(li, p) {
+  margin: 0;
+  padding: 0;
+}
+html:root:root .tag-category-list :is(li, a, i, p) {
+  color: var(--amb-muted);
+}
+html:root:root .post-list li {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--amb-border);
+}
+html:root:root .post-list li :is(h3, h1.post-title) {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.35;
+}
+html:root:root .post-list li a {
+  color: var(--amb-text);
+}
+html:root:root .post-list li a:hover {
+  color: var(--amb-link);
+}
+html:root:root :is(.post-meta, .post-tags, .post-list .post-meta a, .post-list .post-tags a, .post-tags i) {
+  color: var(--amb-muted);
+}
+html:root:root .icon_svg-stroke {
+  stroke: var(--amb-muted);
+}
+html:root:root .post-list svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* ---------------------------------------------------------------------------------- photography */
+
+html:root:root img.z-depth-1[data-zoomable] {
+  border-radius: var(--amb-radius);
+  box-shadow: none;
+  outline: 0;
+  cursor: zoom-in;
+  filter: none;
+}
+
+/* --------------------------------------------------------------------------------- chrome, widgets */
+
+/* vanilla-back-to-top: small and quiet; the only page-level control left at the bottom of long pages. */
+html:root:root body #back-to-top {
+  right: 1.25rem !important;
+  bottom: 1.25rem !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  border: 1px solid var(--amb-border-strong) !important;
+  border-radius: 50% !important;
+  background: var(--amb-surface) !important;
+  color: var(--amb-muted) !important;
+  box-shadow: none !important;
+}
+html:root:root body #back-to-top:hover {
+  color: var(--amb-text) !important;
+}
+html:root:root body #back-to-top svg {
+  fill: currentColor !important;
+}
+/* Open-Meteo credit, the last line of the main column while a weather reading is in use (ambient.js). Its data
+   licence (CC BY 4.0) asks for a visible link wherever the data are used, and the footer is hidden. */
+html:root:root .amb-credit {
+  margin: 4rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--amb-muted);
+}
+html:root:root .amb-credit[hidden] {
+  display: none;
+}
+html:root:root .amb-credit a {
+  white-space: nowrap; /* the credit phrase wraps as a unit on phones */
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+html:root:root .amb-credit a:is(:hover, :focus-visible) {
+  color: var(--amb-text);
+  text-decoration-color: currentColor;
+}
+/* "Pause animation": a text button in the credit line (WCAG 2.2.2: moving content needs a way to stop it) */
+html:root:root .amb-credit button {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+html:root:root .amb-credit button:is(:hover, :focus-visible) {
+  color: var(--amb-text);
+  text-decoration-color: currentColor;
+}
+html:root:root .amb-credit button[hidden] {
+  display: none;
+}
+/* theme.js builds the zoom overlay colour as getPropertyValue("--global-bg-color") + "ee", which is invalid
+   once the tokens are registered <color>s (they compute to rgb(...)). */
+html:root:root .medium-zoom-overlay {
+  background: color-mix(in srgb, var(--amb-bg) 94%, transparent) !important;
+}
+html:root:root ninja-keys {
+  --ninja-font-family: var(--amb-font);
+  --ninja-modal-background: var(--amb-bg);
+  --ninja-text-color: var(--amb-text);
+  --ninja-secondary-text-color: var(--amb-muted);
+  --ninja-placeholder-color: var(--amb-muted);
+  --ninja-accent-color: var(--amb-accent);
+  --ninja-selected-background: var(--amb-surface);
+  --ninja-selected-text-color: var(--amb-text);
+  --ninja-group-text-color: var(--amb-muted);
+  --ninja-secondary-background-color: var(--amb-code-bg);
+  --ninja-footer-background: var(--amb-bg);
+  --ninja-separate-border: 1px solid var(--amb-border);
+  --ninja-modal-shadow: 0 12px 40px rgb(0 0 0 / 0.18);
+  --ninja-overlay-background: color-mix(in srgb, var(--amb-text) 35%, transparent);
+}
+html:root:root .dropdown-menu {
+  background: var(--amb-surface);
+  border-color: var(--amb-border);
+}
+
+/* ------------------------------------------------------------------------------------------- print */
+
+@media print {
+  html:root:root:root:root {
+    /* (0,4,1): beats the generated (0,3,1) state rules */
+    --amb-bg: #fff;
+    --amb-surface: #fff;
+    --amb-text: #111;
+    --amb-muted: #444;
+    --amb-link: #111;
+    --amb-border: #ccc;
+    --amb-code-bg: #f4f4f4;
+  }
+  /* the print palette is static, so the weather credit does not apply to a printout */
+  html:root:root :is(#navbar, .amb-crumb, .amb-pager, #back-to-top, .amb-skip, .amb-credit) {
+    display: none !important;
+  }
+  html:root:root body.fixed-top-nav {
+    padding-top: 0;
+  }
+}

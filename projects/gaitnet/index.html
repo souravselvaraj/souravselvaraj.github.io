@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> GaitNet | Sourav Selvaraj </title> <meta name="author" content="Sourav Selvaraj"> <meta name="description" content="Attention-based acyclic footstep planning for dynamic quadruped locomotion — candidate self-attention, motion history, and inverse footstep dynamics on top of perceptive MPC."> <meta name="keywords" content="robotics, legged robots, quadruped, humanoid, model predictive control, whole-body control, reinforcement learning, robot learning, WPI"> <meta property="og:site_name" content="Sourav Selvaraj"> <meta property="og:type" content="website"> <meta property="og:title" content="Sourav Selvaraj | GaitNet"> <meta property="og:url" content="https://souravselvaraj.github.io/projects/gaitnet/"> <meta property="og:description" content="Attention-based acyclic footstep planning for dynamic quadruped locomotion — candidate self-attention, motion history, and inverse footstep dynamics on top of perceptive MPC."> <meta property="og:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="GaitNet"> <meta name="twitter:description" content="Attention-based acyclic footstep planning for dynamic quadruped locomotion — candidate self-attention, motion history, and inverse footstep dynamics on top of perceptive MPC."> <meta name="twitter:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <script type="application/ld+json">
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> GaitNet | Sourav Selvaraj </title> <meta name="author" content="Sourav Selvaraj"> <meta name="description" content="A footstep planner given no gait. Each tick it picks one step, or none, from safe footholds, and a controller lands it. Trained once, it runs frozen on a new controller."> <meta name="keywords" content="robotics, legged robots, quadruped, humanoid, model predictive control, whole-body control, reinforcement learning, robot learning, WPI"> <meta property="og:site_name" content="Sourav Selvaraj"> <meta property="og:type" content="website"> <meta property="og:title" content="Sourav Selvaraj | GaitNet"> <meta property="og:url" content="https://souravselvaraj.github.io/projects/gaitnet/"> <meta property="og:description" content="A footstep planner given no gait. Each tick it picks one step, or none, from safe footholds, and a controller lands it. Trained once, it runs frozen on a new controller."> <meta property="og:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="GaitNet"> <meta name="twitter:description" content="A footstep planner given no gait. Each tick it picks one step, or none, from safe footholds, and a controller lands it. Trained once, it runs frozen on a new controller."> <meta name="twitter:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <script type="application/ld+json">
     {
         "author":
         {
@@ -7,7 +7,7 @@
         },
         "url": "https://souravselvaraj.github.io/projects/gaitnet/",
         "@type": "WebSite",
-        "description": "Attention-based acyclic footstep planning for dynamic quadruped locomotion — candidate self-attention, motion history, and inverse footstep dynamics on top of perceptive MPC.",
+        "description": "A footstep planner given no gait. Each tick it picks one step, or none, from safe footholds, and a controller lands it. Trained once, it runs frozen on a new controller.",
         "headline": "GaitNet",
         
         "sameAs": ["https://github.com/souravselvaraj","https://www.linkedin.com/in/souravselvaraj",null],
@@ -17,15 +17,115 @@
     }
   </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
   :root {
-    --max-content-width: 1140px;
+    --max-content-width: 920px;
   }
-</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A4%96&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://souravselvaraj.github.io/projects/gaitnet/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="/assets/ambient/site.css?v=5"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A4%96&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://souravselvaraj.github.io/projects/gaitnet/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Sourav</span> Selvaraj </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/photography/">photography </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">GaitNet</h1> <p class="post-description">Attention-based acyclic footstep planning for dynamic quadruped locomotion — candidate self-attention, motion history, and inverse footstep dynamics on top of perceptive MPC.</p> </header> <article> <p><strong>GaitNet-T</strong> is an attention-based footstep planner for acyclic Unitree Go1 locomotion over irregular terrain, developed with Owen Sullivan (co-first authors, equal contribution) in the <a href="https://www.wpi.edu/people/faculty/mmaghelih" rel="external nofollow noopener" target="_blank">ALMaS Research Group</a> at <a href="https://www.wpi.edu/" rel="external nofollow noopener" target="_blank">WPI</a> (advisor: Dr. Mahdi Agheli). Instead of following a fixed gait cycle, the policy decides <em>which</em> leg to move, <em>where</em> to place it, and <em>how long</em> the swing should take — one footstep at a time.</p> <div class="row justify-content-center"> <div class="col-sm-11 mt-3 mb-3"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/gaitnet_pipeline-480.webp 480w,/assets/img/projects/gaitnet_pipeline-800.webp 800w,/assets/img/projects/gaitnet_pipeline-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/gaitnet_pipeline.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="GaitNet pipeline" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> Original GaitNet system overview. GaitNet-T preserves the same candidate-based decision interface while adding attention across footholds, a one-second motion history, and an inverse footstep model before execution. </div> <h2 id="why-acyclic">Why acyclic?</h2> <p>Fixed cyclic gaits (trot, crawl) waste the quadruped’s freedom on broken terrain: when footholds are scarce — gaps, missing steps, rubble — the <em>sequence</em> of leg movements matters as much as the footholds themselves. GaitNet treats gait selection itself as a learned decision.</p> <h2 id="method">Method</h2> <ul> <li> <strong>Candidate-based action space.</strong> At each 25 Hz policy tick, the planner samples up to 16 valid footholds for every eligible leg. Together with a no-op, this produces 65 slots. A masked categorical policy selects a slot, while a Gaussian head selects its swing duration.</li> <li> <strong>GaitNet-T attention architecture.</strong> A 464k-parameter actor uses two pre-normalized Transformer encoder layers with four attention heads to compare candidate footholds. Its context combines the current robot state with one second of motion and touchdown-error history.</li> <li> <strong>Inverse footstep model (IDM).</strong> A learned inverse model maps each desired landing location to the command required by the active controller. This separates <em>where the policy wants the foot to land</em> from <em>what must be sent to the controller</em>.</li> <li> <strong>Model-based execution.</strong> The selected step is passed to OCS2 perceptive MPC and whole-body control. The policy chooses the gait online; no periodic contact sequence is prescribed.</li> </ul> <h2 id="my-role-attention-and-inverse-dynamics">My role: attention and inverse dynamics</h2> <p>I implemented the two additions at the center of the current system:</p> <ul> <li> <strong>GaitNet-T</strong>, including candidate self-attention, the motion-history encoder, masking, weight-preserving conversion from the original GaitNet actor, and memory-efficient PPO training.</li> <li> <strong>The IDM pipeline</strong>, including footstep-data collection, hindsight-relabeled inverse-model fitting, integration into training and deployment, and evaluation across controller configurations. The model reduced held-out command-to-landing RMS error from <strong>2.61 cm to 0.89 cm</strong>.</li> <li> <strong>Deployment integration</strong> with the ROS GaitNet service, OCS2 perceptive MPC, and camera-based terrain mapping on the simulated Go1.</li> </ul> <h2 id="results">Results</h2> <p>The final GaitNet-T policy was evaluated in Isaac Lab and through the complete Gazebo + OCS2 deployment stack:</p> <table> <thead> <tr> <th>Evaluation</th> <th style="text-align: center">Success</th> </tr> </thead> <tbody> <tr> <td>Isaac Lab, 10–30% void terrain</td> <td style="text-align: center"><strong>99%</strong></td> </tr> <tr> <td>Isaac Lab, 40% void terrain</td> <td style="text-align: center"><strong>≈88%</strong></td> </tr> <tr> <td>Isaac Lab, 50% void terrain</td> <td style="text-align: center"><strong>≈75%</strong></td> </tr> <tr> <td>Gazebo + OCS2, held-out worlds with exact terrain</td> <td style="text-align: center"> <strong>82%</strong> [70, 89]</td> </tr> <tr> <td>Gazebo + OCS2, onboard perception and leg odometry (330 trials)</td> <td style="text-align: center"> <strong>80.3%</strong> [76, 84]</td> </tr> </tbody> </table> <p>Bracketed values are 95% Wilson confidence intervals.</p> <p>Although no gait was specified, the learned policy spontaneously coordinated almost every paired swing diagonally, producing a trot from step-by-step decisions.</p> <h2 id="status">Status</h2> <p>Manuscript (2026): O. Sullivan*, S. Selvaraj*, and M. Agheli, “GaitNet: Learning-Based Acyclic Footstep Planning for Dynamic Quadruped Locomotion.” *Equal contribution.</p> <p>Technical documentation: <a href="https://github.com/souravselvaraj/gaitnet-docs" rel="external nofollow noopener" target="_blank">github.com/souravselvaraj/gaitnet-docs</a></p> <p>Code: <a href="https://github.com/souravselvaraj/gaitnet/tree/train-port" rel="external nofollow noopener" target="_blank">github.com/souravselvaraj/gaitnet</a></p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Sourav Selvaraj. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Sourav</span> Selvaraj </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/photography/">photography </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">GaitNet</h1> <p class="post-description">A footstep planner given no gait. Each tick it picks one step, or none, from safe footholds, and a controller lands it. Trained once, it runs frozen on a new controller.</p> </header> <article> <p>GaitNet lets a quadruped choose its own steps. It plans footsteps for a Unitree Go1 crossing ground full of holes, with no gait to follow. At every control tick it decides whether to take a step and, if so, which leg to lift and where to put it down. A model-based controller then carries the step out. I work on GaitNet with Owen Sullivan in the <a href="https://www.wpi.edu/people/faculty/mmaghelih" rel="external nofollow noopener" target="_blank">ALMaS Research Group</a> at <a href="https://www.wpi.edu/" rel="external nofollow noopener" target="_blank">WPI</a>, advised by Dr. Mahdi Agheli. The project started as Owen’s master’s thesis, and I have worked on it since November 2025.</p> <div class="row justify-content-center"> <div class="col-sm-11 mt-3 mb-3"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/gaitnet_pipeline-480.webp 480w,/assets/img/projects/gaitnet_pipeline-800.webp 800w,/assets/img/projects/gaitnet_pipeline-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/gaitnet_pipeline.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="GaitNet pipeline" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> An earlier version of the GaitNet pipeline: (a) deployment, where the planner scores the cells marked safe and sends the chosen step to the low-level controller; (b) the network; (c) training with PPO in NVIDIA Isaac Lab. The current version adds attention across the candidates, a short motion history, and an execution layer with an inverse footstep model for each controller. </div> <h2 id="why-a-fixed-gait-struggles">Why a fixed gait struggles</h2> <p>Most legged controllers walk with a fixed gait. A trot lifts diagonal leg pairs in turn on a set schedule, and the controller then places each foot. With few holes this costs little, since safe ground is usually right beside wherever the foot was headed. With dense holes, the schedule still says a leg must lift now, and that foot may have nowhere to land.</p> <p>Someone crossing a stream on stepping stones pauses when no stone is in reach and moves whichever foot has one nearby. Papers on legged robots call this kind of stepping acyclic, non-gaited or free-gait, because no leg order repeats. GaitNet learns which single step to take next, with no gait imposed.</p> <h2 id="one-step-at-a-time">One step at a time</h2> <p>Every tick, GaitNet looks at a few candidate footholds for each leg. They come only from cells already marked safe, set back from the hole edges, so GaitNet never judges safety itself. It picks one candidate, which fixes both the leg and the landing point, or a no-step option that lets the robot wait.</p> <p>This one-step-per-tick action space comes from Owen’s thesis, “GaitNet: Greedy, Acyclic Quadruped Gait Generation” (WPI, 2025), where a network scored candidates independently and the planner was tested with one controller. GaitNet now compares the candidates against each other through attention before scoring them, since the best foothold depends on what else is in reach. It also keeps a short memory of the robot’s recent motion.</p> <h2 id="choosing-a-step-is-only-half-of-it">Choosing a step is only half of it</h2> <p>Picking a safe foothold does not mean the foot lands on it. Controllers land a little off target, and the offset differs from one controller to the next. At speed, the controller we trained GaitNet with overshot by a few centimeters, more than the clearance GaitNet keeps around each hole, so a foot sent to a safe cell at a hole’s edge could drop in.</p> <p>My fix is a small inverse footstep model for each controller, fitted from that controller’s own logged steps. Given where GaitNet wants the foot, it returns the command that lands the foot there, much as an archer who knows the wind pushes arrows right aims a little left. Pairing a fixed planner with an inverse model refit for each new setting follows FADA (Xie et al., 2026), which does this for humanoid control.</p> <p>We train GaitNet with PPO in NVIDIA Isaac Lab, with a convex MPC executing its steps, then freeze it and run it on a second controller, OCS2’s nonlinear MPC and whole-body controller, with the terrain mapped from a simulated depth camera. Only the inverse footstep model is refit, on OCS2’s own steps.</p> <h2 id="who-built-what">Who built what</h2> <p>I wrote the attention that compares candidate footholds, the motion history the planner reads, and the controller-specific inverse footstep models. I also did most of the work on the OCS2 deployment: routing GaitNet’s steps into OCS2’s perceptive MPC, setting up and tuning GPU elevation mapping from depth, terrain-aware candidate generation, and the Gazebo benchmark behind the results below. In September 2026 I finished the Go1 hardware bring-up, building on earlier work by another contributor, and calibrated the camera mount.</p> <p>Owen wrote the original GaitNet code for his thesis, starting in August 2025: the Isaac Lab training environment, candidate sampling, PPO training and the per-candidate network. After his thesis he wrote the first ROS service linking GaitNet to a controller, and in September 2026 a GPU version of the convex MPC that our training now uses. He still works on training and the paper, and we share first authorship.</p> <h2 id="results-in-simulation">Results in simulation</h2> <p>We tested the frozen GaitNet on OCS2 in Gazebo, on tile strips with 0 to 70% holes and commanded speeds of 0.05 to 0.25 m/s. The baseline is OCS2’s own perceptive trot on the same terrain, depth pipeline and controller, so only the stepping differs. A run counts as a success when the robot gets to the far end in time, on its feet and on the strip. GaitNet matches the trot on sparse voids and pulls ahead as they get denser. It also beats the trot at each commanded speed we tested.</p> <table> <thead> <tr> <th>Planner</th> <th style="text-align: center">Success at 40-70% voids</th> </tr> </thead> <tbody> <tr> <td> <strong>GaitNet</strong> (mean of 5 training seeds)</td> <td style="text-align: center"><strong>71%</strong></td> </tr> <tr> <td>OCS2 trot</td> <td style="text-align: center">38%</td> </tr> </tbody> </table> <p>The fastest command and densest voids lie outside GaitNet’s training range, and the Gazebo tiles are larger than its training cells, so equal void fractions are not the same ground. We suspect GaitNet’s lead on dense voids is the stepping-stone effect described above, though no test here isolates it.</p> <p>On held-out steps from the training controller, the inverse footstep model cuts landing error from 2.61 cm to 0.89 cm RMS. In an ablation on one trained checkpoint, removing it drops GaitNet’s success on OCS2 from 83% to 55%, averaged over void levels.</p> <p>So far we have moved GaitNet from one controller to one other, and each new controller needs a logging run to fit its inverse footstep model, a step that online learning could remove. The safe cells come from hand-written rules that can reject good footholds or admit poor ones, and planning directly from depth or a height map might do better there.</p> <h2 id="status">Status</h2> <p>To be submitted to L4DC 2027: O. Sullivan*, S. Selvaraj*, and M. Agheli, “GaitNet: Where Do I Step?” *Equal contribution.</p> <p>In September 2026 we ran an earlier, frozen GaitNet checkpoint on a real Go1 with OCS2 and an onboard depth camera. With a few hand-set deployment rules on top of the policy, it stepped acyclically through a field of 40 to 50 mm blocks. That checkpoint, trained in November 2025, predates the candidate attention and the inverse footstep model. These runs are qualitative, and every number on this page comes from simulation.</p> <p>Code: <a href="https://github.com/opsullivan85/gaitnet" rel="external nofollow noopener" target="_blank">github.com/opsullivan85/gaitnet</a></p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Sourav Selvaraj. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. <script>
+(function () {
+  /* ambient boot: inline in footer_text so it runs as soon as the parser reaches the footer,
+     before first paint. Sets html[data-amb-phase] (+ cached html[data-amb-wx]) and makes the
+     theme toggle's "system" setting mean automatic (dark at night). ambient.js refines it.
+     Only block comments and explicit semicolons: survives HTML minification. */
+  try {
+    var d = document.documentElement;
+    var q = new URLSearchParams(location.search);
+    if (q.get("amb") === "0") return;
+    var A = (window.ambient = {});
+    A.load = function (k) {
+      try {
+        return JSON.parse(localStorage.getItem(k));
+      } catch (e) {
+        return null;
+      }
+    };
+    /* NOAA low-precision solar elevation in degrees (~0.1 deg). t: Date (UTC used internally);
+       lat, lon: degrees, north- and east-positive. */
+    A.solarElevation = function (t, lat, lon) {
+      var r = Math.PI / 180;
+      var n = Math.floor((t.getTime() - Date.UTC(t.getUTCFullYear(), 0, 1)) / 864e5);
+      var m = t.getUTCHours() * 60 + t.getUTCMinutes() + t.getUTCSeconds() / 60;
+      var g = ((2 * Math.PI) / 365) * (n + (m / 60 - 12) / 24);
+      var eq = 229.18 * (7.5e-5 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+      var dec = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+      var ha = ((m + eq + 4 * lon) / 4 - 180) * r;
+      var c = Math.sin(lat * r) * Math.sin(dec) + Math.cos(lat * r) * Math.cos(dec) * Math.cos(ha);
+      return 90 - Math.acos(Math.max(-1, Math.min(1, c))) / r;
+    };
+    /* day: sun >= +6 deg; night: below civil twilight (< -6 deg); otherwise dawn or dusk by trend. */
+    A.phaseAt = function (t, lat, lon) {
+      var h = A.solarElevation(t, lat, lon);
+      if (h >= 6) return "day";
+      if (h < -6) return "night";
+      return A.solarElevation(new Date(t.getTime() + 6e5), lat, lon) > h ? "dawn" : "dusk";
+    };
+    A.now = function () {
+      var s = q.get("amb-time");
+      return s && !isNaN(Date.parse(s)) ? new Date(Date.parse(s)) : new Date();
+    };
+    var tz = "";
+    try {
+      tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    } catch (e) {}
+    var now = A.now();
+    var p = A.load("amb.place.v1");
+    var ql = /^(-?[\d.]+),(-?[\d.]+)$/.exec(q.get("amb-loc") || "");
+    if (ql) {
+      p = { tz: tz, lat: +ql[1], lon: +ql[2], label: "preview" };
+    } else if (!p || p.tz !== tz) {
+      if (!tz || /^(UTC|GMT|Etc\/)/.test(tz)) {
+        /* Zones the table cannot place (UTC, GMT, Etc/*, e.g. privacy browsers): Worcester, the same
+           fallback ambient.js uses, so the page does not switch phase or mode after first paint. */
+        p = { tz: tz, lat: 42.27, lon: -71.81, guess: true };
+      } else {
+        /* First visit or new time zone: guess from the UTC offset (offset minutes are UTC - local).
+           lon = -standard offset / 4; lat 40 N with northern DST, 35 S with southern DST, 25 N without. */
+        var y = now.getFullYear();
+        var jan = new Date(y, 0, 1).getTimezoneOffset();
+        var jul = new Date(y, 6, 1).getTimezoneOffset();
+        p = { tz: tz, lat: jan === jul ? 25 : jan < jul ? -35 : 40, lon: -Math.max(jan, jul) / 4, guess: true };
+      }
+    }
+    var phase = q.get("amb-phase");
+    if (!/^(dawn|day|dusk|night)$/.test(phase)) phase = A.phaseAt(now, p.lat, p.lon);
+    /* Cached weather only for the place it was fetched for (as ambient.js cachedWx), never for a guess. */
+    var w = A.load("amb.wx.v1");
+    var wx = w && w.wx && Date.now() - w.at < 3 * 36e5 && !p.guess && Math.abs(w.lat - p.lat) <= 0.5 && Math.abs(w.lon - p.lon) <= 0.5 ? w.wx : "";
+    if (/^(clear|partly|overcast|rain|snow|fog|storm)$/.test(q.get("amb-wx"))) wx = q.get("amb-wx");
+    d.setAttribute("data-amb-phase", phase);
+    if (wx) d.setAttribute("data-amb-wx", wx);
+    A.state = { place: p, phase: phase, wx: wx };
+    A.autoMode = function () {
+      return d.getAttribute("data-amb-phase") === "night" ? "dark" : "light"; /* the sun decides, not the OS */
+    };
+    /* theme.js (in <head>) declares these with top-level let: global bindings a later classic
+       script may reassign. Every caller (toggle, OS listener, highlight sheets, table-dark,
+       search theme) then follows automatic mode. */
+    if (typeof determineComputedTheme === "function" && typeof determineThemeSetting === "function" && typeof applyTheme === "function" && typeof transTheme === "function") {
+      determineComputedTheme = function () {
+        var s = determineThemeSetting();
+        return s === "system" ? A.autoMode() : s;
+      };
+      A.applyThemeQuiet = function () {
+        var t = transTheme;
+        transTheme = function () {};
+        try {
+          applyTheme();
+        } finally {
+          transTheme = t;
+        }
+      };
+      if (d.getAttribute("data-theme") !== determineComputedTheme()) A.applyThemeQuiet();
+    }
+  } catch (e) {
+    /* never break the page: theme.js and the static palette in site.css still apply */
+  }
+})();
+</script> <script defer src="/assets/ambient/ambient.js?v=13"></script> </div> </footer> <script>
   window.alFolio = {
     compatBootstrap: false
   };
-</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
     addBackToTop();
   </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
 // get the ninja-keys element
@@ -39,12 +139,12 @@ ninja.data = [{
     handler: () => {
       window.location.href = "/";
     },
-  },{id: "nav-blog",
-          title: "blog",
-          description: "",
+  },{id: "nav-projects",
+          title: "projects",
+          description: "Research and selected projects in legged robotics, robot learning, and control.",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/blog/";
+            window.location.href = "/projects/";
           },
         },{id: "nav-publications",
           title: "publications",
@@ -53,19 +153,19 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/publications/";
           },
-        },{id: "nav-projects",
-          title: "projects",
-          description: "Research and selected projects in legged robotics, robot learning, and control.",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/projects/";
-          },
         },{id: "nav-cv",
           title: "CV",
           description: "Education, research experience, manuscripts, projects, teaching, and service. A PDF version is available via the download button.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
+          },
+        },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
           },
         },{id: "nav-photography",
           title: "photography",
@@ -110,42 +210,42 @@ ninja.data = [{
           description: "",
           section: "News",},{id: "projects-acrobatic-quadrotor-flight",
           title: 'Acrobatic Quadrotor Flight',
-          description: "SE(3) geometric control with L1 adaptive augmentation on a Crazyflie 2.1 — zero-radius flips, recovery, and 94% disturbance rejection in ROS 2 simulation.",
+          description: "Geometric SE(3) control with an L1 adaptive layer for a simulated Crazyflie: a zero-radius roll flip, recovery to hover, and step-torque rejection in ROS 2 and Gazebo.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/crazyflie-se3-l1/";
             },},{id: "projects-flow-matching-policies",
           title: 'Flow Matching Policies',
-          description: "Conditional Flow Matching visuomotor policies in robomimic — beats Diffusion Policy head-to-head, with a 94× faster 1-step inference mode.",
+          description: "Conditional Flow Matching policy for robomimic. Success comparable to Diffusion Policy on five simulated tasks, about 11× faster than its 100-step DDPM sampler.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/flow-matching-policies/";
             },},{id: "projects-bimanual-lifting",
           title: 'Bimanual Lifting',
-          description: "Simulated bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy.",
+          description: "A Unitree G1 learns in MuJoCo to lift a box with both arms, using a residual AMP-PPO policy over a frozen walking controller. A lifting policy later ran on the real G1.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/g1-bimanual-lifting/";
             },},{id: "projects-humanoid-ice-skating",
           title: 'Humanoid Ice Skating',
-          description: "Simulated ice-skating locomotion for a Unitree G1 via blade-contact RL — no motion capture, no imitation data. The skating gait emerges from anisotropic blade–ice contact.",
+          description: "A simulated Unitree G1 humanoid learns to ice-skate with reinforcement learning, on passive blades that glide along their length and grip sideways.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/g1-ice-skating/";
             },},{id: "projects-gaitnet",
           title: 'GaitNet',
-          description: "Attention-based acyclic footstep planning for dynamic quadruped locomotion — candidate self-attention, motion history, and inverse footstep dynamics on top of perceptive MPC.",
+          description: "A footstep planner given no gait. Each tick it picks one step, or none, from safe footholds, and a controller lands it. Trained once, it runs frozen on a new controller.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/gaitnet/";
             },},{id: "projects-go1-ppo-locomotion",
           title: 'Go1 PPO Locomotion',
-          description: "PPO locomotion for the Unitree Go1 in JAX/MuJoCo MJX — asymmetric actor-critic, domain randomization, rough terrain, and real-robot deployment.",
+          description: "PPO walking policies for the Unitree Go1, trained in JAX and MuJoCo MJX on MuJoCo Playground&#39;s flat and rough joystick tasks, with a demo on a real Go1.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/go1-ppo-mjx/";
             },},{id: "projects-revolute",
           title: 'Revolute',
-          description: "Flow-matching visuomotor policies for a Seeed B601 RS arm on LeRobot — teleoperated demonstrations, a controlled U-Net vs. transformer comparison, and models sized for a Jetson Orin Nano.",
+          description: "ToastBot, our Revolute 2026 hackathon entry: flow-matching policies for the steps of making toast on a six-joint arm, learned from teleoperation and sized for a Jetson.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/revolute/";
             },},{id: "projects-scrub",
           title: 'SCRUB',
-          description: "Blind force-regulated tool sliding on Unitree Go1 hardware — an armless quadruped presses and slides a body-mounted tool along surfaces it has no model of.",
+          description: "An armless Unitree Go1 presses a trunk-mounted tool against a wall or column and slides it along, working out which way the surface faces from the contact itself.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/scrub/";
             },},{

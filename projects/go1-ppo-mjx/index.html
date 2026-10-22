@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Go1 PPO Locomotion | Sourav Selvaraj </title> <meta name="author" content="Sourav Selvaraj"> <meta name="description" content="PPO locomotion for the Unitree Go1 in JAX/MuJoCo MJX — asymmetric actor-critic, domain randomization, rough terrain, and real-robot deployment."> <meta name="keywords" content="robotics, legged robots, quadruped, humanoid, model predictive control, whole-body control, reinforcement learning, robot learning, WPI"> <meta property="og:site_name" content="Sourav Selvaraj"> <meta property="og:type" content="website"> <meta property="og:title" content="Sourav Selvaraj | Go1 PPO Locomotion"> <meta property="og:url" content="https://souravselvaraj.github.io/projects/go1-ppo-mjx/"> <meta property="og:description" content="PPO locomotion for the Unitree Go1 in JAX/MuJoCo MJX — asymmetric actor-critic, domain randomization, rough terrain, and real-robot deployment."> <meta property="og:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Go1 PPO Locomotion"> <meta name="twitter:description" content="PPO locomotion for the Unitree Go1 in JAX/MuJoCo MJX — asymmetric actor-critic, domain randomization, rough terrain, and real-robot deployment."> <meta name="twitter:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <script type="application/ld+json">
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Go1 PPO Locomotion | Sourav Selvaraj </title> <meta name="author" content="Sourav Selvaraj"> <meta name="description" content="PPO walking policies for the Unitree Go1, trained in JAX and MuJoCo MJX on MuJoCo Playground's flat and rough joystick tasks, with a demo on a real Go1."> <meta name="keywords" content="robotics, legged robots, quadruped, humanoid, model predictive control, whole-body control, reinforcement learning, robot learning, WPI"> <meta property="og:site_name" content="Sourav Selvaraj"> <meta property="og:type" content="website"> <meta property="og:title" content="Sourav Selvaraj | Go1 PPO Locomotion"> <meta property="og:url" content="https://souravselvaraj.github.io/projects/go1-ppo-mjx/"> <meta property="og:description" content="PPO walking policies for the Unitree Go1, trained in JAX and MuJoCo MJX on MuJoCo Playground's flat and rough joystick tasks, with a demo on a real Go1."> <meta property="og:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Go1 PPO Locomotion"> <meta name="twitter:description" content="PPO walking policies for the Unitree Go1, trained in JAX and MuJoCo MJX on MuJoCo Playground's flat and rough joystick tasks, with a demo on a real Go1."> <meta name="twitter:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <script type="application/ld+json">
     {
         "author":
         {
@@ -7,7 +7,7 @@
         },
         "url": "https://souravselvaraj.github.io/projects/go1-ppo-mjx/",
         "@type": "WebSite",
-        "description": "PPO locomotion for the Unitree Go1 in JAX/MuJoCo MJX — asymmetric actor-critic, domain randomization, rough terrain, and real-robot deployment.",
+        "description": "PPO walking policies for the Unitree Go1, trained in JAX and MuJoCo MJX on MuJoCo Playground's flat and rough joystick tasks, with a demo on a real Go1.",
         "headline": "Go1 PPO Locomotion",
         
         "sameAs": ["https://github.com/souravselvaraj","https://www.linkedin.com/in/souravselvaraj",null],
@@ -17,15 +17,115 @@
     }
   </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
   :root {
-    --max-content-width: 1140px;
+    --max-content-width: 920px;
   }
-</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A4%96&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://souravselvaraj.github.io/projects/go1-ppo-mjx/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="/assets/ambient/site.css?v=5"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A4%96&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://souravselvaraj.github.io/projects/go1-ppo-mjx/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Sourav</span> Selvaraj </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/photography/">photography </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Go1 PPO Locomotion</h1> <p class="post-description">PPO locomotion for the Unitree Go1 in JAX/MuJoCo MJX — asymmetric actor-critic, domain randomization, rough terrain, and real-robot deployment.</p> </header> <article> <div class="row justify-content-center"> <div class="col-12 mt-3 mb-3"> <figure> <video src="/assets/video/projects/go1_locomotion.mp4" class="img-fluid rounded z-depth-1" width="100%" height="auto" controls="" muted=""></video> </figure> </div> </div> <div class="caption"> The trained policy deployed on the real Go1. </div> <p>End-to-end <strong>PPO locomotion training for the Unitree Go1</strong> quadruped using JAX, Brax PPO, and MuJoCo MJX — from vectorized simulation through keyboard-teleoperated deployment on the real robot.</p> <h2 id="training-at-jax-speed">Training at JAX speed</h2> <p>The entire environment lives inside MJX, so simulation, reward computation, and PPO updates all run on-accelerator with <code class="language-plaintext highlighter-rouge">jax.vmap</code> across thousands of parallel environments — no CPU–GPU round trips. Flax networks, Orbax checkpointing.</p> <ul> <li> <strong>Action space</strong>: joint-position offsets (±0.5 rad) around a nominal standing pose at a 50 Hz control rate (0.02 s control step over 0.004 s physics substeps) — the policy shapes posture rather than fighting for raw torques.</li> <li> <strong>Observations</strong>: onboard-realistic policy inputs (IMU gyro, gravity vector in body frame, joint states, previous action, velocity command) with a <strong>privileged critic</strong> that additionally sees ground-truth velocities and contact state — asymmetric actor–critic for cleaner value estimates without cheating at deployment.</li> <li> <strong>Feet-only contact modeling</strong> keeps the contact problem small and prevents spurious self-collisions from corrupting training.</li> </ul> <h2 id="sim-to-real-ingredients">Sim-to-real ingredients</h2> <ul> <li> <strong>Domain randomization</strong> over floor friction (μ ∈ [0.4, 1.0]), link inertia, center of mass, and mass.</li> <li> <strong>Gait shaping</strong> rewards: foot clearance to a 10 cm swing target, slip and energy penalties, air-time terms — no reference trajectories.</li> <li> <strong>Rough-terrain variant</strong> (<code class="language-plaintext highlighter-rouge">Go1JoystickRoughTerrain</code>): a procedurally generated heightfield (5 cm max feature height) with expanded contact-solver limits; the reward is identical to flat terrain, so robustness comes from the terrain distribution and randomization, not hand-tuned shaping.</li> </ul> <h2 id="deployment">Deployment</h2> <p>Trained policies run through a keyboard teleoperation interface for velocity commands — the video above is the real robot walking with the learned policy. A companion <a href="https://github.com/souravselvaraj/Unitree_Go1_Sim" rel="external nofollow noopener" target="_blank">ROS 2 Humble + Ignition Gazebo simulation stack</a> supports the same robot.</p> <p>Code: <a href="https://github.com/souravselvaraj/unitree-go1-ppo-mjx" rel="external nofollow noopener" target="_blank">github.com/souravselvaraj/unitree-go1-ppo-mjx</a></p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Sourav Selvaraj. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Sourav</span> Selvaraj </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/photography/">photography </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Go1 PPO Locomotion</h1> <p class="post-description">PPO walking policies for the Unitree Go1, trained in JAX and MuJoCo MJX on MuJoCo Playground's flat and rough joystick tasks, with a demo on a real Go1.</p> </header> <article> <div class="row justify-content-center"> <div class="col-12 mt-3 mb-3"> <figure> <video src="/assets/video/projects/go1_locomotion.mp4" class="img-fluid rounded z-depth-1" width="100%" height="auto" controls="" muted=""></video> </figure> </div> </div> <div class="caption"> A policy trained with this setup walking on a real Go1 on a flat lab floor, shown as a qualitative demonstration with no tracking metrics. </div> <p>A reinforcement learning policy learns to walk by practicing in simulation and is then moved to the real robot. A simulator never gets friction, masses or sensor noise exactly right, so a policy that has come to depend on those errors will stumble on hardware.</p> <h2 id="what-is-borrowed-and-what-is-mine">What is borrowed and what is mine</h2> <p>The task (observations, reward, domain randomization, terrains and PPO settings) is the Go1 joystick environment from DeepMind’s MuJoCo Playground, used as is, with the Go1 model from MuJoCo Menagerie.</p> <p>I moved Playground’s flat and rough Go1 joystick tasks into a standalone package, wrote a keyboard viewer for driving trained checkpoints, and ran full-length training on both terrains. I also wrote a note on the environment design (<code class="language-plaintext highlighter-rouge">modeling_section.md</code>) and prepared the public release. Two collaborators added simulation scripts: <a href="https://github.com/ramellen" rel="external nofollow noopener" target="_blank">ramellen</a> plotted commanded against achieved velocity, joint angles and gait phases, and <a href="https://github.com/laasyak02" rel="external nofollow noopener" target="_blank">laasyak02</a> wrote a driver for scripted straight-line and circular paths. I trained the policies in March and April 2026 and released the code in June.</p> <h2 id="how-the-policy-learns-to-walk">How the policy learns to walk</h2> <p>MJX is the JAX version of MuJoCo, so physics, rewards and the PPO update compile together on the GPU, and <code class="language-plaintext highlighter-rouge">jax.vmap</code> steps every simulated robot in one batch. Playground’s default configuration, which I kept, trains 8192 Go1s in parallel for 200 million control steps with Brax’s PPO. My logs show a full run taking a little over 20 minutes on flat ground and about half an hour on rough ground.</p> <p>Fifty times a second the policy picks a target angle for each of the 12 joints, as an offset of at most 0.5 rad from a standing pose, and a PD loop (stiffness 35 N·m/rad, damping 0.5 N·m·s/rad) turns that target into torque while the physics runs at 250 Hz.</p> <p>Each simulated robot starts with a random command of forward speed (up to 1.5 m/s either way), sideways speed (up to 0.8 m/s) and turning rate (up to 1.2 rad/s). During a 20-second episode, at random moments about 5 seconds apart on average, each part of the command may switch to a new value, which for sideways speed is usually zero. The policy sees 48 numbers the robot can measure or estimate: gyro angular velocity, the direction of gravity in the body frame, joint angles and speeds, its previous action, the command, and the body’s linear velocity. Every reading gets random noise during training. The real Go1 has no linear velocity sensor, so on hardware that input must come from a state estimate.</p> <p>The critic, which scores states during training and never runs on the robot, sees 123 numbers, adding noise-free readings and simulation-only quantities such as joint torques, foot velocities and contacts. The idea is that better value estimates give the policy a cleaner learning signal.</p> <p>Playground’s reward mainly pays the robot for matching the commanded velocity and charges it for bouncing, tilting, foot slip, torque, power and abrupt action changes. Swing feet are pulled toward 10 cm of clearance, and while the robot is commanded to move, feet earn a small bonus for swings longer than 0.1 s. With no reference motion, the gait is whatever balances these terms.</p> <h2 id="preparing-for-the-real-robot">Preparing for the real robot</h2> <p>The README’s training commands switch on domain randomization, which makes each simulated robot slightly different. Floor friction is drawn between 0.4 and 1.0. Link masses are scaled by up to 10% either way, the trunk gains or loses up to 1 kg, and its center of mass shifts by up to 5 cm along each axis. Joint friction and rotor inertia vary a little, and each joint’s zero angle moves by up to 0.05 rad to stand in for calibration error. A policy that walks on all of these robots is less likely to depend on the simulator’s errors. Playground can also push the trunk at random moments, but the saved configurations of both runs reported below show that option switched off. Those files do not record whether randomization was on for the two runs, and the README’s training commands at the time did not switch it on.</p> <h2 id="rough-ground">Rough ground</h2> <p><code class="language-plaintext highlighter-rouge">Go1JoystickRoughTerrain</code>, Playground’s rough-terrain variant, replaces the flat floor with a heightfield whose bumps reach 5 cm, half the swing-height target. The reward is unchanged, so whatever the policy learns about bumps comes from the terrain (and the randomization, when enabled). The policy has no height map or camera and feels the ground only through its joints and IMU. I trained it for the same 200 million steps (last checkpoint at 206,438,400) and added terrain selection to my viewer, so both policies run from one script.</p> <h2 id="results-and-limits">Results and limits</h2> <p>On hardware, the only evidence is the video at the top. In simulation, the numbers come from Brax’s evaluation during training: 128 episodes of up to 20 seconds, with training’s command sampling and sensor noise and the policy still sampling its actions. A fall means the body tipped past 90 degrees. At the end of the last flat run, which used Playground’s default training settings, all 128 episodes lasted the full 20 seconds, and no evaluation from about 138 million steps on had a fall. The rough-terrain policy fell in 26 of 128 episodes at its final evaluation. Falls rose from one at about 46 million steps to 31 at about 69 million, the evaluation where its speed tracking also rose sharply, and stayed between 17 and 31 afterwards.</p> <p>I have not measured velocity-tracking error or compared against another controller, in simulation or on the robot. The only tracking data is one simulated rollout of about 4 seconds from the flat-ground policy at a constant 0.5 m/s forward command, plotted against that command. The rough-terrain policy has only been shown walking in simulation.</p> <p>My separate ROS 2 Humble and Ignition Gazebo setup for the Go1 from October 2025 does not run this policy; it uses a scripted gait controller adapted from code by lnotspotl and abutalipovvv.</p> <p>Code, with training and teleoperation instructions: <a href="https://github.com/souravselvaraj/unitree-go1-ppo-mjx" rel="external nofollow noopener" target="_blank">github.com/souravselvaraj/unitree-go1-ppo-mjx</a></p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Sourav Selvaraj. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. <script>
+(function () {
+  /* ambient boot: inline in footer_text so it runs as soon as the parser reaches the footer,
+     before first paint. Sets html[data-amb-phase] (+ cached html[data-amb-wx]) and makes the
+     theme toggle's "system" setting mean automatic (dark at night). ambient.js refines it.
+     Only block comments and explicit semicolons: survives HTML minification. */
+  try {
+    var d = document.documentElement;
+    var q = new URLSearchParams(location.search);
+    if (q.get("amb") === "0") return;
+    var A = (window.ambient = {});
+    A.load = function (k) {
+      try {
+        return JSON.parse(localStorage.getItem(k));
+      } catch (e) {
+        return null;
+      }
+    };
+    /* NOAA low-precision solar elevation in degrees (~0.1 deg). t: Date (UTC used internally);
+       lat, lon: degrees, north- and east-positive. */
+    A.solarElevation = function (t, lat, lon) {
+      var r = Math.PI / 180;
+      var n = Math.floor((t.getTime() - Date.UTC(t.getUTCFullYear(), 0, 1)) / 864e5);
+      var m = t.getUTCHours() * 60 + t.getUTCMinutes() + t.getUTCSeconds() / 60;
+      var g = ((2 * Math.PI) / 365) * (n + (m / 60 - 12) / 24);
+      var eq = 229.18 * (7.5e-5 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+      var dec = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+      var ha = ((m + eq + 4 * lon) / 4 - 180) * r;
+      var c = Math.sin(lat * r) * Math.sin(dec) + Math.cos(lat * r) * Math.cos(dec) * Math.cos(ha);
+      return 90 - Math.acos(Math.max(-1, Math.min(1, c))) / r;
+    };
+    /* day: sun >= +6 deg; night: below civil twilight (< -6 deg); otherwise dawn or dusk by trend. */
+    A.phaseAt = function (t, lat, lon) {
+      var h = A.solarElevation(t, lat, lon);
+      if (h >= 6) return "day";
+      if (h < -6) return "night";
+      return A.solarElevation(new Date(t.getTime() + 6e5), lat, lon) > h ? "dawn" : "dusk";
+    };
+    A.now = function () {
+      var s = q.get("amb-time");
+      return s && !isNaN(Date.parse(s)) ? new Date(Date.parse(s)) : new Date();
+    };
+    var tz = "";
+    try {
+      tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    } catch (e) {}
+    var now = A.now();
+    var p = A.load("amb.place.v1");
+    var ql = /^(-?[\d.]+),(-?[\d.]+)$/.exec(q.get("amb-loc") || "");
+    if (ql) {
+      p = { tz: tz, lat: +ql[1], lon: +ql[2], label: "preview" };
+    } else if (!p || p.tz !== tz) {
+      if (!tz || /^(UTC|GMT|Etc\/)/.test(tz)) {
+        /* Zones the table cannot place (UTC, GMT, Etc/*, e.g. privacy browsers): Worcester, the same
+           fallback ambient.js uses, so the page does not switch phase or mode after first paint. */
+        p = { tz: tz, lat: 42.27, lon: -71.81, guess: true };
+      } else {
+        /* First visit or new time zone: guess from the UTC offset (offset minutes are UTC - local).
+           lon = -standard offset / 4; lat 40 N with northern DST, 35 S with southern DST, 25 N without. */
+        var y = now.getFullYear();
+        var jan = new Date(y, 0, 1).getTimezoneOffset();
+        var jul = new Date(y, 6, 1).getTimezoneOffset();
+        p = { tz: tz, lat: jan === jul ? 25 : jan < jul ? -35 : 40, lon: -Math.max(jan, jul) / 4, guess: true };
+      }
+    }
+    var phase = q.get("amb-phase");
+    if (!/^(dawn|day|dusk|night)$/.test(phase)) phase = A.phaseAt(now, p.lat, p.lon);
+    /* Cached weather only for the place it was fetched for (as ambient.js cachedWx), never for a guess. */
+    var w = A.load("amb.wx.v1");
+    var wx = w && w.wx && Date.now() - w.at < 3 * 36e5 && !p.guess && Math.abs(w.lat - p.lat) <= 0.5 && Math.abs(w.lon - p.lon) <= 0.5 ? w.wx : "";
+    if (/^(clear|partly|overcast|rain|snow|fog|storm)$/.test(q.get("amb-wx"))) wx = q.get("amb-wx");
+    d.setAttribute("data-amb-phase", phase);
+    if (wx) d.setAttribute("data-amb-wx", wx);
+    A.state = { place: p, phase: phase, wx: wx };
+    A.autoMode = function () {
+      return d.getAttribute("data-amb-phase") === "night" ? "dark" : "light"; /* the sun decides, not the OS */
+    };
+    /* theme.js (in <head>) declares these with top-level let: global bindings a later classic
+       script may reassign. Every caller (toggle, OS listener, highlight sheets, table-dark,
+       search theme) then follows automatic mode. */
+    if (typeof determineComputedTheme === "function" && typeof determineThemeSetting === "function" && typeof applyTheme === "function" && typeof transTheme === "function") {
+      determineComputedTheme = function () {
+        var s = determineThemeSetting();
+        return s === "system" ? A.autoMode() : s;
+      };
+      A.applyThemeQuiet = function () {
+        var t = transTheme;
+        transTheme = function () {};
+        try {
+          applyTheme();
+        } finally {
+          transTheme = t;
+        }
+      };
+      if (d.getAttribute("data-theme") !== determineComputedTheme()) A.applyThemeQuiet();
+    }
+  } catch (e) {
+    /* never break the page: theme.js and the static palette in site.css still apply */
+  }
+})();
+</script> <script defer src="/assets/ambient/ambient.js?v=13"></script> </div> </footer> <script>
   window.alFolio = {
     compatBootstrap: false
   };
-</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
     addBackToTop();
   </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
 // get the ninja-keys element
@@ -39,12 +139,12 @@ ninja.data = [{
     handler: () => {
       window.location.href = "/";
     },
-  },{id: "nav-blog",
-          title: "blog",
-          description: "",
+  },{id: "nav-projects",
+          title: "projects",
+          description: "Research and selected projects in legged robotics, robot learning, and control.",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/blog/";
+            window.location.href = "/projects/";
           },
         },{id: "nav-publications",
           title: "publications",
@@ -53,19 +153,19 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/publications/";
           },
-        },{id: "nav-projects",
-          title: "projects",
-          description: "Research and selected projects in legged robotics, robot learning, and control.",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/projects/";
-          },
         },{id: "nav-cv",
           title: "CV",
           description: "Education, research experience, manuscripts, projects, teaching, and service. A PDF version is available via the download button.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
+          },
+        },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
           },
         },{id: "nav-photography",
           title: "photography",
@@ -110,42 +210,42 @@ ninja.data = [{
           description: "",
           section: "News",},{id: "projects-acrobatic-quadrotor-flight",
           title: 'Acrobatic Quadrotor Flight',
-          description: "SE(3) geometric control with L1 adaptive augmentation on a Crazyflie 2.1 — zero-radius flips, recovery, and 94% disturbance rejection in ROS 2 simulation.",
+          description: "Geometric SE(3) control with an L1 adaptive layer for a simulated Crazyflie: a zero-radius roll flip, recovery to hover, and step-torque rejection in ROS 2 and Gazebo.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/crazyflie-se3-l1/";
             },},{id: "projects-flow-matching-policies",
           title: 'Flow Matching Policies',
-          description: "Conditional Flow Matching visuomotor policies in robomimic — beats Diffusion Policy head-to-head, with a 94× faster 1-step inference mode.",
+          description: "Conditional Flow Matching policy for robomimic. Success comparable to Diffusion Policy on five simulated tasks, about 11× faster than its 100-step DDPM sampler.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/flow-matching-policies/";
             },},{id: "projects-bimanual-lifting",
           title: 'Bimanual Lifting',
-          description: "Simulated bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy.",
+          description: "A Unitree G1 learns in MuJoCo to lift a box with both arms, using a residual AMP-PPO policy over a frozen walking controller. A lifting policy later ran on the real G1.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/g1-bimanual-lifting/";
             },},{id: "projects-humanoid-ice-skating",
           title: 'Humanoid Ice Skating',
-          description: "Simulated ice-skating locomotion for a Unitree G1 via blade-contact RL — no motion capture, no imitation data. The skating gait emerges from anisotropic blade–ice contact.",
+          description: "A simulated Unitree G1 humanoid learns to ice-skate with reinforcement learning, on passive blades that glide along their length and grip sideways.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/g1-ice-skating/";
             },},{id: "projects-gaitnet",
           title: 'GaitNet',
-          description: "Attention-based acyclic footstep planning for dynamic quadruped locomotion — candidate self-attention, motion history, and inverse footstep dynamics on top of perceptive MPC.",
+          description: "A footstep planner given no gait. Each tick it picks one step, or none, from safe footholds, and a controller lands it. Trained once, it runs frozen on a new controller.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/gaitnet/";
             },},{id: "projects-go1-ppo-locomotion",
           title: 'Go1 PPO Locomotion',
-          description: "PPO locomotion for the Unitree Go1 in JAX/MuJoCo MJX — asymmetric actor-critic, domain randomization, rough terrain, and real-robot deployment.",
+          description: "PPO walking policies for the Unitree Go1, trained in JAX and MuJoCo MJX on MuJoCo Playground&#39;s flat and rough joystick tasks, with a demo on a real Go1.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/go1-ppo-mjx/";
             },},{id: "projects-revolute",
           title: 'Revolute',
-          description: "Flow-matching visuomotor policies for a Seeed B601 RS arm on LeRobot — teleoperated demonstrations, a controlled U-Net vs. transformer comparison, and models sized for a Jetson Orin Nano.",
+          description: "ToastBot, our Revolute 2026 hackathon entry: flow-matching policies for the steps of making toast on a six-joint arm, learned from teleoperation and sized for a Jetson.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/revolute/";
             },},{id: "projects-scrub",
           title: 'SCRUB',
-          description: "Blind force-regulated tool sliding on Unitree Go1 hardware — an armless quadruped presses and slides a body-mounted tool along surfaces it has no model of.",
+          description: "An armless Unitree Go1 presses a trunk-mounted tool against a wall or column and slides it along, working out which way the surface faces from the contact itself.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/scrub/";
             },},{

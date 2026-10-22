@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Acrobatic Quadrotor Flight | Sourav Selvaraj </title> <meta name="author" content="Sourav Selvaraj"> <meta name="description" content="SE(3) geometric control with L1 adaptive augmentation on a Crazyflie 2.1 — zero-radius flips, recovery, and 94% disturbance rejection in ROS 2 simulation."> <meta name="keywords" content="robotics, legged robots, quadruped, humanoid, model predictive control, whole-body control, reinforcement learning, robot learning, WPI"> <meta property="og:site_name" content="Sourav Selvaraj"> <meta property="og:type" content="website"> <meta property="og:title" content="Sourav Selvaraj | Acrobatic Quadrotor Flight"> <meta property="og:url" content="https://souravselvaraj.github.io/projects/crazyflie-se3-l1/"> <meta property="og:description" content="SE(3) geometric control with L1 adaptive augmentation on a Crazyflie 2.1 — zero-radius flips, recovery, and 94% disturbance rejection in ROS 2 simulation."> <meta property="og:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Acrobatic Quadrotor Flight"> <meta name="twitter:description" content="SE(3) geometric control with L1 adaptive augmentation on a Crazyflie 2.1 — zero-radius flips, recovery, and 94% disturbance rejection in ROS 2 simulation."> <meta name="twitter:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <script type="application/ld+json">
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Acrobatic Quadrotor Flight | Sourav Selvaraj </title> <meta name="author" content="Sourav Selvaraj"> <meta name="description" content="Geometric SE(3) control with an L1 adaptive layer for a simulated Crazyflie: a zero-radius roll flip, recovery to hover, and step-torque rejection in ROS 2 and Gazebo."> <meta name="keywords" content="robotics, legged robots, quadruped, humanoid, model predictive control, whole-body control, reinforcement learning, robot learning, WPI"> <meta property="og:site_name" content="Sourav Selvaraj"> <meta property="og:type" content="website"> <meta property="og:title" content="Sourav Selvaraj | Acrobatic Quadrotor Flight"> <meta property="og:url" content="https://souravselvaraj.github.io/projects/crazyflie-se3-l1/"> <meta property="og:description" content="Geometric SE(3) control with an L1 adaptive layer for a simulated Crazyflie: a zero-radius roll flip, recovery to hover, and step-torque rejection in ROS 2 and Gazebo."> <meta property="og:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Acrobatic Quadrotor Flight"> <meta name="twitter:description" content="Geometric SE(3) control with an L1 adaptive layer for a simulated Crazyflie: a zero-radius roll flip, recovery to hover, and step-torque rejection in ROS 2 and Gazebo."> <meta name="twitter:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <script type="application/ld+json">
     {
         "author":
         {
@@ -7,7 +7,7 @@
         },
         "url": "https://souravselvaraj.github.io/projects/crazyflie-se3-l1/",
         "@type": "WebSite",
-        "description": "SE(3) geometric control with L1 adaptive augmentation on a Crazyflie 2.1 — zero-radius flips, recovery, and 94% disturbance rejection in ROS 2 simulation.",
+        "description": "Geometric SE(3) control with an L1 adaptive layer for a simulated Crazyflie: a zero-radius roll flip, recovery to hover, and step-torque rejection in ROS 2 and Gazebo.",
         "headline": "Acrobatic Quadrotor Flight",
         
         "sameAs": ["https://github.com/souravselvaraj","https://www.linkedin.com/in/souravselvaraj",null],
@@ -17,15 +17,115 @@
     }
   </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
   :root {
-    --max-content-width: 1140px;
+    --max-content-width: 920px;
   }
-</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A4%96&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://souravselvaraj.github.io/projects/crazyflie-se3-l1/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="/assets/ambient/site.css?v=5"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A4%96&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://souravselvaraj.github.io/projects/crazyflie-se3-l1/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Sourav</span> Selvaraj </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/photography/">photography </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Acrobatic Quadrotor Flight</h1> <p class="post-description">SE(3) geometric control with L1 adaptive augmentation on a Crazyflie 2.1 — zero-radius flips, recovery, and 94% disturbance rejection in ROS 2 simulation.</p> </header> <article> <div class="row justify-content-center"> <div class="col-12 mt-3 mb-3"> <figure> <video src="/assets/video/projects/crazyflie_demo.mp4" class="img-fluid rounded z-depth-1" width="100%" height="auto" controls="" muted=""></video> </figure> </div> </div> <div class="caption"> Minimum-jerk trajectory, zero-radius flip, recovery, and hold — flown by the SE(3) + L1 controller in Gazebo Harmonic. </div> <p>An <strong>SE(3) geometric controller with L1 adaptive augmentation</strong> for the Crazyflie 2.1 micro quadrotor, implemented as a ROS 2 + Gazebo Harmonic simulation stack with a full ROS–Gazebo bridge (odometry, IMU, pose, and motor-command topics).</p> <h2 id="why-geometric-control">Why geometric control</h2> <p>Euler-angle attitude controllers hit singularities exactly where acrobatics live — near ±90° pitch. The SE(3) controller works <strong>directly on the rotation manifold</strong>: attitude error is computed from rotation matrices, so a zero-radius flip is just another trajectory rather than a special case. Thrust and moments are computed from geometric position/velocity/attitude errors, with mode switching across hover, minimum-jerk trajectory tracking, flip, and recovery.</p> <h2 id="why-l1-augmentation">Why L1 augmentation</h2> <p>Geometric control assumes the model is right. Real vehicles (and imperfect simulators) have unmodeled drag, thrust mismatch, and external pushes. The <strong>L1 adaptive loop</strong> estimates the matched disturbance at high rate through a state predictor, and cancels it through a low-pass filter — keeping the adaptation aggressive without exciting high-frequency dynamics. The controller stays a geometric controller; L1 just makes its model assumption true.</p> <h2 id="results">Results</h2> <div class="row justify-content-center"> <div class="col-sm-6 mt-3 mb-3"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/crazyflie_position_tracking-480.webp 480w,/assets/img/projects/crazyflie_position_tracking-800.webp 800w,/assets/img/projects/crazyflie_position_tracking-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/crazyflie_position_tracking.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Position tracking" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div class="col-sm-6 mt-3 mb-3"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/crazyflie_attitude_response-480.webp 480w,/assets/img/projects/crazyflie_attitude_response-800.webp 800w,/assets/img/projects/crazyflie_attitude_response-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/crazyflie_attitude_response.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Attitude response" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> Left: position tracking across trajectory, flip, recovery, and hold modes. Right: attitude response through the flip. </div> <div class="row justify-content-center"> <div class="col-sm-7 mt-3 mb-3"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/crazyflie_l1_disturbance-480.webp 480w,/assets/img/projects/crazyflie_l1_disturbance-800.webp 800w,/assets/img/projects/crazyflie_l1_disturbance-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/crazyflie_l1_disturbance.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="L1 disturbance rejection" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> The L1 loop absorbing force-step disturbances at the motor-command level. </div> <table> <thead> <tr> <th>Metric</th> <th>Result</th> </tr> </thead> <tbody> <tr> <td>Position-tracking RMSE</td> <td><strong>2.2 cm</strong></td> </tr> <tr> <td>Force-step disturbance rejection</td> <td>up to <strong>94%</strong> </td> </tr> <tr> <td>Maneuvers</td> <td>hover, minimum-jerk tracking, zero-radius flip, recovery</td> </tr> </tbody> </table> <p>Code: <a href="https://github.com/souravselvaraj/crazyflie-se3-l1" rel="external nofollow noopener" target="_blank">github.com/souravselvaraj/crazyflie-se3-l1</a></p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Sourav Selvaraj. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Sourav</span> Selvaraj </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/photography/">photography </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Acrobatic Quadrotor Flight</h1> <p class="post-description">Geometric SE(3) control with an L1 adaptive layer for a simulated Crazyflie: a zero-radius roll flip, recovery to hover, and step-torque rejection in ROS 2 and Gazebo.</p> </header> <article> <div class="row justify-content-center"> <div class="col-12 mt-3 mb-3"> <figure> <video src="/assets/video/projects/crazyflie_demo.mp4" class="img-fluid rounded z-depth-1" width="100%" height="auto" controls="" muted=""></video> </figure> </div> </div> <div class="caption"> Gazebo screen recording of the full sequence: a minimum-jerk climb to (2, 2, 2) m, the roll flip, recovery and hold. The vehicle is small in this wide view. </div> <p>Most quadrotor controllers are designed around hover, with the vehicle close to level, and a flip takes it fully upside down. For my Robot Control course (RBE 502) at WPI in Fall 2025, I wrote a controller that flies a simulated Crazyflie through a full roll flip in place and back to hover, then added an adaptive layer that cancels most of the torque its model does not account for. Everything here runs in simulation, in ROS 2 and Gazebo.</p> <h2 id="why-a-flip-is-hard">Why a flip is hard</h2> <p>Many flight controllers describe orientation with roll, pitch and yaw angles, which become singular at 90° of pitch, so a pitch-axis flip runs straight through a singularity. A roll flip like mine hits the angle wrap instead, where roll jumps from +180° to -180° (visible in the attitude plot below), so an error computed by subtracting angles can jump mid-maneuver.</p> <p>Geometric control works with the rotation itself, stored as a 3×3 rotation matrix, so it has no such singularities. I followed the SE(3) tracking controller of Lee, Leok and McClamroch (2010): the position error sets a desired force vector, its direction sets where the thrust should point, and the attitude loop turns the body to match, whether the vehicle is level or upside down. The textbook attitude error fades toward zero near 180° from the target, so a very large error would produce almost no restoring torque. I compute it instead from the quaternion of the relative rotation, which stays non-zero there.</p> <h2 id="flying-the-flip">Flying the flip</h2> <p>The run has four phases, each a mode in the controller. The vehicle climbs along a minimum-jerk trajectory to a hover at (2, 2, 2) m. Once the climb ends and the tracking errors are small, it is commanded to roll 360° about its own x-axis in 0.2 s while the position reference stays fixed, so the flip has zero radius. A recovery mode then levels it and restores its height. When roll and pitch are within 5°, body rates are under 0.5 rad/s and height is within 5 cm, a hold mode keeps it hovering in place. In the plotted run below, the vehicle lagged the commanded roll and finished the rotation early in recovery.</p> <p>The controller is a single 200 Hz C++ node written for ROS 2 Humble and Gazebo Harmonic. It reads odometry at 100 Hz and IMU angular rates at 500 Hz, computes a thrust and three body torques, and converts them into four rotor-speed commands within saturation limits. The simulated vehicle weighs about 28 g, and its model builds on the Crazyflie description package and meshes from Bitcraze’s <a href="https://github.com/bitcraze/crazyflie-simulation" rel="external nofollow noopener" target="_blank">crazyflie-simulation</a> repository; I changed the package to take direct rotor-speed commands and to publish IMU and odometry data.</p> <h2 id="adding-l1-adaptation">Adding L1 adaptation</h2> <p>The geometric controller assumes its vehicle model is right, so modeling errors and outside pushes show up as torques it did not plan for. Building on Wu et al.’s L1 augmentation of geometric quadrotor control, I added a layer that estimates that torque and subtracts it.</p> <p>On all three rotation axes, the layer predicts how fast the body should be rotating given the commanded torques. When the vehicle rotates differently, the difference is attributed to an unknown torque and the estimate updates quickly. Only a low-pass filtered version (10 rad/s cutoff) reaches the torque command, so the estimate adapts fast while the correction stays slow enough not to excite the vehicle’s fast dynamics. That split is the main idea of L1 control. I bounded the estimate (3.0 mN·m on roll and pitch, 1.5 mN·m on yaw) and paused adaptation when attitude and body-rate errors were below 1.5° and 5 deg/s, so it would not chatter. It runs during the climb, recovery and hold, and I switched it off for the 0.2 s flip itself.</p> <h2 id="results">Results</h2> <p>The plots come from a run logged on 18 December 2025, after I wrote the course report, and the table comes from the report’s earlier run. Some settings changed in between, such as the climb time (7 s in the report’s run, 10 s in the plotted one), and the report describes its run in Ignition Gazebo, while the published code targets Gazebo Harmonic.</p> <div class="row justify-content-center"> <div class="col-sm-6 mt-3 mb-3"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/crazyflie_position_tracking-480.webp 480w,/assets/img/projects/crazyflie_position_tracking-800.webp 800w,/assets/img/projects/crazyflie_position_tracking-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/crazyflie_position_tracking.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Position tracking" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div class="col-sm-6 mt-3 mb-3"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/crazyflie_attitude_response-480.webp 480w,/assets/img/projects/crazyflie_attitude_response-800.webp 800w,/assets/img/projects/crazyflie_attitude_response-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/crazyflie_attitude_response.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Attitude response" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> Left: x, y and z position against the reference through the track, flip, recover and hold phases (shaded). The dip in z is height lost during the flip and recovery. Right: roll, pitch and yaw over the same run. The roll trace jumps between +180° and -180° as the vehicle passes upside down, and the actual roll finishes its rotation just after the flip phase ends. </div> <p>To test the L1 layer, I injected a step torque on all three axes from 2.0 to 2.8 s into the climb. The disturbance is matched: it enters through the same torque channels the controller uses, so in principle it can be cancelled completely. I scored each axis as one minus the average size of the leftover torque (injected plus adaptive) over the average size of the injected torque in that window, so 100% means exact cancellation.</p> <div class="row justify-content-center"> <div class="col-sm-7 mt-3 mb-3"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/crazyflie_l1_disturbance-480.webp 480w,/assets/img/projects/crazyflie_l1_disturbance-800.webp 800w,/assets/img/projects/crazyflie_l1_disturbance-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/crazyflie_l1_disturbance.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="L1 disturbance rejection" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> Commanded rotor speeds (top), L1 adaptive torque on each axis (middle) and the injected step torque (bottom): 1.0 mN·m on roll, -1.5 mN·m on pitch and 0.8 mN·m on yaw, active from 2.0 to 2.8 s. Roll and pitch adaptive torques swing opposite to the injected torque within a fraction of a second, overshooting it by roughly a quarter to a third. Yaw responds more slowly and only reaches an equal and opposite value near the end of the window. L1 is off during the flip; the larger swings after 10 s are in the recovery phase, as it reacts to the errors the flip leaves. </div> <table> <thead> <tr> <th>Measure (logged run analyzed in the course report)</th> <th>Result</th> </tr> </thead> <tbody> <tr> <td>Position RMSE, x and y</td> <td>2.2 cm each</td> </tr> <tr> <td>Position RMSE, z</td> <td>7.0 cm</td> </tr> <tr> <td>Roll-rate error, RMSE / MAE</td> <td>152 / 27 deg/s</td> </tr> <tr> <td>L1 torque cancellation, roll / pitch / yaw</td> <td>94% / 86% / 71%</td> </tr> <tr> <td>Flip</td> <td>360° roll commanded over 0.2 s, then recovered to hover</td> </tr> </tbody> </table> <p>The tracking errors cover the whole run, flip included. Height is worse than x and y: the vehicle loses altitude in the flip and climbs back during recovery, and in both runs it also sits several centimetres above the height reference during the climb. The roll-rate RMSE of 152 deg/s comes mostly from the flip, where the commanded roll rate peaks near 2,800 deg/s. The much smaller mean absolute error of 27 deg/s says most of the run is tracked closely.</p> <p>Yaw cancellation was the lowest of the three. I had tuned yaw more conservatively, with lower attitude gains and the tighter bound, to avoid fighting the motor allocation limits and rotor reaction torques. That bound is still about twice the injected yaw torque, so it does not explain the gap by itself. The score measures how closely the adaptive torque matched the injected one, which is separate from how much tracking improved. With L1 off, the same disturbance produced larger attitude and body-rate errors, but I have not put a number on that comparison.</p> <h2 id="limits-and-status">Limits and status</h2> <p>These numbers come from one simulated run with a software-injected disturbance. A matched step torque is a favorable case for L1, since it enters exactly where the controller acts, and a real vehicle would add disturbances that are neither matched nor steps. In the plotted flip, the rotor commands hit my controller’s cap of six times hover thrust, but Gazebo’s motor model limits rotor speed to 2,618 rad/s, about 1.27 times hover thrust, so the simulated rotors delivered far less than commanded. My proposal also planned front and back flips and a cascaded PID baseline; the final report covers only the roll flip, and its one baseline is the same controller without L1, described qualitatively. I have not flown this controller on hardware, although the proposal framed the project as groundwork for real flight tests.</p> <p>Code: <a href="https://github.com/souravselvaraj/crazyflie-se3-l1" rel="external nofollow noopener" target="_blank">github.com/souravselvaraj/crazyflie-se3-l1</a></p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Sourav Selvaraj. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. <script>
+(function () {
+  /* ambient boot: inline in footer_text so it runs as soon as the parser reaches the footer,
+     before first paint. Sets html[data-amb-phase] (+ cached html[data-amb-wx]) and makes the
+     theme toggle's "system" setting mean automatic (dark at night). ambient.js refines it.
+     Only block comments and explicit semicolons: survives HTML minification. */
+  try {
+    var d = document.documentElement;
+    var q = new URLSearchParams(location.search);
+    if (q.get("amb") === "0") return;
+    var A = (window.ambient = {});
+    A.load = function (k) {
+      try {
+        return JSON.parse(localStorage.getItem(k));
+      } catch (e) {
+        return null;
+      }
+    };
+    /* NOAA low-precision solar elevation in degrees (~0.1 deg). t: Date (UTC used internally);
+       lat, lon: degrees, north- and east-positive. */
+    A.solarElevation = function (t, lat, lon) {
+      var r = Math.PI / 180;
+      var n = Math.floor((t.getTime() - Date.UTC(t.getUTCFullYear(), 0, 1)) / 864e5);
+      var m = t.getUTCHours() * 60 + t.getUTCMinutes() + t.getUTCSeconds() / 60;
+      var g = ((2 * Math.PI) / 365) * (n + (m / 60 - 12) / 24);
+      var eq = 229.18 * (7.5e-5 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+      var dec = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+      var ha = ((m + eq + 4 * lon) / 4 - 180) * r;
+      var c = Math.sin(lat * r) * Math.sin(dec) + Math.cos(lat * r) * Math.cos(dec) * Math.cos(ha);
+      return 90 - Math.acos(Math.max(-1, Math.min(1, c))) / r;
+    };
+    /* day: sun >= +6 deg; night: below civil twilight (< -6 deg); otherwise dawn or dusk by trend. */
+    A.phaseAt = function (t, lat, lon) {
+      var h = A.solarElevation(t, lat, lon);
+      if (h >= 6) return "day";
+      if (h < -6) return "night";
+      return A.solarElevation(new Date(t.getTime() + 6e5), lat, lon) > h ? "dawn" : "dusk";
+    };
+    A.now = function () {
+      var s = q.get("amb-time");
+      return s && !isNaN(Date.parse(s)) ? new Date(Date.parse(s)) : new Date();
+    };
+    var tz = "";
+    try {
+      tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    } catch (e) {}
+    var now = A.now();
+    var p = A.load("amb.place.v1");
+    var ql = /^(-?[\d.]+),(-?[\d.]+)$/.exec(q.get("amb-loc") || "");
+    if (ql) {
+      p = { tz: tz, lat: +ql[1], lon: +ql[2], label: "preview" };
+    } else if (!p || p.tz !== tz) {
+      if (!tz || /^(UTC|GMT|Etc\/)/.test(tz)) {
+        /* Zones the table cannot place (UTC, GMT, Etc/*, e.g. privacy browsers): Worcester, the same
+           fallback ambient.js uses, so the page does not switch phase or mode after first paint. */
+        p = { tz: tz, lat: 42.27, lon: -71.81, guess: true };
+      } else {
+        /* First visit or new time zone: guess from the UTC offset (offset minutes are UTC - local).
+           lon = -standard offset / 4; lat 40 N with northern DST, 35 S with southern DST, 25 N without. */
+        var y = now.getFullYear();
+        var jan = new Date(y, 0, 1).getTimezoneOffset();
+        var jul = new Date(y, 6, 1).getTimezoneOffset();
+        p = { tz: tz, lat: jan === jul ? 25 : jan < jul ? -35 : 40, lon: -Math.max(jan, jul) / 4, guess: true };
+      }
+    }
+    var phase = q.get("amb-phase");
+    if (!/^(dawn|day|dusk|night)$/.test(phase)) phase = A.phaseAt(now, p.lat, p.lon);
+    /* Cached weather only for the place it was fetched for (as ambient.js cachedWx), never for a guess. */
+    var w = A.load("amb.wx.v1");
+    var wx = w && w.wx && Date.now() - w.at < 3 * 36e5 && !p.guess && Math.abs(w.lat - p.lat) <= 0.5 && Math.abs(w.lon - p.lon) <= 0.5 ? w.wx : "";
+    if (/^(clear|partly|overcast|rain|snow|fog|storm)$/.test(q.get("amb-wx"))) wx = q.get("amb-wx");
+    d.setAttribute("data-amb-phase", phase);
+    if (wx) d.setAttribute("data-amb-wx", wx);
+    A.state = { place: p, phase: phase, wx: wx };
+    A.autoMode = function () {
+      return d.getAttribute("data-amb-phase") === "night" ? "dark" : "light"; /* the sun decides, not the OS */
+    };
+    /* theme.js (in <head>) declares these with top-level let: global bindings a later classic
+       script may reassign. Every caller (toggle, OS listener, highlight sheets, table-dark,
+       search theme) then follows automatic mode. */
+    if (typeof determineComputedTheme === "function" && typeof determineThemeSetting === "function" && typeof applyTheme === "function" && typeof transTheme === "function") {
+      determineComputedTheme = function () {
+        var s = determineThemeSetting();
+        return s === "system" ? A.autoMode() : s;
+      };
+      A.applyThemeQuiet = function () {
+        var t = transTheme;
+        transTheme = function () {};
+        try {
+          applyTheme();
+        } finally {
+          transTheme = t;
+        }
+      };
+      if (d.getAttribute("data-theme") !== determineComputedTheme()) A.applyThemeQuiet();
+    }
+  } catch (e) {
+    /* never break the page: theme.js and the static palette in site.css still apply */
+  }
+})();
+</script> <script defer src="/assets/ambient/ambient.js?v=13"></script> </div> </footer> <script>
   window.alFolio = {
     compatBootstrap: false
   };
-</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
     addBackToTop();
   </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
 // get the ninja-keys element
@@ -39,12 +139,12 @@ ninja.data = [{
     handler: () => {
       window.location.href = "/";
     },
-  },{id: "nav-blog",
-          title: "blog",
-          description: "",
+  },{id: "nav-projects",
+          title: "projects",
+          description: "Research and selected projects in legged robotics, robot learning, and control.",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/blog/";
+            window.location.href = "/projects/";
           },
         },{id: "nav-publications",
           title: "publications",
@@ -53,19 +153,19 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/publications/";
           },
-        },{id: "nav-projects",
-          title: "projects",
-          description: "Research and selected projects in legged robotics, robot learning, and control.",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/projects/";
-          },
         },{id: "nav-cv",
           title: "CV",
           description: "Education, research experience, manuscripts, projects, teaching, and service. A PDF version is available via the download button.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
+          },
+        },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
           },
         },{id: "nav-photography",
           title: "photography",
@@ -110,42 +210,42 @@ ninja.data = [{
           description: "",
           section: "News",},{id: "projects-acrobatic-quadrotor-flight",
           title: 'Acrobatic Quadrotor Flight',
-          description: "SE(3) geometric control with L1 adaptive augmentation on a Crazyflie 2.1 — zero-radius flips, recovery, and 94% disturbance rejection in ROS 2 simulation.",
+          description: "Geometric SE(3) control with an L1 adaptive layer for a simulated Crazyflie: a zero-radius roll flip, recovery to hover, and step-torque rejection in ROS 2 and Gazebo.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/crazyflie-se3-l1/";
             },},{id: "projects-flow-matching-policies",
           title: 'Flow Matching Policies',
-          description: "Conditional Flow Matching visuomotor policies in robomimic — beats Diffusion Policy head-to-head, with a 94× faster 1-step inference mode.",
+          description: "Conditional Flow Matching policy for robomimic. Success comparable to Diffusion Policy on five simulated tasks, about 11× faster than its 100-step DDPM sampler.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/flow-matching-policies/";
             },},{id: "projects-bimanual-lifting",
           title: 'Bimanual Lifting',
-          description: "Simulated bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy.",
+          description: "A Unitree G1 learns in MuJoCo to lift a box with both arms, using a residual AMP-PPO policy over a frozen walking controller. A lifting policy later ran on the real G1.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/g1-bimanual-lifting/";
             },},{id: "projects-humanoid-ice-skating",
           title: 'Humanoid Ice Skating',
-          description: "Simulated ice-skating locomotion for a Unitree G1 via blade-contact RL — no motion capture, no imitation data. The skating gait emerges from anisotropic blade–ice contact.",
+          description: "A simulated Unitree G1 humanoid learns to ice-skate with reinforcement learning, on passive blades that glide along their length and grip sideways.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/g1-ice-skating/";
             },},{id: "projects-gaitnet",
           title: 'GaitNet',
-          description: "Attention-based acyclic footstep planning for dynamic quadruped locomotion — candidate self-attention, motion history, and inverse footstep dynamics on top of perceptive MPC.",
+          description: "A footstep planner given no gait. Each tick it picks one step, or none, from safe footholds, and a controller lands it. Trained once, it runs frozen on a new controller.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/gaitnet/";
             },},{id: "projects-go1-ppo-locomotion",
           title: 'Go1 PPO Locomotion',
-          description: "PPO locomotion for the Unitree Go1 in JAX/MuJoCo MJX — asymmetric actor-critic, domain randomization, rough terrain, and real-robot deployment.",
+          description: "PPO walking policies for the Unitree Go1, trained in JAX and MuJoCo MJX on MuJoCo Playground&#39;s flat and rough joystick tasks, with a demo on a real Go1.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/go1-ppo-mjx/";
             },},{id: "projects-revolute",
           title: 'Revolute',
-          description: "Flow-matching visuomotor policies for a Seeed B601 RS arm on LeRobot — teleoperated demonstrations, a controlled U-Net vs. transformer comparison, and models sized for a Jetson Orin Nano.",
+          description: "ToastBot, our Revolute 2026 hackathon entry: flow-matching policies for the steps of making toast on a six-joint arm, learned from teleoperation and sized for a Jetson.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/revolute/";
             },},{id: "projects-scrub",
           title: 'SCRUB',
-          description: "Blind force-regulated tool sliding on Unitree Go1 hardware — an armless quadruped presses and slides a body-mounted tool along surfaces it has no model of.",
+          description: "An armless Unitree Go1 presses a trunk-mounted tool against a wall or column and slides it along, working out which way the surface faces from the contact itself.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/scrub/";
             },},{

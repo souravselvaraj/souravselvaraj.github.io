@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Revolute | Sourav Selvaraj </title> <meta name="author" content="Sourav Selvaraj"> <meta name="description" content="Flow-matching visuomotor policies for a Seeed B601 RS arm on LeRobot — teleoperated demonstrations, a controlled U-Net vs. transformer comparison, and models sized for a Jetson Orin Nano."> <meta name="keywords" content="robotics, legged robots, quadruped, humanoid, model predictive control, whole-body control, reinforcement learning, robot learning, WPI"> <meta property="og:site_name" content="Sourav Selvaraj"> <meta property="og:type" content="website"> <meta property="og:title" content="Sourav Selvaraj | Revolute"> <meta property="og:url" content="https://souravselvaraj.github.io/projects/revolute/"> <meta property="og:description" content="Flow-matching visuomotor policies for a Seeed B601 RS arm on LeRobot — teleoperated demonstrations, a controlled U-Net vs. transformer comparison, and models sized for a Jetson Orin Nano."> <meta property="og:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Revolute"> <meta name="twitter:description" content="Flow-matching visuomotor policies for a Seeed B601 RS arm on LeRobot — teleoperated demonstrations, a controlled U-Net vs. transformer comparison, and models sized for a Jetson Orin Nano."> <meta name="twitter:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <script type="application/ld+json">
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Revolute | Sourav Selvaraj </title> <meta name="author" content="Sourav Selvaraj"> <meta name="description" content="ToastBot, our Revolute 2026 hackathon entry: flow-matching policies for the steps of making toast on a six-joint arm, learned from teleoperation and sized for a Jetson."> <meta name="keywords" content="robotics, legged robots, quadruped, humanoid, model predictive control, whole-body control, reinforcement learning, robot learning, WPI"> <meta property="og:site_name" content="Sourav Selvaraj"> <meta property="og:type" content="website"> <meta property="og:title" content="Sourav Selvaraj | Revolute"> <meta property="og:url" content="https://souravselvaraj.github.io/projects/revolute/"> <meta property="og:description" content="ToastBot, our Revolute 2026 hackathon entry: flow-matching policies for the steps of making toast on a six-joint arm, learned from teleoperation and sized for a Jetson."> <meta property="og:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Revolute"> <meta name="twitter:description" content="ToastBot, our Revolute 2026 hackathon entry: flow-matching policies for the steps of making toast on a six-joint arm, learned from teleoperation and sized for a Jetson."> <meta name="twitter:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <script type="application/ld+json">
     {
         "author":
         {
@@ -7,7 +7,7 @@
         },
         "url": "https://souravselvaraj.github.io/projects/revolute/",
         "@type": "WebSite",
-        "description": "Flow-matching visuomotor policies for a Seeed B601 RS arm on LeRobot — teleoperated demonstrations, a controlled U-Net vs. transformer comparison, and models sized for a Jetson Orin Nano.",
+        "description": "ToastBot, our Revolute 2026 hackathon entry: flow-matching policies for the steps of making toast on a six-joint arm, learned from teleoperation and sized for a Jetson.",
         "headline": "Revolute",
         
         "sameAs": ["https://github.com/souravselvaraj","https://www.linkedin.com/in/souravselvaraj",null],
@@ -17,15 +17,115 @@
     }
   </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
   :root {
-    --max-content-width: 1140px;
+    --max-content-width: 920px;
   }
-</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A4%96&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://souravselvaraj.github.io/projects/revolute/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="/assets/ambient/site.css?v=5"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A4%96&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://souravselvaraj.github.io/projects/revolute/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Sourav</span> Selvaraj </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/photography/">photography </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Revolute</h1> <p class="post-description">Flow-matching visuomotor policies for a Seeed B601 RS arm on LeRobot — teleoperated demonstrations, a controlled U-Net vs. transformer comparison, and models sized for a Jetson Orin Nano.</p> </header> <article> <div class="row justify-content-center"> <div class="col-sm-8 mt-3 mb-3"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/revolute_thumb-480.webp 480w,/assets/img/projects/revolute_thumb-800.webp 800w,/assets/img/projects/revolute_thumb-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/revolute_thumb.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Toast task workspace" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> The workspace from the top camera: bread slices in the holder, the toaster, and the pan. </div> <p><strong>Revolute</strong> is an imitation-learning stack for a <strong>Seeed B601 RS</strong> 7-DoF arm, built on <a href="https://github.com/huggingface/lerobot" rel="external nofollow noopener" target="_blank">LeRobot</a>: teleoperated data collection, flow-matching policy training, and on-robot evaluation. The deployment target is a <strong>Jetson Orin Nano 8GB</strong>, and every default — frozen vision backbone, a single observation step, five ODE integration steps — is set by what fits a <strong>533 ms re-plan window</strong> on that device, not by what trains best on a cluster GPU.</p> <h2 id="why-flow-matching">Why flow matching</h2> <p>Rectified flow learns a straight-path velocity field, so sampling an action chunk takes <strong>5 Euler steps</strong> instead of a diffusion policy’s ~100 DDPM steps — the reason it was chosen for an edge deployment. (See also <a href="/projects/flow-matching-policies/">Flow Matching Policies</a> for a benchmark against Diffusion Policy in robomimic.)</p> <h2 id="policies">Policies</h2> <p>Four policies are registered as a LeRobot plugin:</p> <table> <thead> <tr> <th>Policy</th> <th>Velocity field / head</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">flow_unet</code></td> <td>FiLM-conditioned 1D conv U-Net (the Diffusion Policy backbone)</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">flow_dit</code></td> <td>DiT transformer with adaLN-Zero and cross-attention into the vision tokens</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">act_dino</code></td> <td>ACT-style transformer decoder with direct chunk regression — the non-generative control</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">flow_lang</code></td> <td> <code class="language-plaintext highlighter-rouge">flow_dit</code> plus a frozen text encoder — language-conditioned</td> </tr> </tbody> </table> <p><code class="language-plaintext highlighter-rouge">flow_unet</code> and <code class="language-plaintext highlighter-rouge">flow_dit</code> share the same frozen DINOv2 encoder, objective, optimizer, and data pipeline — <strong>only the velocity field differs</strong>, so comparing them is a controlled experiment rather than a capacity comparison.</p> <h2 id="sized-for-the-edge">Sized for the edge</h2> <ul> <li>A frozen <code class="language-plaintext highlighter-rouge">dinov2-small</code> backbone with a small trainable transformer head per camera — about 40 demonstrations per task cannot fine-tune a ViT.</li> <li>One observation step, a 48-step action horizon (1.6 s at 30 fps), and 16 executed actions per re-plan (533 ms).</li> <li>Measured off-board, <code class="language-plaintext highlighter-rouge">flow_dit_small</code> re-plans in 33 ms versus 83 ms for <code class="language-plaintext highlighter-rouge">flow_dit_base</code>; the larger model is more accurate on replayed episodes (0.200 vs. 0.284 joint units).</li> </ul> <h2 id="data">Data</h2> <p>Two teleoperated sessions at 30 fps, recording opposite directions of the same manipulation, plus a third lever-pulling task:</p> <table> <thead> <tr> <th>Task</th> <th style="text-align: center">Demonstrations</th> <th style="text-align: center">Frames</th> </tr> </thead> <tbody> <tr> <td>Collect toast from the toaster and place it on the pan</td> <td style="text-align: center">50</td> <td style="text-align: center">29,828</td> </tr> <tr> <td>Pick up a bread slice and put it in the toaster</td> <td style="text-align: center">40</td> <td style="text-align: center">23,847</td> </tr> </tbody> </table> <p>The repository also patches a uint8 overflow in LeRobot’s dataset statistics that collapsed the image standard deviations, and corrects a task annotation that described the reverse of the recorded demonstrations — harmless for the vision-only policies, but a language-conditioned policy would perform the opposite task.</p> <h2 id="status">Status</h2> <p>Trained <code class="language-plaintext highlighter-rouge">flow_dit</code> policies have been rolled out on the real arm; no success rates are reported yet. Deployment on the Jetson Orin Nano itself has not been run, and the Orin latency figures in the repository are desk estimates, not measurements.</p> <p>Code: <a href="https://github.com/souravselvaraj/Revolute" rel="external nofollow noopener" target="_blank">github.com/souravselvaraj/Revolute</a></p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Sourav Selvaraj. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Sourav</span> Selvaraj </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/photography/">photography </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Revolute</h1> <p class="post-description">ToastBot, our Revolute 2026 hackathon entry: flow-matching policies for the steps of making toast on a six-joint arm, learned from teleoperation and sized for a Jetson.</p> </header> <article> <div class="row justify-content-center"> <div class="col-sm-8 mt-3 mb-3"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/revolute_thumb-480.webp 480w,/assets/img/projects/revolute_thumb-800.webp 800w,/assets/img/projects/revolute_thumb-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/revolute_thumb.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Toast task workspace" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> The workspace from the top camera: bread slices in the purple holder, the toaster, and the pan. </div> <p>At the Revolute 2026 hackathon (August 1 and 2, 2026, at FabLab Kendall), our team, Team Toasted, built ToastBot. We split making toast into three steps on a Seeed B601 RS arm: put a slice of bread in the toaster, pull the lever, and move the toast to a pan. For each step we recorded teleoperated demonstrations and trained a flow-matching policy with <a href="https://github.com/huggingface/lerobot" rel="external nofollow noopener" target="_blank">LeRobot</a>. The repository is mine, from the recording scripts to policy training, and I committed all of it over the hackathon weekend.</p> <h2 id="why-toast">Why toast</h2> <p>We started from people who cannot safely use heating appliances or sharp utensils. Without them, cooking comes down to one pot at one temperature, and nothing comes out crispy. Disability-friendly meals can get boring and repetitive. People end up relying on caregivers and social services. So we asked how a robot arm could make crispy food for someone in that situation. Our baseline was a toasted sandwich with spreads, crispy and smooth at once and a childhood favorite. Toasting the bread is the part the arm does.</p> <h2 id="three-short-policies">Three short policies</h2> <p>The full sequence is long, with a wait for the toaster in the middle. With 40 to 50 demonstrations per task, data, more than compute, was the limit. So we trained a separate policy for each step and planned a state machine to run them in order. Each policy learns a short episode, and a failure points to one stage.</p> <p>We decided against a large vision-language-action model. For three fixed tasks, language conditioning could end up as a lookup from instruction to policy, which a state machine would do explicitly. Such a model is also impractical on an 8 GB Jetson Orin Nano. The event’s compute notes put inference on the Jetson and warned that a cloud round trip takes about 60 to 150 ms, too slow for a 30 to 50 Hz control loop.</p> <h2 id="why-flow-matching">Why flow matching</h2> <p>Each policy takes images from a fixed top camera and a wrist camera, plus the arm’s joint positions, and predicts a chunk of future joint positions. A diffusion policy builds it from random noise, which its standard DDPM sampler removes over about 100 small steps. Flow matching (rectified flow) trains the network to predict a velocity along a straight line from noise to a demonstrated chunk. The learned paths come out close to straight, so our policies sample with only 5 Euler steps. The <a href="/projects/flow-matching-policies/">Flow Matching Policies</a> page compares the two in simulation.</p> <p>A chunk holds 48 actions, 1.6 s at 30 fps. The arm executes the first 16 (533 ms) and then re-plans from a fresh observation. A re-plan pauses the loop for one control step, so its latency matters even inside that window.</p> <h2 id="sized-for-the-jetson">Sized for the Jetson</h2> <p>I sized the defaults against that 533 ms re-plan window on the Orin Nano: one observation step where Diffusion Policy uses two, which halves the vision cost, and five integration steps. Data decided how the backbone is trained. Forty demonstrations are too few to fine-tune a vision transformer, so DINOv2-small stays frozen, and only what sits on top of it trains: a small transformer per camera and the network that predicts the velocity.</p> <p><code class="language-plaintext highlighter-rouge">flow_dit_small</code> is the deployment default. On the laptop that drove the arm (an RTX 5060 laptop GPU), it re-plans in 33 ms, against 83 ms for <code class="language-plaintext highlighter-rouge">flow_dit_base</code>. The base model has lower error on replayed demonstrations (0.200 joint units against 0.284) and comes next once the small one behaves on the arm. Training holds no episodes out, so that comparison measures fit and does not settle whether the base model’s trainable parameters, more than twice as many (41.2M against 18.2M), overfit a few dozen demonstrations.</p> <p><code class="language-plaintext highlighter-rouge">flow_dit</code> uses a transformer to predict the velocity. Its twin, <code class="language-plaintext highlighter-rouge">flow_unet</code>, swaps in Diffusion Policy’s 1D convolutional U-Net and keeps everything else, a controlled comparison with no results reported yet.</p> <h2 id="what-the-recordings-taught-us">What the recordings taught us</h2> <p>We teleoperated with a leader arm and recorded at 30 fps. The two toast tasks are the same manipulation run in opposite directions.</p> <table> <thead> <tr> <th>Task</th> <th style="text-align: center">Demonstrations</th> <th style="text-align: center">Frames</th> </tr> </thead> <tbody> <tr> <td>Pick up a bread slice and put it in the toaster</td> <td style="text-align: center">40</td> <td style="text-align: center">23,847</td> </tr> <tr> <td>Pull the toaster lever</td> <td style="text-align: center">40</td> <td style="text-align: center">15,986</td> </tr> <tr> <td>Collect toast from the toaster and place it on the pan</td> <td style="text-align: center">50</td> <td style="text-align: center">29,828</td> </tr> </tbody> </table> <p>Our toast recordings ran for a fixed 20 seconds, and about a quarter of the placing frames show no motion. Those idle stretches can make a policy freeze mid-task, because the same observation is followed by motion in some episodes and by stillness in others. We trimmed idle frames from both toast datasets and trained a second policy on each trimmed set. The lever demonstrations, recorded later, are shorter, about 13 seconds on average.</p> <p>Teleoperation sends about 420 CAN frames a second, and with the kernel’s default 10-frame transmit queue one USB hiccup could abort an episode. I raised the queue to 1000 frames and capped the Rerun visualizer’s memory after its stalls froze the camera and joint streams. The last seven placing episodes came after these fixes.</p> <p>Both cameras are rigidly mounted and the actions are absolute joint positions, so where things sit in the image matters. We fixed the camera placement and controlled the lighting. Augmentation stayed mild, and we tried to keep the background plain. The wrist camera’s auto-exposure gave black frames, so we set its exposure by hand each session.</p> <p>The recording script’s default task string also mislabelled both toast datasets. The collecting set was recorded under the placing instruction, and after I flipped the default, the placing set inherited the collecting one. Our policies never read the string, but a language-conditioned policy would do the opposite task. I corrected both labels, and the script now refuses to record without one. I also patched an 8-bit overflow in LeRobot’s image statistics that had zeroed the per-episode image standard deviations in the collecting data.</p> <h2 id="where-it-stands">Where it stands</h2> <p>Trained <code class="language-plaintext highlighter-rouge">flow_dit</code> policies have run on the real arm for the placing and collecting tasks, one task per saved rollout. No success rates are reported yet, so these runs are qualitative, and no policy has run on the Jetson yet. The repository has no state machine to chain the policies.</p> <p>Five <code class="language-plaintext highlighter-rouge">flow_dit_small</code> checkpoints ship through Git LFS, each trained for 40,000 steps at batch 128 with the same seed: two per toast task (one of each pair on idle-trimmed data) and one for the lever, added last. The repository documents no lever rollout.</p> <p>Code: <a href="https://github.com/souravselvaraj/Revolute" rel="external nofollow noopener" target="_blank">github.com/souravselvaraj/Revolute</a></p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Sourav Selvaraj. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. <script>
+(function () {
+  /* ambient boot: inline in footer_text so it runs as soon as the parser reaches the footer,
+     before first paint. Sets html[data-amb-phase] (+ cached html[data-amb-wx]) and makes the
+     theme toggle's "system" setting mean automatic (dark at night). ambient.js refines it.
+     Only block comments and explicit semicolons: survives HTML minification. */
+  try {
+    var d = document.documentElement;
+    var q = new URLSearchParams(location.search);
+    if (q.get("amb") === "0") return;
+    var A = (window.ambient = {});
+    A.load = function (k) {
+      try {
+        return JSON.parse(localStorage.getItem(k));
+      } catch (e) {
+        return null;
+      }
+    };
+    /* NOAA low-precision solar elevation in degrees (~0.1 deg). t: Date (UTC used internally);
+       lat, lon: degrees, north- and east-positive. */
+    A.solarElevation = function (t, lat, lon) {
+      var r = Math.PI / 180;
+      var n = Math.floor((t.getTime() - Date.UTC(t.getUTCFullYear(), 0, 1)) / 864e5);
+      var m = t.getUTCHours() * 60 + t.getUTCMinutes() + t.getUTCSeconds() / 60;
+      var g = ((2 * Math.PI) / 365) * (n + (m / 60 - 12) / 24);
+      var eq = 229.18 * (7.5e-5 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+      var dec = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+      var ha = ((m + eq + 4 * lon) / 4 - 180) * r;
+      var c = Math.sin(lat * r) * Math.sin(dec) + Math.cos(lat * r) * Math.cos(dec) * Math.cos(ha);
+      return 90 - Math.acos(Math.max(-1, Math.min(1, c))) / r;
+    };
+    /* day: sun >= +6 deg; night: below civil twilight (< -6 deg); otherwise dawn or dusk by trend. */
+    A.phaseAt = function (t, lat, lon) {
+      var h = A.solarElevation(t, lat, lon);
+      if (h >= 6) return "day";
+      if (h < -6) return "night";
+      return A.solarElevation(new Date(t.getTime() + 6e5), lat, lon) > h ? "dawn" : "dusk";
+    };
+    A.now = function () {
+      var s = q.get("amb-time");
+      return s && !isNaN(Date.parse(s)) ? new Date(Date.parse(s)) : new Date();
+    };
+    var tz = "";
+    try {
+      tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    } catch (e) {}
+    var now = A.now();
+    var p = A.load("amb.place.v1");
+    var ql = /^(-?[\d.]+),(-?[\d.]+)$/.exec(q.get("amb-loc") || "");
+    if (ql) {
+      p = { tz: tz, lat: +ql[1], lon: +ql[2], label: "preview" };
+    } else if (!p || p.tz !== tz) {
+      if (!tz || /^(UTC|GMT|Etc\/)/.test(tz)) {
+        /* Zones the table cannot place (UTC, GMT, Etc/*, e.g. privacy browsers): Worcester, the same
+           fallback ambient.js uses, so the page does not switch phase or mode after first paint. */
+        p = { tz: tz, lat: 42.27, lon: -71.81, guess: true };
+      } else {
+        /* First visit or new time zone: guess from the UTC offset (offset minutes are UTC - local).
+           lon = -standard offset / 4; lat 40 N with northern DST, 35 S with southern DST, 25 N without. */
+        var y = now.getFullYear();
+        var jan = new Date(y, 0, 1).getTimezoneOffset();
+        var jul = new Date(y, 6, 1).getTimezoneOffset();
+        p = { tz: tz, lat: jan === jul ? 25 : jan < jul ? -35 : 40, lon: -Math.max(jan, jul) / 4, guess: true };
+      }
+    }
+    var phase = q.get("amb-phase");
+    if (!/^(dawn|day|dusk|night)$/.test(phase)) phase = A.phaseAt(now, p.lat, p.lon);
+    /* Cached weather only for the place it was fetched for (as ambient.js cachedWx), never for a guess. */
+    var w = A.load("amb.wx.v1");
+    var wx = w && w.wx && Date.now() - w.at < 3 * 36e5 && !p.guess && Math.abs(w.lat - p.lat) <= 0.5 && Math.abs(w.lon - p.lon) <= 0.5 ? w.wx : "";
+    if (/^(clear|partly|overcast|rain|snow|fog|storm)$/.test(q.get("amb-wx"))) wx = q.get("amb-wx");
+    d.setAttribute("data-amb-phase", phase);
+    if (wx) d.setAttribute("data-amb-wx", wx);
+    A.state = { place: p, phase: phase, wx: wx };
+    A.autoMode = function () {
+      return d.getAttribute("data-amb-phase") === "night" ? "dark" : "light"; /* the sun decides, not the OS */
+    };
+    /* theme.js (in <head>) declares these with top-level let: global bindings a later classic
+       script may reassign. Every caller (toggle, OS listener, highlight sheets, table-dark,
+       search theme) then follows automatic mode. */
+    if (typeof determineComputedTheme === "function" && typeof determineThemeSetting === "function" && typeof applyTheme === "function" && typeof transTheme === "function") {
+      determineComputedTheme = function () {
+        var s = determineThemeSetting();
+        return s === "system" ? A.autoMode() : s;
+      };
+      A.applyThemeQuiet = function () {
+        var t = transTheme;
+        transTheme = function () {};
+        try {
+          applyTheme();
+        } finally {
+          transTheme = t;
+        }
+      };
+      if (d.getAttribute("data-theme") !== determineComputedTheme()) A.applyThemeQuiet();
+    }
+  } catch (e) {
+    /* never break the page: theme.js and the static palette in site.css still apply */
+  }
+})();
+</script> <script defer src="/assets/ambient/ambient.js?v=13"></script> </div> </footer> <script>
   window.alFolio = {
     compatBootstrap: false
   };
-</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
     addBackToTop();
   </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
 // get the ninja-keys element
@@ -39,12 +139,12 @@ ninja.data = [{
     handler: () => {
       window.location.href = "/";
     },
-  },{id: "nav-blog",
-          title: "blog",
-          description: "",
+  },{id: "nav-projects",
+          title: "projects",
+          description: "Research and selected projects in legged robotics, robot learning, and control.",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/blog/";
+            window.location.href = "/projects/";
           },
         },{id: "nav-publications",
           title: "publications",
@@ -53,19 +153,19 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/publications/";
           },
-        },{id: "nav-projects",
-          title: "projects",
-          description: "Research and selected projects in legged robotics, robot learning, and control.",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/projects/";
-          },
         },{id: "nav-cv",
           title: "CV",
           description: "Education, research experience, manuscripts, projects, teaching, and service. A PDF version is available via the download button.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
+          },
+        },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
           },
         },{id: "nav-photography",
           title: "photography",
@@ -110,42 +210,42 @@ ninja.data = [{
           description: "",
           section: "News",},{id: "projects-acrobatic-quadrotor-flight",
           title: 'Acrobatic Quadrotor Flight',
-          description: "SE(3) geometric control with L1 adaptive augmentation on a Crazyflie 2.1 — zero-radius flips, recovery, and 94% disturbance rejection in ROS 2 simulation.",
+          description: "Geometric SE(3) control with an L1 adaptive layer for a simulated Crazyflie: a zero-radius roll flip, recovery to hover, and step-torque rejection in ROS 2 and Gazebo.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/crazyflie-se3-l1/";
             },},{id: "projects-flow-matching-policies",
           title: 'Flow Matching Policies',
-          description: "Conditional Flow Matching visuomotor policies in robomimic — beats Diffusion Policy head-to-head, with a 94× faster 1-step inference mode.",
+          description: "Conditional Flow Matching policy for robomimic. Success comparable to Diffusion Policy on five simulated tasks, about 11× faster than its 100-step DDPM sampler.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/flow-matching-policies/";
             },},{id: "projects-bimanual-lifting",
           title: 'Bimanual Lifting',
-          description: "Simulated bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy.",
+          description: "A Unitree G1 learns in MuJoCo to lift a box with both arms, using a residual AMP-PPO policy over a frozen walking controller. A lifting policy later ran on the real G1.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/g1-bimanual-lifting/";
             },},{id: "projects-humanoid-ice-skating",
           title: 'Humanoid Ice Skating',
-          description: "Simulated ice-skating locomotion for a Unitree G1 via blade-contact RL — no motion capture, no imitation data. The skating gait emerges from anisotropic blade–ice contact.",
+          description: "A simulated Unitree G1 humanoid learns to ice-skate with reinforcement learning, on passive blades that glide along their length and grip sideways.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/g1-ice-skating/";
             },},{id: "projects-gaitnet",
           title: 'GaitNet',
-          description: "Attention-based acyclic footstep planning for dynamic quadruped locomotion — candidate self-attention, motion history, and inverse footstep dynamics on top of perceptive MPC.",
+          description: "A footstep planner given no gait. Each tick it picks one step, or none, from safe footholds, and a controller lands it. Trained once, it runs frozen on a new controller.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/gaitnet/";
             },},{id: "projects-go1-ppo-locomotion",
           title: 'Go1 PPO Locomotion',
-          description: "PPO locomotion for the Unitree Go1 in JAX/MuJoCo MJX — asymmetric actor-critic, domain randomization, rough terrain, and real-robot deployment.",
+          description: "PPO walking policies for the Unitree Go1, trained in JAX and MuJoCo MJX on MuJoCo Playground&#39;s flat and rough joystick tasks, with a demo on a real Go1.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/go1-ppo-mjx/";
             },},{id: "projects-revolute",
           title: 'Revolute',
-          description: "Flow-matching visuomotor policies for a Seeed B601 RS arm on LeRobot — teleoperated demonstrations, a controlled U-Net vs. transformer comparison, and models sized for a Jetson Orin Nano.",
+          description: "ToastBot, our Revolute 2026 hackathon entry: flow-matching policies for the steps of making toast on a six-joint arm, learned from teleoperation and sized for a Jetson.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/revolute/";
             },},{id: "projects-scrub",
           title: 'SCRUB',
-          description: "Blind force-regulated tool sliding on Unitree Go1 hardware — an armless quadruped presses and slides a body-mounted tool along surfaces it has no model of.",
+          description: "An armless Unitree Go1 presses a trunk-mounted tool against a wall or column and slides it along, working out which way the surface faces from the contact itself.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/scrub/";
             },},{

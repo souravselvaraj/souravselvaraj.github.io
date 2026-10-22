@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Bimanual Lifting | Sourav Selvaraj </title> <meta name="author" content="Sourav Selvaraj"> <meta name="description" content="Simulated bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy."> <meta name="keywords" content="robotics, legged robots, quadruped, humanoid, model predictive control, whole-body control, reinforcement learning, robot learning, WPI"> <meta property="og:site_name" content="Sourav Selvaraj"> <meta property="og:type" content="website"> <meta property="og:title" content="Sourav Selvaraj | Bimanual Lifting"> <meta property="og:url" content="https://souravselvaraj.github.io/projects/g1-bimanual-lifting/"> <meta property="og:description" content="Simulated bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy."> <meta property="og:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Bimanual Lifting"> <meta name="twitter:description" content="Simulated bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy."> <meta name="twitter:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <script type="application/ld+json">
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Bimanual Lifting | Sourav Selvaraj </title> <meta name="author" content="Sourav Selvaraj"> <meta name="description" content="A Unitree G1 learns in MuJoCo to lift a box with both arms, using a residual AMP-PPO policy over a frozen walking controller. A lifting policy later ran on the real G1."> <meta name="keywords" content="robotics, legged robots, quadruped, humanoid, model predictive control, whole-body control, reinforcement learning, robot learning, WPI"> <meta property="og:site_name" content="Sourav Selvaraj"> <meta property="og:type" content="website"> <meta property="og:title" content="Sourav Selvaraj | Bimanual Lifting"> <meta property="og:url" content="https://souravselvaraj.github.io/projects/g1-bimanual-lifting/"> <meta property="og:description" content="A Unitree G1 learns in MuJoCo to lift a box with both arms, using a residual AMP-PPO policy over a frozen walking controller. A lifting policy later ran on the real G1."> <meta property="og:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Bimanual Lifting"> <meta name="twitter:description" content="A Unitree G1 learns in MuJoCo to lift a box with both arms, using a residual AMP-PPO policy over a frozen walking controller. A lifting policy later ran on the real G1."> <meta name="twitter:image" content="https://souravselvaraj.github.io/assets/img/og-preview.jpg"> <script type="application/ld+json">
     {
         "author":
         {
@@ -7,7 +7,7 @@
         },
         "url": "https://souravselvaraj.github.io/projects/g1-bimanual-lifting/",
         "@type": "WebSite",
-        "description": "Simulated bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy.",
+        "description": "A Unitree G1 learns in MuJoCo to lift a box with both arms, using a residual AMP-PPO policy over a frozen walking controller. A lifting policy later ran on the real G1.",
         "headline": "Bimanual Lifting",
         
         "sameAs": ["https://github.com/souravselvaraj","https://www.linkedin.com/in/souravselvaraj",null],
@@ -17,15 +17,115 @@
     }
   </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
   :root {
-    --max-content-width: 1140px;
+    --max-content-width: 920px;
   }
-</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A4%96&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://souravselvaraj.github.io/projects/g1-bimanual-lifting/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="/assets/ambient/site.css?v=5"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A4%96&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://souravselvaraj.github.io/projects/g1-bimanual-lifting/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Sourav</span> Selvaraj </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/photography/">photography </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Bimanual Lifting</h1> <p class="post-description">Simulated bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy.</p> </header> <article> <div class="row justify-content-center"> <div class="col-12 mt-3 mb-3"> <figure> <video src="/assets/video/projects/g1_bimanual_lifting.mp4" class="img-fluid rounded z-depth-1" width="100%" height="auto" controls="" muted=""></video> </figure> </div> </div> <div class="caption"> Converged policies squatting, grasping, and carrying objects bimanually in MuJoCo. </div> <p>Whole-body lifting is a coordination problem: a humanoid must bend its legs, lean its torso, close both arms around an object, and stand back up — without the arms fighting the balance controller. This project trains a <strong>Unitree G1</strong> to squat, grasp, and carry objects bimanually in MuJoCo, structured as a <strong>residual policy over a frozen locomotion actor</strong>: the pretrained locomotion policy keeps the robot balanced and walking, while a residual network adds the manipulation behavior on top.</p> <h2 id="style-without-imitation-traps">Style without imitation traps</h2> <p>An <strong>AMP discriminator</strong> trained on human motion capture acts as a style regularizer — but a <em>capped</em> one. The imitation reward is bounded so it can never outpay task completion: the policy is rewarded for lifting like a human, but only after it actually lifts. This ordering matters; uncapped style rewards routinely produce policies that pose beautifully and never pick anything up.</p> <h2 id="training-machinery">Training machinery</h2> <ul> <li> <strong>Success-adaptive curriculum</strong> — a virtual “object assist” force helps early training and is annealed away as the success rate climbs.</li> <li> <strong>Asymmetric actor–critic</strong> — the critic sees privileged contact forces; the actor sees noisy object-state observations only.</li> <li> <strong>Domain randomization</strong> over object mass, friction, center of mass, and external base pushes.</li> <li> <strong>Reward-hacking whack-a-mole</strong> — successive exploits (lunging, waist-folding instead of squatting) were closed with gated posture penalties that activate only when the task is being cheated, not during legitimate motion.</li> </ul> <h2 id="results-simulation">Results (simulation)</h2> <p>Converged policies consistently hold objects at goal height, centered within <strong>3 cm</strong>, with human-like posture — torso pitch stays inside the mocap prior’s 2–13° range. This project is simulation-only; no sim-to-real transfer was attempted.</p> <p>Code: <a href="https://github.com/shuayyy/humanoid-amp-ppo" rel="external nofollow noopener" target="_blank">github.com/shuayyy/humanoid-amp-ppo</a></p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Sourav Selvaraj. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Sourav</span> Selvaraj </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/photography/">photography </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Bimanual Lifting</h1> <p class="post-description">A Unitree G1 learns in MuJoCo to lift a box with both arms, using a residual AMP-PPO policy over a frozen walking controller. A lifting policy later ran on the real G1.</p> </header> <article> <div class="row justify-content-center"> <div class="col-sm-6 mt-3 mb-3"> <figure> <video src="/assets/video/projects/g1_bimanual_lifting_release.mp4" class="img-fluid rounded z-depth-1" width="100%" height="auto" autoplay="" controls="" loop="" muted=""></video> </figure> </div> </div> <div class="caption"> The dual-arm lifting policy from my collaborator's August 2026 release, in MuJoCo simulation. This release drives the joints directly instead of adding a residual to the frozen walking policy (see below). </div> <p>Picking a box up off the floor takes your whole body. You bend your legs, lean your torso, pull the box in with both arms and stand back up. A humanoid has to do the same, and its arms cannot fight whatever is keeping it balanced. In this project a Unitree G1 learns in MuJoCo simulation to reach down to a box, grasp it with both arms and lift it, and we later ran a lifting policy from the project on the real G1.</p> <p>This was a collaboration with Mohamed Shuaib Nasurudeen (<a href="https://github.com/shuayyy" rel="external nofollow noopener" target="_blank">shuayyy</a>). The training stack is my collaborator’s work: AMP-PPO on RSL-RL and mjlab, the G1 locomotion policy used as the frozen base, the motion clips, the dual-arm environment with its original reach and lift rewards, and the virtual box controller described below. My part was the residual version of the lift policy. I added the residual setup over the frozen locomotion policy, made the curricula adapt to the success rate, wrote most of the posture rewards and the posture evaluation tooling, trained the residual versions of the lift policy, and rewrote the README.</p> <h2 id="why-lifting-is-hard-for-a-humanoid">Why lifting is hard for a humanoid</h2> <p>Reaching down shifts the robot’s center of mass forward, and with the box in its hands it has to stand up with that weight in front of its body. The lifting reward only pays once both hands are on the box, so separate reach rewards guide the hands there first.</p> <h2 id="keeping-the-walking-policy-and-learning-the-rest">Keeping the walking policy and learning the rest</h2> <p>We split the problem in two, following <a href="https://arxiv.org/abs/2510.05070" rel="external nofollow noopener" target="_blank">ResMimic</a> (Zhao et al., 2025). The locomotion policy keeps the G1 balanced, and we froze it. A second, residual network adds its output to the frozen policy’s actions and also sees the action the frozen policy just took. A person who already knows how to stand keeps that skill when they pick up a box and adjusts their posture around the load. Because the locomotion weights never change, training the lift cannot overwrite what the base policy learned about balance. Both policies were trained with PPO and run at 50 Hz.</p> <h2 id="moving-like-a-person">Moving like a person</h2> <p>For human-like motion we used an adversarial motion prior (AMP): a discriminator learns to tell motion capture from the robot’s motion, and the policy earns a style reward for fooling it. I widened the discriminator’s input from joint angles alone to joint angles and velocities plus the base’s velocity and tilt. If looking human pays enough, a policy can hold a natural pose and never pick anything up, so we capped the style reward near what the robot earns for just standing. After v5 lunged to reach the box, the reach phase got a larger style weight, since task rewards are sparse there, and the cap now applies only after the lift.</p> <h2 id="getting-training-to-converge">Getting training to converge</h2> <p>Early on, a virtual controller on the box takes some of its weight, like a spotter at the gym. I made its assistance decay only while the lift success rate stays high and return if success collapses, with a growing penalty on whatever assistance the policy still uses. The object observations carry about 1 cm of noise, and we randomized the box’s mass (0.7 to 1.5 times nominal), friction and center of mass, the robot’s friction and torso center of mass, and pushed the robot at random.</p> <h2 id="what-the-lunge-taught-us">What the lunge taught us</h2> <p>v5 reaches the box with a lunge where the motion capture squats symmetrically, and later versions folded at the waist with straight legs. I added a posture penalty against each failure, and the policy kept finding a new one. A lunge crossed in half a second cost almost nothing per step, so some penalties became one-time charges on the episode’s worst posture.</p> <p>The actual cause was the action space. The leg residual was scaled so small that the policy could command at most about 0.4 rad of knee bend, while the reference squat bends the knees 1.9 to 2.2 rad. No reward could produce a squat the policy could not command. I raised the leg authority, dropped most of the reach-phase penalties and started a quarter of episodes from motion-capture squat frames, since exploration from standing never found the squat. Whether the style prior alone now shapes a squat was still being tested at my last commit.</p> <h2 id="results">Results</h2> <table> <thead> <tr> <th>Setting</th> <th>What we checked</th> <th>Result</th> </tr> </thead> <tbody> <tr> <td>MuJoCo simulation, converged policies</td> <td>Object position, held at the goal height</td> <td>within 3 cm of the target</td> </tr> <tr> <td>MuJoCo simulation, converged policies</td> <td>Torso pitch while holding the object at the goal height</td> <td>between 2° and 13°, the range in the human motion data</td> </tr> <tr> <td>Real Unitree G1</td> <td>Lifting a box</td> <td>lifting policy run on hardware (qualitative)</td> </tr> </tbody> </table> <p>The 2 to 13° pitch range is what we mean by human-like here, and it covers the hold only. During its reach, the person in the motion capture leans to about 50°.</p> <p>We have since run a lifting policy from this project on the real Unitree G1, and it lifted a box. That run is qualitative.</p> <h2 id="status">Status</h2> <p>As of my last commit the task was lifting in place, with no carry to a goal, and a depth-camera input was wired up but off by default. The clip at the top shows my collaborator’s August release, described next, not this residual line. The larger pre-lift style weight, the one-time posture charges, the squat starts and the raised leg authority all came after v5.</p> <p>In August 2026 my collaborator committed a <a href="https://github.com/shuayyy/humanoid-amp-ppo/commit/241cd05" rel="external nofollow noopener" target="_blank">released policy</a> that drops the frozen base. It drives the joints directly, with action ranges sized from the motion capture, and trains with a much heavier, constant style weight. According to its config, it reaches a squat at motion-capture depth, and its discriminator is back to joint angles only.</p> <h2 id="code">Code</h2> <p>The code is in <a href="https://github.com/shuayyy/humanoid-amp-ppo" rel="external nofollow noopener" target="_blank">github.com/shuayyy/humanoid-amp-ppo</a>. The residual setup, the v5 checkpoint and my README are in its history at commit <a href="https://github.com/shuayyy/humanoid-amp-ppo/tree/94f6a93" rel="external nofollow noopener" target="_blank">94f6a93</a>.</p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Sourav Selvaraj. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. <script>
+(function () {
+  /* ambient boot: inline in footer_text so it runs as soon as the parser reaches the footer,
+     before first paint. Sets html[data-amb-phase] (+ cached html[data-amb-wx]) and makes the
+     theme toggle's "system" setting mean automatic (dark at night). ambient.js refines it.
+     Only block comments and explicit semicolons: survives HTML minification. */
+  try {
+    var d = document.documentElement;
+    var q = new URLSearchParams(location.search);
+    if (q.get("amb") === "0") return;
+    var A = (window.ambient = {});
+    A.load = function (k) {
+      try {
+        return JSON.parse(localStorage.getItem(k));
+      } catch (e) {
+        return null;
+      }
+    };
+    /* NOAA low-precision solar elevation in degrees (~0.1 deg). t: Date (UTC used internally);
+       lat, lon: degrees, north- and east-positive. */
+    A.solarElevation = function (t, lat, lon) {
+      var r = Math.PI / 180;
+      var n = Math.floor((t.getTime() - Date.UTC(t.getUTCFullYear(), 0, 1)) / 864e5);
+      var m = t.getUTCHours() * 60 + t.getUTCMinutes() + t.getUTCSeconds() / 60;
+      var g = ((2 * Math.PI) / 365) * (n + (m / 60 - 12) / 24);
+      var eq = 229.18 * (7.5e-5 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+      var dec = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+      var ha = ((m + eq + 4 * lon) / 4 - 180) * r;
+      var c = Math.sin(lat * r) * Math.sin(dec) + Math.cos(lat * r) * Math.cos(dec) * Math.cos(ha);
+      return 90 - Math.acos(Math.max(-1, Math.min(1, c))) / r;
+    };
+    /* day: sun >= +6 deg; night: below civil twilight (< -6 deg); otherwise dawn or dusk by trend. */
+    A.phaseAt = function (t, lat, lon) {
+      var h = A.solarElevation(t, lat, lon);
+      if (h >= 6) return "day";
+      if (h < -6) return "night";
+      return A.solarElevation(new Date(t.getTime() + 6e5), lat, lon) > h ? "dawn" : "dusk";
+    };
+    A.now = function () {
+      var s = q.get("amb-time");
+      return s && !isNaN(Date.parse(s)) ? new Date(Date.parse(s)) : new Date();
+    };
+    var tz = "";
+    try {
+      tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    } catch (e) {}
+    var now = A.now();
+    var p = A.load("amb.place.v1");
+    var ql = /^(-?[\d.]+),(-?[\d.]+)$/.exec(q.get("amb-loc") || "");
+    if (ql) {
+      p = { tz: tz, lat: +ql[1], lon: +ql[2], label: "preview" };
+    } else if (!p || p.tz !== tz) {
+      if (!tz || /^(UTC|GMT|Etc\/)/.test(tz)) {
+        /* Zones the table cannot place (UTC, GMT, Etc/*, e.g. privacy browsers): Worcester, the same
+           fallback ambient.js uses, so the page does not switch phase or mode after first paint. */
+        p = { tz: tz, lat: 42.27, lon: -71.81, guess: true };
+      } else {
+        /* First visit or new time zone: guess from the UTC offset (offset minutes are UTC - local).
+           lon = -standard offset / 4; lat 40 N with northern DST, 35 S with southern DST, 25 N without. */
+        var y = now.getFullYear();
+        var jan = new Date(y, 0, 1).getTimezoneOffset();
+        var jul = new Date(y, 6, 1).getTimezoneOffset();
+        p = { tz: tz, lat: jan === jul ? 25 : jan < jul ? -35 : 40, lon: -Math.max(jan, jul) / 4, guess: true };
+      }
+    }
+    var phase = q.get("amb-phase");
+    if (!/^(dawn|day|dusk|night)$/.test(phase)) phase = A.phaseAt(now, p.lat, p.lon);
+    /* Cached weather only for the place it was fetched for (as ambient.js cachedWx), never for a guess. */
+    var w = A.load("amb.wx.v1");
+    var wx = w && w.wx && Date.now() - w.at < 3 * 36e5 && !p.guess && Math.abs(w.lat - p.lat) <= 0.5 && Math.abs(w.lon - p.lon) <= 0.5 ? w.wx : "";
+    if (/^(clear|partly|overcast|rain|snow|fog|storm)$/.test(q.get("amb-wx"))) wx = q.get("amb-wx");
+    d.setAttribute("data-amb-phase", phase);
+    if (wx) d.setAttribute("data-amb-wx", wx);
+    A.state = { place: p, phase: phase, wx: wx };
+    A.autoMode = function () {
+      return d.getAttribute("data-amb-phase") === "night" ? "dark" : "light"; /* the sun decides, not the OS */
+    };
+    /* theme.js (in <head>) declares these with top-level let: global bindings a later classic
+       script may reassign. Every caller (toggle, OS listener, highlight sheets, table-dark,
+       search theme) then follows automatic mode. */
+    if (typeof determineComputedTheme === "function" && typeof determineThemeSetting === "function" && typeof applyTheme === "function" && typeof transTheme === "function") {
+      determineComputedTheme = function () {
+        var s = determineThemeSetting();
+        return s === "system" ? A.autoMode() : s;
+      };
+      A.applyThemeQuiet = function () {
+        var t = transTheme;
+        transTheme = function () {};
+        try {
+          applyTheme();
+        } finally {
+          transTheme = t;
+        }
+      };
+      if (d.getAttribute("data-theme") !== determineComputedTheme()) A.applyThemeQuiet();
+    }
+  } catch (e) {
+    /* never break the page: theme.js and the static palette in site.css still apply */
+  }
+})();
+</script> <script defer src="/assets/ambient/ambient.js?v=13"></script> </div> </footer> <script>
   window.alFolio = {
     compatBootstrap: false
   };
-</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
     addBackToTop();
   </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
 // get the ninja-keys element
@@ -39,12 +139,12 @@ ninja.data = [{
     handler: () => {
       window.location.href = "/";
     },
-  },{id: "nav-blog",
-          title: "blog",
-          description: "",
+  },{id: "nav-projects",
+          title: "projects",
+          description: "Research and selected projects in legged robotics, robot learning, and control.",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/blog/";
+            window.location.href = "/projects/";
           },
         },{id: "nav-publications",
           title: "publications",
@@ -53,19 +153,19 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/publications/";
           },
-        },{id: "nav-projects",
-          title: "projects",
-          description: "Research and selected projects in legged robotics, robot learning, and control.",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/projects/";
-          },
         },{id: "nav-cv",
           title: "CV",
           description: "Education, research experience, manuscripts, projects, teaching, and service. A PDF version is available via the download button.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
+          },
+        },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
           },
         },{id: "nav-photography",
           title: "photography",
@@ -110,42 +210,42 @@ ninja.data = [{
           description: "",
           section: "News",},{id: "projects-acrobatic-quadrotor-flight",
           title: 'Acrobatic Quadrotor Flight',
-          description: "SE(3) geometric control with L1 adaptive augmentation on a Crazyflie 2.1 — zero-radius flips, recovery, and 94% disturbance rejection in ROS 2 simulation.",
+          description: "Geometric SE(3) control with an L1 adaptive layer for a simulated Crazyflie: a zero-radius roll flip, recovery to hover, and step-torque rejection in ROS 2 and Gazebo.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/crazyflie-se3-l1/";
             },},{id: "projects-flow-matching-policies",
           title: 'Flow Matching Policies',
-          description: "Conditional Flow Matching visuomotor policies in robomimic — beats Diffusion Policy head-to-head, with a 94× faster 1-step inference mode.",
+          description: "Conditional Flow Matching policy for robomimic. Success comparable to Diffusion Policy on five simulated tasks, about 11× faster than its 100-step DDPM sampler.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/flow-matching-policies/";
             },},{id: "projects-bimanual-lifting",
           title: 'Bimanual Lifting',
-          description: "Simulated bimanual object lifting and carrying for a Unitree G1 via residual AMP–PPO over a frozen locomotion policy.",
+          description: "A Unitree G1 learns in MuJoCo to lift a box with both arms, using a residual AMP-PPO policy over a frozen walking controller. A lifting policy later ran on the real G1.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/g1-bimanual-lifting/";
             },},{id: "projects-humanoid-ice-skating",
           title: 'Humanoid Ice Skating',
-          description: "Simulated ice-skating locomotion for a Unitree G1 via blade-contact RL — no motion capture, no imitation data. The skating gait emerges from anisotropic blade–ice contact.",
+          description: "A simulated Unitree G1 humanoid learns to ice-skate with reinforcement learning, on passive blades that glide along their length and grip sideways.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/g1-ice-skating/";
             },},{id: "projects-gaitnet",
           title: 'GaitNet',
-          description: "Attention-based acyclic footstep planning for dynamic quadruped locomotion — candidate self-attention, motion history, and inverse footstep dynamics on top of perceptive MPC.",
+          description: "A footstep planner given no gait. Each tick it picks one step, or none, from safe footholds, and a controller lands it. Trained once, it runs frozen on a new controller.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/gaitnet/";
             },},{id: "projects-go1-ppo-locomotion",
           title: 'Go1 PPO Locomotion',
-          description: "PPO locomotion for the Unitree Go1 in JAX/MuJoCo MJX — asymmetric actor-critic, domain randomization, rough terrain, and real-robot deployment.",
+          description: "PPO walking policies for the Unitree Go1, trained in JAX and MuJoCo MJX on MuJoCo Playground&#39;s flat and rough joystick tasks, with a demo on a real Go1.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/go1-ppo-mjx/";
             },},{id: "projects-revolute",
           title: 'Revolute',
-          description: "Flow-matching visuomotor policies for a Seeed B601 RS arm on LeRobot — teleoperated demonstrations, a controlled U-Net vs. transformer comparison, and models sized for a Jetson Orin Nano.",
+          description: "ToastBot, our Revolute 2026 hackathon entry: flow-matching policies for the steps of making toast on a six-joint arm, learned from teleoperation and sized for a Jetson.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/revolute/";
             },},{id: "projects-scrub",
           title: 'SCRUB',
-          description: "Blind force-regulated tool sliding on Unitree Go1 hardware — an armless quadruped presses and slides a body-mounted tool along surfaces it has no model of.",
+          description: "An armless Unitree Go1 presses a trunk-mounted tool against a wall or column and slides it along, working out which way the surface faces from the contact itself.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/scrub/";
             },},{
