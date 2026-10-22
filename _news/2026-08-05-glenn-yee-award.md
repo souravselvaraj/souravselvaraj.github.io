@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Selected by the Robotics Engineering Department at WPI to receive the *Dr. Glenn Yee Graduate Student Tuition Award* for Fall 2026.
+I'm grateful to have been selected for the [Dr. Glenn Yee Graduate Student Tuition Award](https://www.wpi.edu/academics/departments/robotics-engineering/glenn-yee-graduate-awards), a merit-based award from WPI's Robotics Engineering Department, for Fall 2026.

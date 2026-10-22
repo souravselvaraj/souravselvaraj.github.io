@@ -2,7 +2,7 @@
 layout: page
 title: projects
 permalink: /projects/
-description: Research and selected projects in legged robotics, robot learning, and control.
+description: My research in the ALMaS Research Group at WPI comes first, followed by other projects on a humanoid, a quadruped, robot arms and a quadrotor.
 nav: true
 nav_order: 1
 display_categories: [research, projects]

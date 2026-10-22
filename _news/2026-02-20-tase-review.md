@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Served as a reviewer for *IEEE Transactions on Automation Science and Engineering* (T-ASE).
+I served as a reviewer for *IEEE Transactions on Automation Science and Engineering* (T-ASE).

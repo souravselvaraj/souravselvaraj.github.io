@@ -9,8 +9,8 @@ last_name: Selvaraj
 contact_note: >
   The best way to reach me is by email.
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  Sourav Selvaraj — M.S. Robotics Engineering student at Worcester Polytechnic Institute working on
-  legged robot control, contact-aware locomotion, and learning-based methods for dynamic robotic systems.
+  I'm Sourav Selvaraj, an M.S. Robotics Engineering student at WPI studying how legged robots
+  do physical work through contact, with model-based control and robot learning.
 # The footer is hidden by assets/ambient/site.css, but its <script> tags still run (display:none does
 # not stop scripts). The inline <script> is the ambient boot (weather x time theme): it must run before
 # first paint, so it lives here (the gem layouts have no head JS hook). Use only /* */ comments and
@@ -231,7 +231,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: Blog # displayed as the blog page title (matches its nav label)
-blog_description: Robotics, control, and research notes
+blog_description: Notes on control and on doing research in robotics.
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 

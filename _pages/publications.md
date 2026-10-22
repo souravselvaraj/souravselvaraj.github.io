@@ -2,7 +2,7 @@
 layout: page
 permalink: /publications/
 title: publications
-description: Manuscripts and publications in reversed chronological order.
+description: Manuscripts in preparation. Each entry notes the venue it will be submitted to.
 nav: true
 nav_order: 2
 ---

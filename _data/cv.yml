@@ -7,14 +7,17 @@
 # The web CV is a concise overview; the full detail lives in the PDF (cv_pdf).
 cv:
   name: Sourav Selvaraj
-  label: M.S. Robotics Engineering Student
+  label: M.S. Student in Robotics Engineering
   email: sselvaraj@wpi.edu
   location: Worcester, MA
   image: ""
   summary: >-
-    Research interests: legged robotics, whole-body control, and robot learning. Recent work spans
-    force-regulated body contact on quadruped hardware (SCRUB), learned footstep planning (GaitNet),
-    and reinforcement learning for humanoids.
+    I am an M.S. student in Robotics Engineering at WPI, working with Dr. Mahdi Agheli in the ALMaS
+    Research Group. I study how legged robots choose where to touch and how hard to push. I lead SCRUB,
+    in which our armless Unitree Go1 presses a tool against a wall or column that the robot has no model
+    of and slides the tool along it. With Owen Sullivan, I also work on GaitNet, a learned planner that picks each
+    footstep for a quadruped crossing ground full of holes. My research interests are legged robotics,
+    whole-body control and robot learning, and I am applying to PhD programs for Fall 2027.
 
   social_networks:
     - network: GitHub
@@ -50,46 +53,50 @@ cv:
         awarder: Robotics Engineering Department, Worcester Polytechnic Institute
         date: 2026-08
         summary: >-
-          Competitive merit-based award for outstanding RBE graduate students, selected on research record —
-          publications and successful projects — and academic standing. Carries one tuition credit for the
-          Fall 2026 semester.
+          A merit-based tuition award for RBE graduate students. One tuition credit for Fall 2026.
 
       - title: Winner, Smart India Hackathon 2023
         awarder: Ministry of Education, India
         date: 2023
-        summary: Nationwide student innovation competition.
+        summary: A nationwide student innovation competition.
 
     Experience:
       - company: ALMaS Research Group, Worcester Polytechnic Institute
         url: https://www.wpi.edu/people/faculty/mmaghelih
-        position: Graduate Researcher — SCRUB, Armless Quadruped Body-Tool Sliding
+        position: "Graduate Researcher: SCRUB, tool sliding with an armless quadruped"
         location: Worcester, MA
         start_date: 2025-08
         end_date: present
-        summary: "Advisor: Dr. Mahdi Agheli"
+        summary: >-
+          Advisor: Dr. Mahdi Agheli. I lead this project. On our Go1, SCRUB completed 5/5 wall and 5/5
+          column trials at a 10 N target force.
 
       - company: ALMaS Research Group, Worcester Polytechnic Institute
         url: https://www.wpi.edu/people/faculty/mmaghelih
-        position: Graduate Researcher — GaitNet, RL Footstep Planning
+        position: "Graduate Researcher: GaitNet, learned footstep planning"
         location: Worcester, MA
         start_date: 2025-11
         end_date: present
-        summary: "Advisor: Dr. Mahdi Agheli"
+        summary: >-
+          Advisor: Dr. Mahdi Agheli. Co-first author with Owen Sullivan. In simulation, GaitNet reached 71%
+          success (5-seed mean) on ground with 40 to 70% holes, against 38% for OCS2's own trot.
 
       - company: NIT Trichy
         url: https://www.nitt.edu/
-        position: Undergraduate Researcher — TOTO, Autonomous Mobile Robot
+        position: "Undergraduate Researcher: TOTO, autonomous mobile robot"
         location: Tiruchirappalli, India
         start_date: 2024-09
         end_date: 2025-05
         summary: "Advisor: Dr. D. Ezhilarasi"
 
       - company: IIT Madras
-        position: Research Intern — Bio-mimetic Autonomous Underwater Vehicle (BAUV)
+        position: "Research Intern: biomimetic autonomous underwater vehicle (BAUV)"
         location: Chennai, India
         start_date: 2023-03
         end_date: 2023-09
-        summary: "Advisor: Dr. Asokan Thondiyath"
+        summary: >-
+          Advisor: Dr. Asokan Thondiyath. I designed a Jetson Orin interface PCB and CAN motor control for
+          the Maxon BLDC propulsion drives.
 
     Publications:
       - title: "SCRUB: Contact-Based Surface-Frame Estimation for Force–Motion Control with an Armless Quadruped"
@@ -106,49 +113,63 @@ cv:
           O. Sullivan\*, S. Selvaraj\*, and M. Agheli (\*equal contribution).
 
     Projects:
-      - name: Simulated Ice-Skating Locomotion for Humanoids via Blade-Contact RL (Jul 2026 – present)
+      - name: Humanoid ice skating with reinforcement learning (Jul 2026 – present)
         url: https://youtu.be/F5EM3TZRRbE
         summary: >-
-          Unitree G1 trained with PPO in MuJoCo to skate on passive 3 mm blades without imitation data; the
-          skating gait emerges from anisotropic blade–ice contact. Tracks a 0.9 m/s command within 0.09 m/s
-          at 94% single support.
+          I train a simulated Unitree G1 to skate with PPO on thin passive blades, using a contact model I
+          set up so each blade glides along its length and grips sideways. Trained in mjlab with no motion
+          capture, reference motion or imitation reward, policies from three seeds had mean speed errors of
+          0.11 and 0.16 m/s at 0.6 and 0.9 m/s commands, with 3 to 4 cm/s of sideways blade slip.
+          Everything so far is in simulation. The linked video shows my newer Isaac Lab version, which is
+          trained to follow a reference gait recorded from an earlier policy of mine that I had shaped
+          toward a human-like stroke.
 
-      - name: Bimanual Lifting for Humanoids via Residual AMP–PPO (May 2026 – Jul 2026)
+      - name: Humanoid bimanual lifting with residual AMP-PPO (May 2026 – Jul 2026)
         url: https://github.com/shuayyy/humanoid-amp-ppo
         summary: >-
-          Collaborated on training a Unitree G1 to lift objects with residual AMP–PPO over a frozen locomotion actor, holding them
-          within 3 cm of target in simulation using adaptive curricula and dynamics randomization, then run on
-          the real G1 with a box.
+          This is a collaboration with Mohamed Shuaib Nasurudeen, who built the training stack; the code
+          is in his repository. A Unitree G1 learns in MuJoCo simulation to grasp a box with both arms and
+          lift it. My part was the residual version of the lift policy, a second network whose output is
+          added to the actions of the frozen locomotion policy. I set it up, made the curricula adapt to
+          the lift success rate and wrote most of the posture rewards. In simulation the converged policies
+          hold the box at the goal height, within 3 cm of the target position. A lifting policy from the
+          project has also run on the real G1, where it lifted a box (a qualitative result).
 
-      - name: Conditional Flow Matching Policies for Robot Manipulation (Apr 2026 – May 2026)
+      - name: Conditional flow matching policies for robot manipulation (Apr 2026 – May 2026)
         url: https://github.com/souravselvaraj/Robomimic-Flowmatching
         summary: >-
-          Conditional Flow Matching visuomotor policy built from scratch in robomimic — 11× faster inference
-          than 100-step DDPM Diffusion Policy on the same backbone, with equal or higher success on the tasks
-          compared head-to-head.
+          I wrote a Conditional Flow Matching policy for robomimic and compared it with Diffusion Policy on
+          the same U-Net backbone, on five simulated tasks from low-dimensional state with three seeds each.
+          Success was comparable. Flow matching was ahead on Square and slightly behind on Tool Hang and
+          Transport, and both reached 100% on Lift and Can. With 10 Euler steps it samples an action chunk
+          about 11× faster than Diffusion Policy's 100-step DDPM sampler.
 
-      - name: Acrobatic Quadrotor Control with L1 Adaptive Augmentation (Oct 2025 – Dec 2025)
+      - name: Acrobatic quadrotor flight with L1 adaptation (Oct 2025 – Dec 2025)
         url: https://github.com/souravselvaraj/crazyflie-se3-l1
         summary: >-
-          SE(3) geometric controller with L1 adaptive augmentation for a Crazyflie 2.1 in ROS 2 simulation
-          — 2.2 cm position RMSE, up to 94% of force-step disturbances rejected.
+          For my Robot Control course, I wrote an SE(3) geometric controller with an L1 adaptive layer for
+          a simulated Crazyflie in ROS 2 and Gazebo. It flies a 360° roll flip in place and recovers to
+          hover. In one logged run, position RMSE was 2.2 cm in x and y and 7.0 cm in z, and the L1 layer
+          cancelled 94%, 86% and 71% of an injected step torque on roll, pitch and yaw. I have not flown
+          it on hardware.
 
-      - name: Autonomous Rover — ISRO Robotics Challenge 2024 (Dec 2022 – Aug 2024)
+      - name: Autonomous rover for the ISRO Robotics Challenge 2024 (Dec 2022 – Aug 2024)
         summary: >-
-          6-wheeled rocker-bogie autonomous rover with ORB-SLAM terrain mapping, kinodynamic path planning,
-          and custom control electronics.
+          A six-wheeled rocker-bogie rover that mapped terrain with ORB-SLAM, planned kinodynamic paths
+          and ran on custom control electronics.
 
       - name: Additional projects
         summary: >-
-          Visuomotor imitation learning — Behavior Cloning vs. Diffusion Policy on robosuite
-          ([code](https://github.com/souravselvaraj/Visuomotor-Imitation-Learning)); task-and-motion
-          planning — PDDL + OMPL block assembly on a Franka Panda.
+          Visuomotor imitation learning on robosuite's Pick-and-Place Can task from two camera views,
+          training a transformer behavior-cloning policy and a Diffusion Policy
+          ([code](https://github.com/souravselvaraj/Visuomotor-Imitation-Learning)). Task and motion
+          planning with PDDL and OMPL.
 
     Teaching Experience:
       - bullet: >-
-          **Teaching Assistant & Laboratory Curriculum Developer — RBE 521: Legged Robotics**,
+          **Teaching Assistant and Laboratory Curriculum Developer, RBE 521: Legged Robotics**,
           [Worcester Polytechnic Institute](https://www.wpi.edu/), May – Aug 2026. Instructor: Dr. Mahdi Agheli.
-          Developed hands-on lab modules using Unitree Go1 and G1 robots.
+          I built hands-on lab modules for this graduate course on the Unitree Go1 and G1.
 
     Academic Service & Leadership:
       - bullet: >-
