@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Revolute
-description: Flow-matching visuomotor policies for a Seeed B601 RS arm on LeRobot — teleoperated demonstrations, a controlled U-Net vs. transformer comparison, and models sized for a Jetson Orin Nano.
+description: "ToastBot, our Revolute 2026 hackathon entry: flow-matching policies for the steps of making toast on a six-joint arm, learned from teleoperation and sized for a Jetson."
 img: assets/img/projects/revolute_thumb.jpg
 importance: 6
 category: projects
@@ -13,47 +13,57 @@ category: projects
     </div>
 </div>
 <div class="caption">
-    The workspace from the top camera: bread slices in the holder, the toaster, and the pan.
+    The workspace from the top camera: bread slices in the purple holder, the toaster, and the pan.
 </div>
 
-**Revolute** is an imitation-learning stack for a **Seeed B601 RS** 7-DoF arm, built on [LeRobot](https://github.com/huggingface/lerobot): teleoperated data collection, flow-matching policy training, and on-robot evaluation. The deployment target is a **Jetson Orin Nano 8GB**, and every default — frozen vision backbone, a single observation step, five ODE integration steps — is set by what fits a **533 ms re-plan window** on that device, not by what trains best on a cluster GPU.
+At the Revolute 2026 hackathon (August 1 and 2, 2026, at FabLab Kendall), our team, Team Toasted, built ToastBot. We split making toast into three steps on a Seeed B601 RS arm: put a slice of bread in the toaster, pull the lever, and move the toast to a pan. For each step we recorded teleoperated demonstrations and trained a flow-matching policy with [LeRobot](https://github.com/huggingface/lerobot). The repository is mine, from the recording scripts to policy training, and I committed all of it over the hackathon weekend.
+
+## Why toast
+
+We started from people who cannot safely use heating appliances or sharp utensils. Without them, cooking comes down to one pot at one temperature, and nothing comes out crispy. Disability-friendly meals can get boring and repetitive. People end up relying on caregivers and social services. So we asked how a robot arm could make crispy food for someone in that situation. Our baseline was a toasted sandwich with spreads, crispy and smooth at once and a childhood favorite. Toasting the bread is the part the arm does.
+
+## Three short policies
+
+The full sequence is long, with a wait for the toaster in the middle. With 40 to 50 demonstrations per task, data, more than compute, was the limit. So we trained a separate policy for each step and planned a state machine to run them in order. Each policy learns a short episode, and a failure points to one stage.
+
+We decided against a large vision-language-action model. For three fixed tasks, language conditioning could end up as a lookup from instruction to policy, which a state machine would do explicitly. Such a model is also impractical on an 8 GB Jetson Orin Nano. The event's compute notes put inference on the Jetson and warned that a cloud round trip takes about 60 to 150 ms, too slow for a 30 to 50 Hz control loop.
 
 ## Why flow matching
 
-Rectified flow learns a straight-path velocity field, so sampling an action chunk takes **5 Euler steps** instead of a diffusion policy's ~100 DDPM steps — the reason it was chosen for an edge deployment. (See also [Flow Matching Policies]({{ '/projects/flow-matching-policies/' | relative_url }}) for a benchmark against Diffusion Policy in robomimic.)
+Each policy takes images from a fixed top camera and a wrist camera, plus the arm's joint positions, and predicts a chunk of future joint positions. A diffusion policy builds it from random noise, which its standard DDPM sampler removes over about 100 small steps. Flow matching (rectified flow) trains the network to predict a velocity along a straight line from noise to a demonstrated chunk. The learned paths come out close to straight, so our policies sample with only 5 Euler steps. The [Flow Matching Policies]({{ '/projects/flow-matching-policies/' | relative_url }}) page compares the two in simulation.
 
-## Policies
+A chunk holds 48 actions, 1.6 s at 30 fps. The arm executes the first 16 (533 ms) and then re-plans from a fresh observation. A re-plan pauses the loop for one control step, so its latency matters even inside that window.
 
-Four policies are registered as a LeRobot plugin:
+## Sized for the Jetson
 
-| Policy      | Velocity field / head                                                                   |
-| ----------- | --------------------------------------------------------------------------------------- |
-| `flow_unet` | FiLM-conditioned 1D conv U-Net (the Diffusion Policy backbone)                          |
-| `flow_dit`  | DiT transformer with adaLN-Zero and cross-attention into the vision tokens              |
-| `act_dino`  | ACT-style transformer decoder with direct chunk regression — the non-generative control |
-| `flow_lang` | `flow_dit` plus a frozen text encoder — language-conditioned                            |
+I sized the defaults against that 533 ms re-plan window on the Orin Nano: one observation step where Diffusion Policy uses two, which halves the vision cost, and five integration steps. Data decided how the backbone is trained. Forty demonstrations are too few to fine-tune a vision transformer, so DINOv2-small stays frozen, and only what sits on top of it trains: a small transformer per camera and the network that predicts the velocity.
 
-`flow_unet` and `flow_dit` share the same frozen DINOv2 encoder, objective, optimizer, and data pipeline — **only the velocity field differs**, so comparing them is a controlled experiment rather than a capacity comparison.
+`flow_dit_small` is the deployment default. On the laptop that drove the arm (an RTX 5060 laptop GPU), it re-plans in 33 ms, against 83 ms for `flow_dit_base`. The base model has lower error on replayed demonstrations (0.200 joint units against 0.284) and comes next once the small one behaves on the arm. Training holds no episodes out, so that comparison measures fit and does not settle whether the base model's trainable parameters, more than twice as many (41.2M against 18.2M), overfit a few dozen demonstrations.
 
-## Sized for the edge
+`flow_dit` uses a transformer to predict the velocity. Its twin, `flow_unet`, swaps in Diffusion Policy's 1D convolutional U-Net and keeps everything else, a controlled comparison with no results reported yet.
 
-- A frozen `dinov2-small` backbone with a small trainable transformer head per camera — about 40 demonstrations per task cannot fine-tune a ViT.
-- One observation step, a 48-step action horizon (1.6 s at 30 fps), and 16 executed actions per re-plan (533 ms).
-- Measured off-board, `flow_dit_small` re-plans in 33 ms versus 83 ms for `flow_dit_base`; the larger model is more accurate on replayed episodes (0.200 vs. 0.284 joint units).
+## What the recordings taught us
 
-## Data
-
-Two teleoperated sessions at 30 fps, recording opposite directions of the same manipulation, plus a third lever-pulling task:
+We teleoperated with a leader arm and recorded at 30 fps. The two toast tasks are the same manipulation run in opposite directions.
 
 | Task                                                   | Demonstrations | Frames |
 | ------------------------------------------------------ | :------------: | :----: |
-| Collect toast from the toaster and place it on the pan |       50       | 29,828 |
 | Pick up a bread slice and put it in the toaster        |       40       | 23,847 |
+| Pull the toaster lever                                 |       40       | 15,986 |
+| Collect toast from the toaster and place it on the pan |       50       | 29,828 |
 
-The repository also patches a uint8 overflow in LeRobot's dataset statistics that collapsed the image standard deviations, and corrects a task annotation that described the reverse of the recorded demonstrations — harmless for the vision-only policies, but a language-conditioned policy would perform the opposite task.
+Our toast recordings ran for a fixed 20 seconds, and about a quarter of the placing frames show no motion. Those idle stretches can make a policy freeze mid-task, because the same observation is followed by motion in some episodes and by stillness in others. We trimmed idle frames from both toast datasets and trained a second policy on each trimmed set. The lever demonstrations, recorded later, are shorter, about 13 seconds on average.
 
-## Status
+Teleoperation sends about 420 CAN frames a second, and with the kernel's default 10-frame transmit queue one USB hiccup could abort an episode. I raised the queue to 1000 frames and capped the Rerun visualizer's memory after its stalls froze the camera and joint streams. The last seven placing episodes came after these fixes.
 
-Trained `flow_dit` policies have been rolled out on the real arm; no success rates are reported yet. Deployment on the Jetson Orin Nano itself has not been run, and the Orin latency figures in the repository are desk estimates, not measurements.
+Both cameras are rigidly mounted and the actions are absolute joint positions, so where things sit in the image matters. We fixed the camera placement and controlled the lighting. Augmentation stayed mild, and we tried to keep the background plain. The wrist camera's auto-exposure gave black frames, so we set its exposure by hand each session.
+
+The recording script's default task string also mislabelled both toast datasets. The collecting set was recorded under the placing instruction, and after I flipped the default, the placing set inherited the collecting one. Our policies never read the string, but a language-conditioned policy would do the opposite task. I corrected both labels, and the script now refuses to record without one. I also patched an 8-bit overflow in LeRobot's image statistics that had zeroed the per-episode image standard deviations in the collecting data.
+
+## Where it stands
+
+Trained `flow_dit` policies have run on the real arm for the placing and collecting tasks, one task per saved rollout. No success rates are reported yet, so these runs are qualitative, and no policy has run on the Jetson yet. The repository has no state machine to chain the policies.
+
+Five `flow_dit_small` checkpoints ship through Git LFS, each trained for 40,000 steps at batch 128 with the same seed: two per toast task (one of each pair on idle-trimmed data) and one for the lever, added last. The repository documents no lever rollout.
 
 Code: [github.com/souravselvaraj/Revolute](https://github.com/souravselvaraj/Revolute)
