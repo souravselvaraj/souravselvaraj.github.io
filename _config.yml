@@ -121,7 +121,7 @@ footer_text: |
     }
   })();
   </script>
-  <script defer src="/assets/ambient/ambient.js?v=13"></script>
+  <script defer src="/assets/ambient/ambient.js?v=14"></script>
 keywords: robotics, legged robots, quadruped, humanoid, model predictive control, whole-body control, reinforcement learning, robot learning, WPI
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: 🤖 # the emoji used as the favicon (alternatively, provide image name in /assets/img/)

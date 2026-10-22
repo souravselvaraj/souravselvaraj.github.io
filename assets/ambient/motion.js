@@ -6,13 +6,17 @@
  * One fixed <canvas> behind the page does the rest, from the attributes ambient.js sets on <html>:
  *   rain     slanting streaks (data-amb-wx = rain | storm; storm adds a faint lightning flash)
  *   snow     flakes that sway and drift downwind
- *   wind     thin gust lines crossing the sky, and leaves tumbling across downwind
- *            (data-amb-wind = breezy | windy; no leaves in snow)
+ *   wind     thin gust lines crossing the sky (data-amb-wind = breezy | windy), and leaves tumbling
+ *            across downwind (windy only, and not in snow)
  *   night    twinkling stars and a rare shooting star (phase night, clear or partly cloudy)
  *
- * Rain, snow, leaves and gusts cover the whole window, over the text too (a deliberate choice: the
- * weather is meant to be seen); they are thin and translucent so the text stays readable. Stars stay
- * in the sky, fading out by 75% of the window height like the sky gradient.
+ * No weather moves behind the text column: rain, snow, gusts, leaves and the storm flash are masked to
+ * the side margins with a soft edge, and fade out down the window by 70% of its height, as the static
+ * CSS rain and snow do, so the weather stays in the sky beside the page instead of crossing or sitting
+ * next to what the visitor is reading. It is also kept sparse, faint and unhurried: peripheral vision
+ * is drawn to fast, high-contrast motion. Where there is no margin to speak of (phones, narrow
+ * windows) it is not drawn at all. Stars and shooting stars are not masked: they keep the whole width,
+ * fading out by 75% of the window height like the sky gradient.
  * Cost: one requestAnimationFrame loop, stopped when the scene has nothing to draw, while the tab is
  * hidden, and under prefers-reduced-motion or after "Pause animation" (ambient.js's credit line; then
  * html.amb-motion is removed and the static CSS sky returns, including its static rain and snow).
@@ -36,6 +40,12 @@
   var scene = null;
   var raf = 0;
   var last = 0;
+  // Weather mask (see measure): px, measured outward from the edge of the text column.
+  var GAP = 16; // clear space beside the column (also absorbs the scrollbar's shift of the centre)
+  var FEATHER = 72; // width of the soft edge
+  var MIN_MARGIN = 48; // narrower margins get no weather at all
+  var mask = null; // horizontal gradient: opaque in the margins, transparent over the column; null = no room
+  var vmask = null; // vertical gradient: opaque near the top, transparent from 70% of the window height down
 
   // Seeded generator (mulberry32), so a resize or scene change does not reshuffle the stars.
   function rng(seed) {
@@ -77,6 +87,30 @@
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // --amb-frame is the content width of header and main (site.css), centred in the window. Distances from the
+    // centre: weather is fully hidden within `inner` and fully shown beyond `outer`; `margin` is the room each side.
+    var frame = parseFloat(getComputedStyle(root).getPropertyValue("--amb-frame")) || 920;
+    var inner = frame / 2 + GAP;
+    var outer = inner + FEATHER;
+    var margin = W / 2 - inner;
+    mask = vmask = null;
+    if (margin >= MIN_MARGIN) {
+      var clamp = function (v) {
+        return Math.min(Math.max(v, 0), 1);
+      };
+      mask = ctx.createLinearGradient(0, 0, W, 0);
+      mask.addColorStop(0, "#000");
+      mask.addColorStop(clamp((W / 2 - outer) / W), "#000");
+      mask.addColorStop(clamp((W / 2 - inner) / W), "rgba(0,0,0,0)");
+      mask.addColorStop(clamp((W / 2 + inner) / W), "rgba(0,0,0,0)");
+      mask.addColorStop(clamp((W / 2 + outer) / W), "#000");
+      mask.addColorStop(1, "#000");
+      vmask = ctx.createLinearGradient(0, 0, 0, H);
+      vmask.addColorStop(0, "#000");
+      vmask.addColorStop(0.15, "#000");
+      vmask.addColorStop(0.7, "rgba(0,0,0,0)");
+      vmask.addColorStop(1, "rgba(0,0,0,0)");
+    }
   }
 
   // ------------------------------------------------------------------------------------------ scene
@@ -91,6 +125,7 @@
     var dir = from > 0 && from < 180 ? -1 : 1;
     var w = { calm: 0.12, breezy: 0.45, windy: 0.9 }[wind] || 0.12;
     var area = W * H;
+    var side = !!mask; // room in the margins for weather
     var s = {
       phase: phase,
       wx: wx,
@@ -103,24 +138,26 @@
       flakes: [],
       stars: [],
       gusts: [],
-      gustRate: wind === "windy" ? 1.6 : wind === "breezy" ? 0.5 : 0, // new gusts per second
+      gustRate: !side ? 0 : wind === "windy" ? 0.3 : wind === "breezy" ? 0.08 : 0, // new gusts per second
       leaves: [],
-      leafRate: wx === "snow" ? 0 : wind === "windy" ? 1.4 : wind === "breezy" ? 0.7 : 0, // new leaves per second
-      leafMax: wind === "windy" ? 18 : 10,
+      // Leaves only when windy (Beaufort 4+, about 20 km/h and up); in a breeze they rustle on the trees.
+      leafRate: side && wind === "windy" && wx !== "snow" ? 0.2 : 0, // new leaves per second
+      leafMax: 3,
       leafColours: leafColours(dark),
       storm: wx === "storm",
+      flashes: side && wx === "storm",
       flash: 0,
       nextFlash: 4 + Math.random() * 8,
       meteor: null,
       nextMeteor: 6 + Math.random() * 20,
     };
     var i;
-    if (wx === "rain" || wx === "storm") {
-      var nd = Math.min(Math.round((area / 3400) * (s.storm ? 1.5 : 1)), 420);
+    if (side && (wx === "rain" || wx === "storm")) {
+      var nd = Math.min(Math.round((area / 14000) * (s.storm ? 1.5 : 1)), 120);
       for (i = 0; i < nd; i++) s.drops.push(drop(s, true));
     }
-    if (wx === "snow") {
-      var nf = Math.min(Math.round(area / 6500), 220);
+    if (side && wx === "snow") {
+      var nf = Math.min(Math.round(area / 13000), 110);
       for (i = 0; i < nf; i++) s.flakes.push(flake(s, true));
     }
     if (phase === "night" && (wx === "clear" || wx === "partly")) {
@@ -137,12 +174,13 @@
         });
       }
     }
-    s.idle = !s.drops.length && !s.flakes.length && !s.stars.length && !s.gustRate && !s.leafRate && !s.storm;
+    s.weather = !!(s.drops.length || s.flakes.length || s.gustRate || s.leafRate || s.flashes); // anything to mask
+    s.idle = !s.weather && !s.stars.length;
     return s;
   }
 
   function drop(s, anywhere) {
-    var vy = (s.storm ? 1100 : 820) * (0.75 + Math.random() * 0.5);
+    var vy = (s.storm ? 640 : 480) * (0.75 + Math.random() * 0.5);
     var y = anywhere ? Math.random() * H : -30 - Math.random() * 100;
     var vx = s.dir * vy * (0.08 + s.wind * 0.45);
     return {
@@ -151,7 +189,7 @@
       vy: vy,
       vx: vx,
       len: 10 + Math.random() * 12,
-      a: 0.16 + Math.random() * 0.14,
+      a: 0.06 + Math.random() * 0.06,
     };
   }
 
@@ -164,12 +202,12 @@
       sway: 10 + Math.random() * 18,
       f: 0.6 + Math.random() * 1.2,
       p: Math.random() * 6.283,
-      a: 0.55 + Math.random() * 0.4,
+      a: 0.3 + Math.random() * 0.2,
     };
   }
 
   /** Olive, amber, rust and ochre, a little of the way to the sky colour so they sit in the palette. At night they
-      stay nearly as bright as by day: darker leaves vanish against the night sky. */
+      go further toward the sky: dim shapes in the dark, not lit-up ones. */
   function leafColours(dark) {
     var sky = token("--amb-sky", dark ? [25, 34, 61] : [196, 227, 246]);
     return [
@@ -179,7 +217,7 @@
       [160, 128, 62],
     ].map(function (b) {
       return b.map(function (v, i) {
-        return dark ? v * 0.92 * 0.85 + sky[i] * 0.15 : v * 0.75 + sky[i] * 0.25;
+        return dark ? v * 0.6 + sky[i] * 0.4 : v * 0.75 + sky[i] * 0.25;
       });
     });
   }
@@ -188,12 +226,12 @@
     return {
       x: s.dir > 0 ? -20 : W + 20,
       y: 10 + Math.random() * H * 0.55,
-      vx: s.dir * (110 + Math.random() * 170) * (0.55 + s.wind * 0.7),
+      vx: s.dir * (75 + Math.random() * 120) * (0.55 + s.wind * 0.7),
       vy: -20 + Math.random() * 40,
       size: 8 + Math.random() * 6,
       rot: Math.random() * 6.283,
-      spin: (Math.random() - 0.5) * 5, // rad/s
-      flip: 1 + Math.random() * 1.8, // rad/s: the leaf turning over, drawn as a squash
+      spin: (Math.random() - 0.5) * 2.5, // rad/s
+      flip: 0.6 + Math.random() * 0.9, // rad/s: the leaf turning over, drawn as a squash
       p: Math.random() * 6.283,
       t: 0,
       c: Math.floor(Math.random() * 4),
@@ -206,7 +244,7 @@
       x: s.dir > 0 ? -len : W + len,
       y: 30 + Math.random() * H * 0.55,
       len: len,
-      v: s.dir * (380 + Math.random() * 360) * (0.6 + s.wind * 0.6),
+      v: s.dir * (260 + Math.random() * 250) * (0.6 + s.wind * 0.6),
       bend: (Math.random() - 0.5) * 18,
       t: 0,
       life: 1.6 + Math.random() * 1.4,
@@ -221,24 +259,22 @@
     var dt = last ? Math.min((now - last) / 1000, 0.05) : 0.016;
     last = now;
     var s = scene;
-    var c = s.text;
     var i;
     var k;
     ctx.clearRect(0, 0, W, H);
 
-    if (s.storm) {
-      s.nextFlash -= dt;
-      if (s.nextFlash <= 0) {
-        s.flash = 1;
-        s.nextFlash = 7 + Math.random() * 14;
-      }
-      if (s.flash > 0) {
-        // one soft flash with a weaker second pulse; well under 3 flashes per second
-        var fa = s.flash > 0.6 ? (s.flash - 0.6) * 2.5 : s.flash < 0.35 ? s.flash * 1.4 : 0;
-        ctx.fillStyle = rgba(s.dark ? [190, 200, 255] : [255, 255, 255], 0.07 * fa);
-        ctx.fillRect(0, 0, W, H);
-        s.flash = Math.max(0, s.flash - dt * 1.6);
-      }
+    if (s.weather) {
+      drawWeather(s, dt, now);
+      // Keep the weather to the side margins (erase what was drawn over the text column, with a soft edge) and
+      // to the upper part of the window.
+      ctx.globalCompositeOperation = "destination-in";
+      ctx.fillStyle = mask;
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = vmask;
+      ctx.fillRect(0, 0, W, H);
+      // Stars and shooting stars are not masked: they go in behind the weather. All are drawn in one colour,
+      // so drawing them behind (in reverse order) looks exactly like drawing them first.
+      ctx.globalCompositeOperation = "destination-over";
     }
 
     if (s.stars.length) {
@@ -281,6 +317,29 @@
         ctx.lineTo(m.x - m.vx * 0.16, m.y - m.vy * 0.16);
         ctx.stroke();
         if (m.t > 0.9) s.meteor = null;
+      }
+    }
+    ctx.globalCompositeOperation = "source-over";
+
+    schedule();
+  }
+
+  /** Lightning, rain, snow, gusts and leaves, over the whole canvas; frame() then masks them to the margins. */
+  function drawWeather(s, dt, now) {
+    var c = s.text;
+    var i;
+    if (s.flashes) {
+      s.nextFlash -= dt;
+      if (s.nextFlash <= 0) {
+        s.flash = 1;
+        s.nextFlash = 7 + Math.random() * 14;
+      }
+      if (s.flash > 0) {
+        // one soft flash with a weaker second pulse; well under 3 flashes per second
+        var fa = s.flash > 0.6 ? (s.flash - 0.6) * 2.5 : s.flash < 0.35 ? s.flash * 1.4 : 0;
+        ctx.fillStyle = rgba(s.dark ? [190, 200, 255] : [255, 255, 255], 0.04 * fa);
+        ctx.fillRect(0, 0, W, H);
+        s.flash = Math.max(0, s.flash - dt * 1.6);
       }
     }
 
@@ -342,7 +401,7 @@
         }
         var env = Math.sin((g.t / g.life) * Math.PI);
         var tail = g.x - s.dir * g.len;
-        ctx.strokeStyle = rgba(c, 0.2 * env * (s.dark ? 1.2 : 1));
+        ctx.strokeStyle = rgba(c, 0.07 * env * (s.dark ? 1.2 : 1));
         ctx.beginPath();
         ctx.moveTo(tail, g.y);
         ctx.quadraticCurveTo((tail + g.x) / 2, g.y + g.bend, g.x, g.y - g.bend * 0.3);
@@ -368,7 +427,7 @@
         ctx.translate(L.x, L.y);
         ctx.rotate(L.rot);
         ctx.scale(1, 0.35 + 0.65 * Math.abs(sq)); // never edge-on: a sliver reads as a scratch
-        ctx.globalAlpha = 0.9;
+        ctx.globalAlpha = 0.4;
         ctx.fillStyle = rgba(s.leafColours[L.c], 1);
         ctx.beginPath(); // a pointed oval: two curves from tip to tip
         ctx.moveTo(-L.size, 0);
@@ -390,8 +449,6 @@
       }
       ctx.globalAlpha = 1;
     }
-
-    schedule();
   }
 
   function schedule() {
