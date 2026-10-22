@@ -4,7 +4,7 @@ title: photography
 permalink: /photography/
 description: Moments I've caught away from the lab — cities, water, and the occasional bird.
 nav: true
-nav_order: 6
+nav_order: 5
 ---
 
 <p>A few frames from around the world, shot when I'm not chasing robots. Click any photo to view it larger.</p>

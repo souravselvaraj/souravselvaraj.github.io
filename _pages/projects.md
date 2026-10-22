@@ -4,7 +4,7 @@ title: projects
 permalink: /projects/
 description: Research and selected projects in legged robotics, robot learning, and control.
 nav: true
-nav_order: 3
+nav_order: 1
 display_categories: [research, projects]
 horizontal: false
 ---

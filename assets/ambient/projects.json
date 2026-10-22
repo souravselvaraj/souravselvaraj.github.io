@@ -1,0 +1,33 @@
+---
+layout: null
+permalink: /assets/ambient/projects.json
+sitemap: false
+---
+{%- comment -%}
+  Project order for the previous/next pager on /projects/<slug>/ (ambient.js). Mirrors the
+  ordering of _pages/projects.md: display_categories in order, then importance; redirect-only
+  projects are skipped. Liquid inside JSON, so this file is in .prettierignore.
+{%- endcomment -%}
+{%- assign index = site.pages | where: "permalink", "/projects/" | first -%}
+{%- assign first = true -%}
+[
+{%- if site.enable_project_categories and index.display_categories -%}
+  {%- for category in index.display_categories -%}
+    {%- assign items = site.projects | where: "category", category | sort: "importance" -%}
+    {%- for p in items -%}
+      {%- if p.redirect -%}{%- continue -%}{%- endif -%}
+      {%- unless first -%},{%- endunless -%}
+      {%- assign first = false %}
+  {"url": {{ p.url | relative_url | jsonify }}, "title": {{ p.title | jsonify }}}
+    {%- endfor -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- assign items = site.projects | sort: "importance" -%}
+  {%- for p in items -%}
+    {%- if p.redirect -%}{%- continue -%}{%- endif -%}
+    {%- unless first -%},{%- endunless -%}
+    {%- assign first = false %}
+  {"url": {{ p.url | relative_url | jsonify }}, "title": {{ p.title | jsonify }}}
+  {%- endfor -%}
+{%- endif %}
+]
