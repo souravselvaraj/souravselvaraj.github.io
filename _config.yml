@@ -121,7 +121,7 @@ footer_text: |
     }
   })();
   </script>
-  <script defer src="/assets/ambient/ambient.js?v=14"></script>
+  <script defer src="/assets/ambient/ambient.js?v=15"></script>
 keywords: robotics, legged robots, quadruped, humanoid, model predictive control, whole-body control, reinforcement learning, robot learning, WPI
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: 🤖 # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
@@ -199,7 +199,7 @@ posts_in_search: true
 bib_search: true
 
 # Dimensions
-max_width: 920px # matches --amb-frame in assets/ambient/site.css
+max_width: 920px # only feeds image `sizes` hints; the real column width is --amb-frame in assets/ambient/site.css
 
 # -----------------------------------------------------------------------------
 # Open Graph & Schema.org
@@ -634,7 +634,7 @@ third_party_libraries:
     url:
       # Head CSS hook: head.liquid prints this URL as a render-blocking <link rel=stylesheet> before main.css
       # (no SRI). It loads the site's own stylesheet, which @imports the Inter web font.
-      fonts: "/assets/ambient/site.css?v=5"
+      fonts: "/assets/ambient/site.css?v=6"
   highlightjs:
     integrity:
       css:

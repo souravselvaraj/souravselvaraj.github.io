@@ -80,6 +80,17 @@
     return fade * fade;
   }
 
+  /** Width of the text column in CSS px: the main container's content box, which site.css caps at --amb-frame. */
+  function frameWidth() {
+    var main = document.querySelector('[role="main"]');
+    if (main) {
+      var cs = getComputedStyle(main);
+      var w = main.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      if (w > 0) return w;
+    }
+    return 42.5 * (parseFloat(getComputedStyle(root).fontSize) || 16); // --amb-frame
+  }
+
   function measure() {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     W = window.innerWidth;
@@ -87,9 +98,10 @@
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    // --amb-frame is the content width of header and main (site.css), centred in the window. Distances from the
-    // centre: weather is fully hidden within `inner` and fully shown beyond `outer`; `margin` is the room each side.
-    var frame = parseFloat(getComputedStyle(root).getPropertyValue("--amb-frame")) || 920;
+    // The text column (site.css --amb-frame, in rem and growing with the window) is centred in the window.
+    // Distances from the centre: weather is fully hidden within `inner` and fully shown beyond `outer`; `margin`
+    // is the room each side.
+    var frame = frameWidth();
     var inner = frame / 2 + GAP;
     var outer = inner + FEATHER;
     var margin = W / 2 - inner;
