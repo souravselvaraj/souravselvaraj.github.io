@@ -99,9 +99,12 @@
   color-scheme: light;
   --amb-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --amb-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-  --amb-frame: 920px; /* content width of header and main; _config.yml max_width matches */
+  /* One column for header, text and media, so all three share both edges. 42.5rem = 40em of the 17 px body
+     text, about 80 characters per line; with the fluid root size below it grows from 680 px (windows up to
+     1280 px wide) to 808 px at 1920 and 850 px from 2133. */
+  --amb-frame: 42.5rem;
   --amb-gutter: 1.5rem;
-  --amb-measure: 34em; /* ~70 characters per rendered line of Inter at 17 px (measured; 38em gave ~78) */
+  --amb-measure: 100%; /* prose fills the column, so its right edge meets the media's */
   --amb-nav-h: 3.5rem;
   --amb-radius: 6px;
   --amb-fade: 1.6s;
@@ -1143,6 +1146,14 @@ html:root:root :is(a, .nav-link, .card-title) {
 }
 
 /* ------------------------------------------------------------------------------------- base type */
+
+/* The page scales with wide windows: a 16 px root up to 1280 px wide, growing linearly to 19 px at 1920 and
+   20 px from 2133. Everything sized in rem (column, header, spacing, type) grows together, so the line length
+   stays the same. Percentages keep the visitor's own default font size as the base. tailwind's base layer pins
+   html to 16px; this unlayered rule wins. */
+html:root:root {
+  font-size: clamp(100%, 62.5% + 0.46875vw, 125%);
+}
 
 html:root:root body {
   font-family: var(--amb-font);
