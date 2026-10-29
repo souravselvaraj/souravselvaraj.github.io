@@ -76,8 +76,8 @@ cv:
         start_date: 2025-11
         end_date: present
         summary: >-
-          Advisor: Dr. Mahdi Agheli. Co-first author with Owen Sullivan. In simulation, GaitNet reached 71%
-          success (5-seed mean) on ground with 40 to 70% holes, against 38% for OCS2's own trot.
+          Advisor: Dr. Mahdi Agheli. Co-first author with Owen Sullivan. In simulation, GaitNet reached 70%
+          success on ground with 40 to 70% holes, against 38% for OCS2's own trot.
 
       - company: NIT Trichy
         url: https://www.nitt.edu/
@@ -99,9 +99,9 @@ cv:
     Publications:
       - title: "SCRUB: Contact-Based Surface-Frame Estimation for Force–Motion Control with an Armless Quadruped"
         url: /projects/scrub/
-        publisher: To be submitted to IEEE RA-L
+        publisher: Submitted to IEEE RA-L
         releaseDate: 2026
-        summary: S. Selvaraj and M. Agheli.
+        summary: S. Selvaraj, J. P. Espinosa Chessal, and M. Agheli.
 
       - title: "GaitNet: Where Do I Step?"
         url: /projects/gaitnet/

@@ -81,6 +81,6 @@ SCRUB depends on a force sensor inside the tool, and its estimate assumes the to
 
 ## Status
 
-To be submitted to IEEE RA-L (2026): S. Selvaraj and M. Agheli, "SCRUB: Contact-Based Surface-Frame Estimation for Force–Motion Control with an Armless Quadruped."
+Submitted to IEEE RA-L (2026): S. Selvaraj, J. P. Espinosa Chessal, and M. Agheli, "SCRUB: Contact-Based Surface-Frame Estimation for Force–Motion Control with an Armless Quadruped."
 
 Video: [youtu.be/R2P-cebOBVM](https://youtu.be/R2P-cebOBVM)

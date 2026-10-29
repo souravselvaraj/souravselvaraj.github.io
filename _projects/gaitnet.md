@@ -50,7 +50,7 @@ We tested the frozen GaitNet on OCS2 in Gazebo, on tile strips with 0 to 70% hol
 
 | Planner                                | Success at 40-70% voids |
 | -------------------------------------- | :---------------------: |
-| **GaitNet** (mean of 5 training seeds) |         **71%**         |
+| **GaitNet** (one trained checkpoint)   |         **70%**         |
 | OCS2 trot                              |           38%           |
 
 The fastest command and densest voids lie outside GaitNet's training range, and the Gazebo tiles are larger than its training cells, so equal void fractions are not the same ground. We suspect GaitNet's lead on dense voids is the stepping-stone effect described above, though no test here isolates it.
