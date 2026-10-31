@@ -103,7 +103,7 @@ cv:
         releaseDate: 2026
         summary: S. Selvaraj, J. P. Espinosa Chessal, and M. Agheli.
 
-      - title: "GaitNet: Where Do I Step?"
+      - title: "GaitNet: Learning to Choose the Gait for a Model-Based Locomotion Controller"
         url: /projects/gaitnet/
         publisher: To be submitted to L4DC 2027
         releaseDate: 2026

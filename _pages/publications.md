@@ -2,7 +2,7 @@
 layout: page
 permalink: /publications/
 title: publications
-description: Manuscripts in preparation. Each entry notes the venue it will be submitted to.
+description: Manuscripts submitted or in preparation. Each entry notes its venue and status.
 nav: true
 nav_order: 2
 ---

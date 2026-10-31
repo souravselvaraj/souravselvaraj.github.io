@@ -61,7 +61,7 @@ So far we have moved GaitNet from one controller to one other, and each new cont
 
 ## Status
 
-To be submitted to L4DC 2027: O. Sullivan\*, S. Selvaraj\*, and M. Agheli, "GaitNet: Where Do I Step?" \*Equal contribution.
+To be submitted to L4DC 2027: O. Sullivan\*, S. Selvaraj\*, and M. Agheli, "GaitNet: Learning to Choose the Gait for a Model-Based Locomotion Controller" \*Equal contribution.
 
 In September 2026 we ran an earlier, frozen GaitNet checkpoint on a real Go1 with OCS2 and an onboard depth camera. With a few hand-set deployment rules on top of the policy, it stepped acyclically through a field of 40 to 50 mm blocks. That checkpoint, trained in November 2025, predates the candidate attention and the inverse footstep model. These runs are qualitative, and every number on this page comes from simulation.
 
