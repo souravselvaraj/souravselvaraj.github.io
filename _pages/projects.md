@@ -2,7 +2,7 @@
 layout: page
 title: projects
 permalink: /projects/
-description: My research in the ALMaS Research Group at WPI comes first, followed by other projects on a humanoid, a quadruped, robot arms and a quadrotor.
+description: My research in the ALMaS Research Group at WPI comes first, then other projects on a humanoid, a quadruped, robot arms and a quadrotor.
 nav: true
 nav_order: 1
 display_categories: [research, projects]

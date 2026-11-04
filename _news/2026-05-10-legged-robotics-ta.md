@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-This summer (May to August 2026), I'm a teaching assistant and lab curriculum developer for *RBE 521: Legged Robotics*, a graduate course at [WPI](https://www.wpi.edu/) taught by Dr. Mahdi Agheli. I'm building hands-on lab modules for the course on the Unitree Go1 and G1 robots.
+From May to August 2026, I was a teaching assistant and lab curriculum developer for *RBE 521: Legged Robotics*, a graduate course at [WPI](https://www.wpi.edu/) taught by Dr. Mahdi Agheli. I built hands-on lab modules for it on the Unitree Go1 and G1 robots.

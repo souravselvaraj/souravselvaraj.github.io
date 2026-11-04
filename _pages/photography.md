@@ -2,12 +2,12 @@
 layout: page
 title: photography
 permalink: /photography/
-description: A few of my photographs, several of them taken near the water.
+description: A few of my photographs, several taken near the water.
 nav: true
 nav_order: 5
 ---
 
-<p>I take photographs when I'm not working on robots. Click any photo to see it larger.</p>
+<p>I take photographs when I'm not working on robots. Click any photo to enlarge it.</p>
 
 <div class="row mt-4">
     <div class="col-sm-4 mb-4">
