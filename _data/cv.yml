@@ -12,12 +12,10 @@ cv:
   location: Worcester, MA
   image: ""
   summary: >-
-    I study how legged robots choose where to touch and how hard to push. I'm an M.S. student in
-    Robotics Engineering at WPI, advised by Dr. Mahdi Agheli in the ALMaS Research Group. I lead SCRUB,
-    where our armless Unitree Go1 presses a tool against a wall or column it has no model of and slides
-    it along the surface. With Owen Sullivan, I work on GaitNet, a learned planner that picks each footstep for a
-    quadruped crossing ground full of holes. My research interests are legged robotics, whole-body control and
-    robot learning, and I'm applying to PhD programs for Fall 2027.
+    I study how legged robots choose where to touch the world and how hard to push. I'm an M.S. student in
+    Robotics Engineering at WPI, advised by Dr. Mahdi Agheli in the ALMaS Research Group. My research
+    interests are legged robotics, whole-body control and robot learning, and I'm applying to PhD programs
+    for Fall 2027.
 
   social_networks:
     - network: GitHub
@@ -51,7 +49,7 @@ cv:
         awarder: Robotics Engineering Department, Worcester Polytechnic Institute
         date: 2026-08
         summary: >-
-          Merit-based tuition award for RBE graduate students; one tuition credit for Fall 2026.
+          Merit-based tuition award for RBE graduate students. One tuition credit for Fall 2026.
 
       - title: Winner, Smart India Hackathon 2023
         awarder: Ministry of Education, India
@@ -114,53 +112,38 @@ cv:
       - name: Humanoid ice skating with reinforcement learning (Jul 2026 – present)
         url: https://youtu.be/F5EM3TZRRbE
         summary: >-
-          I train a simulated Unitree G1 with PPO to skate on thin passive blades, with a contact model I
-          set up so each blade glides along its length and grips sideways. In mjlab, with no motion capture,
-          reference motion or imitation reward, policies from three seeds had mean speed errors of 0.11 and
-          0.16 m/s at 0.6 and 0.9 m/s commands, with 3 to 4 cm/s of sideways blade slip. Everything so far
-          is in simulation. The linked video shows my newer Isaac Lab version, trained to follow a reference
-          gait recorded from an earlier policy of mine that I'd shaped toward a human-like stroke.
+          I train a Unitree G1 with PPO to skate on thin passive blades. Everything so far is in
+          simulation. The linked video shows my newer Isaac Lab version.
 
       - name: Humanoid bimanual lifting with residual AMP-PPO (May 2026 – Jul 2026)
         url: https://github.com/shuayyy/humanoid-amp-ppo
         summary: >-
-          A collaboration with Mohamed Shuaib Nasurudeen, who built the training stack; the code is in his
-          repository. A Unitree G1 learns in MuJoCo simulation to grasp a box with both arms and lift it.
-          My part was the residual version of the lift policy, a second network whose output is added to
-          the frozen locomotion policy's actions: I set it up, made the curricula adapt to the lift success
-          rate and wrote most of the posture rewards. In simulation the converged policies hold the box at
-          the goal height, within 3 cm of the target position. A lifting policy from the project also lifted
-          a box on the real G1 (a qualitative result).
+          Mohamed Shuaib Nasurudeen built the training stack, and the code is in his repository. My part
+          was the residual lift policy. A policy from the project lifted a box on the real G1 (qualitative only).
 
       - name: Conditional flow matching policies for robot manipulation (Apr 2026 – May 2026)
         url: https://github.com/souravselvaraj/Robomimic-Flowmatching
         summary: >-
-          I wrote a Conditional Flow Matching policy for robomimic and compared it with Diffusion Policy on
-          the same U-Net backbone: five simulated tasks, low-dimensional state, three seeds each. Success was
-          comparable (flow matching ahead on Square, slightly behind on Tool Hang and Transport, both at 100%
-          on Lift and Can). With 10 Euler steps it samples an action chunk about 11× faster than Diffusion
-          Policy's 100-step DDPM sampler.
+          I wrote a flow matching policy for robomimic. Its success was comparable to Diffusion Policy's on
+          five simulated tasks. With 10 Euler steps, it samples actions about 11× faster than Diffusion Policy's
+          100-step DDPM sampler.
 
       - name: Acrobatic quadrotor flight with L1 adaptation (Oct 2025 – Dec 2025)
         url: https://github.com/souravselvaraj/crazyflie-se3-l1
         summary: >-
-          For my Robot Control course, I wrote an SE(3) geometric controller with an L1 adaptive layer for
-          a simulated Crazyflie in ROS 2 and Gazebo; it flies a 360° roll flip in place and recovers to
-          hover. In one logged run, position RMSE was 2.2 cm in x and y and 7.0 cm in z, and the L1 layer
-          cancelled 94%, 86% and 71% of an injected step torque on roll, pitch and yaw. I have not flown
-          it on hardware.
+          For my Robot Control course, I wrote an SE(3) controller with L1 adaptation for a Crazyflie. In ROS 2
+          and Gazebo simulation, it flies a 360° roll flip. I have not flown it on hardware.
 
       - name: Autonomous rover for the ISRO Robotics Challenge 2024 (Dec 2022 – Aug 2024)
         summary: >-
-          A six-wheeled rocker-bogie rover that mapped terrain with ORB-SLAM, planned kinodynamic paths
-          and ran on custom control electronics.
+          Our six-wheeled rocker-bogie rover mapped terrain with ORB-SLAM, planned kinodynamic paths and ran
+          on custom control electronics.
 
       - name: Additional projects
         summary: >-
-          Visuomotor imitation learning on robosuite's Pick-and-Place Can task from two camera views, with
-          a transformer behavior-cloning policy and a Diffusion Policy
-          ([code](https://github.com/souravselvaraj/Visuomotor-Imitation-Learning)). Task and motion
-          planning with PDDL and OMPL.
+          Visuomotor imitation learning on robosuite's Pick-and-Place Can task, with transformer behavior
+          cloning and Diffusion Policy ([code](https://github.com/souravselvaraj/Visuomotor-Imitation-Learning)).
+          Task and motion planning with PDDL and OMPL.
 
     Teaching Experience:
       - bullet: >-
