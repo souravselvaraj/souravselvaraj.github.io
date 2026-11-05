@@ -27,7 +27,7 @@ I study how legged robots choose where to touch the world and how hard to push. 
 
 **I am applying to PhD programs for Fall 2027.**
 
-I lead [SCRUB]({{ '/projects/scrub/' | relative_url }}), in which our Go1 slides a tool along an unmapped wall or column. It works out which way the surface faces from the contact itself. It's submitted to IEEE RA-L.
+I lead [SCRUB]({{ '/projects/scrub/' | relative_url }}), in which our Go1 slides a tool along an unmapped wall or column. It works out which way the surface faces from the contact itself. It's on [arXiv](https://arxiv.org/abs/2611.06649) and submitted to IEEE RA-L.
 
 In [GaitNet]({{ '/projects/gaitnet/' | relative_url }}), a learned planner picks each footstep for a model-based controller. I'm co-first author with Owen Sullivan, whose master's thesis started it. It's to be submitted to L4DC 2027.
 

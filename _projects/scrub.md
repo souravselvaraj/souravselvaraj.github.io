@@ -57,4 +57,6 @@ Across 8 to 16 mm/s and 5 to 15 N targets, SCRUB completed 89 of 90 trials witho
 
 Submitted to IEEE RA-L (2026): S. Selvaraj, J. P. Espinosa Chessal, and M. Agheli, "SCRUB: Contact-Based Surface-Frame Estimation for Force–Motion Control with an Armless Quadruped."
 
+Paper: [arxiv.org/abs/2611.06649](https://arxiv.org/abs/2611.06649)
+
 Video: [youtu.be/R2P-cebOBVM](https://youtu.be/R2P-cebOBVM)
