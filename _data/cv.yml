@@ -74,8 +74,8 @@ cv:
         start_date: 2025-11
         end_date: present
         summary: >-
-          Advisor: Dr. Mahdi Agheli. Co-first author with Owen Sullivan. In simulation, GaitNet reached 70%
-          success on ground with 40 to 70% holes, against 38% for OCS2's own trot.
+          Advisor: Dr. Mahdi Agheli. Co-first author with Owen Sullivan. In simulation on OCS2, GaitNet succeeded in
+          91.5% of benchmark trials, against 84.0% for OCS2's own trot. On the densest voids, it led 86.5% to 71.5%.
 
       - company: NIT Trichy
         url: https://www.nitt.edu/

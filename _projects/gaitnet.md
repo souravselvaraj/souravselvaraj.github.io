@@ -20,7 +20,7 @@ GaitNet is a learned footstep planner for a Unitree Go1 crossing ground full of 
 
 We train GaitNet with PPO in NVIDIA Isaac Lab, where a convex MPC executes its steps. Then we run it frozen on OCS2's nonlinear MPC and whole-body controller.
 
-Controllers don't always put the foot where they're told. At speed, our training controller overshot by more than the clearance GaitNet keeps around each hole. So I fit a small inverse model to each controller's logged steps. It returns the command that lands the foot on target. On held-out steps from the training controller, it cuts landing error from 2.61 cm to 0.89 cm RMS. Refitting only this model per controller follows FADA (Xie et al., 2026).
+Controllers don't always put the foot where they're told. At speed, our training controller overshot by more than the clearance GaitNet keeps around each hole. So I fit a small inverse footstep model (IFM) to each controller's logged steps. It returns the command that lands the foot on target. On flat ground, it cuts OCS2's RMS landing error from 6 cm to 2 cm, about the clearance around each hole. Refitting only this model per controller follows FADA (Xie et al., 2026).
 
 ## Who built what
 
@@ -30,16 +30,17 @@ I added candidate attention, a motion history and the inverse models. I did most
 
 ## Results
 
-In Gazebo simulation, the baseline is OCS2's own perceptive trot with the same terrain, depth pipeline and controller. GaitNet matches the trot on sparse voids and pulls ahead on dense ones.
+In Gazebo, OCS2's own trot and static walk share GaitNet's worlds, simulated depth camera and controller. Each planner runs 600 trials, with voids covering 26 to 49% of the ground.
 
-| Planner                                | Success at 40-70% voids |
-| -------------------------------------- | :---------------------: |
-| **GaitNet** (one trained checkpoint)   |         **70%**         |
-| OCS2 trot                              |           38%           |
+| Planner                          | All trials | 49% voids |
+| -------------------------------- | :--------: | :-------: |
+| **GaitNet** (mean of five seeds) | **91.5%**  | **86.5%** |
+| OCS2 trot                        |   84.0%    |   71.5%   |
+| OCS2 static walk                 |   80.5%    |   65.5%   |
 
-The fastest commanded speed and densest voids lie outside GaitNet's training range.
+GaitNet's lead grows as the voids get denser. Without the refitted IFM, it succeeded in at most 31.2% of trials.
 
-On a real Go1, an earlier checkpoint with a few hand-set deployment rules stepped through 40 to 50 mm blocks with no fixed gait. These runs are qualitative, and every number on this page comes from simulation.
+In a wider sweep past the training range, at 70% voids, GaitNet succeeded in 50% of trials against the trot's 12%. Every number on this page comes from simulation.
 
 To be submitted to L4DC 2027: O. Sullivan\*, S. Selvaraj\*, and M. Agheli, "GaitNet: Learning to Choose the Gait for a Model-Based Locomotion Controller" \*Equal contribution.
 
