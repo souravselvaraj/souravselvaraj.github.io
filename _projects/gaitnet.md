@@ -11,11 +11,11 @@ GaitNet is a learned footstep planner for a Unitree Go1 crossing ground full of 
 
 <div class="row justify-content-center">
     <div class="col-sm-11 mt-3 mb-3">
-        {% include figure.liquid loading="eager" path="assets/img/projects/gaitnet_pipeline.jpg" title="GaitNet pipeline" class="img-fluid rounded z-depth-1" %}
+        {% include video.liquid path="assets/video/projects/gaitnet_49void_0.20mps.mp4" class="img-fluid rounded z-depth-1" width="100%" autoplay=true loop=true controls=true muted=true %}
     </div>
 </div>
 <div class="caption">
-    An earlier pipeline, before candidate attention, motion history and inverse models.
+    Hardest benchmark setting in simulation: 49% voids at 0.20 m/s.
 </div>
 
 We train GaitNet with PPO in NVIDIA Isaac Lab, where a convex MPC executes its steps. Then we run it frozen on OCS2's nonlinear MPC and whole-body controller.
