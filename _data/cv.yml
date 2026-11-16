@@ -69,13 +69,13 @@ cv:
 
       - company: ALMaS Research Group, Worcester Polytechnic Institute
         url: https://www.wpi.edu/people/faculty/mmaghelih
-        position: "Graduate Researcher: GaitNet, learned footstep planning"
+        position: "Graduate Researcher: CADENCE, learned step planning"
         location: Worcester, MA
         start_date: 2025-11
         end_date: present
         summary: >-
-          Advisor: Dr. Mahdi Agheli. Co-first author with Owen Sullivan. In simulation on OCS2, GaitNet succeeded in
-          91.5% of benchmark trials, against 84.0% for OCS2's own trot. On the densest voids, it led 86.5% to 71.5%.
+          Advisor: Dr. Mahdi Agheli. Co-first author with Owen Sullivan. In simulation on OCS2, CADENCE succeeded in
+          85.1% of benchmark trials, against 67.8% for OCS2's own trot. On the densest voids, it led 72.9% to 43.0%.
 
       - company: NIT Trichy
         url: https://www.nitt.edu/
@@ -101,9 +101,9 @@ cv:
         releaseDate: 2026
         summary: S. Selvaraj, J. P. Espinosa Chessal, and M. Agheli.
 
-      - title: "GaitNet: Learning to Choose the Gait for a Model-Based Locomotion Controller"
-        url: /projects/gaitnet/
-        publisher: To be submitted to L4DC 2027
+      - title: "CADENCE: Learning Acyclic Gaits for Model-Based Quadruped Locomotion"
+        url: /projects/cadence/
+        publisher: Submitted to L4DC 2027
         releaseDate: 2026
         summary: >-
           O. Sullivan\*, S. Selvaraj\*, and M. Agheli (\*equal contribution).
