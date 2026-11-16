@@ -208,7 +208,12 @@ ninja.data = [{
           section: "News",},{id: "news-i-m-grateful-to-have-been-selected-for-the-dr-glenn-yee-graduate-student-tuition-award-a-merit-based-award-from-wpi-s-robotics-engineering-department-for-fall-2026",
           title: 'I’m grateful to have been selected for the Dr. Glenn Yee Graduate Student...',
           description: "",
-          section: "News",},{id: "projects-acrobatic-quadrotor-flight",
+          section: "News",},{id: "projects-cadence",
+          title: 'CADENCE',
+          description: "A learned step planner with no fixed gait. Every 40 ms it picks one step, or none, and a model-based controller lands it.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/cadence/";
+            },},{id: "projects-acrobatic-quadrotor-flight",
           title: 'Acrobatic Quadrotor Flight',
           description: "Geometric SE(3) control with an L1 adaptive layer for a simulated Crazyflie: a zero-radius roll flip, recovery to hover, and step-torque rejection.",
           section: "Projects",handler: () => {
@@ -228,11 +233,6 @@ ninja.data = [{
           description: "A simulated Unitree G1 humanoid learns to ice-skate with reinforcement learning, on passive blades that glide along their length and grip sideways.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/g1-ice-skating/";
-            },},{id: "projects-gaitnet",
-          title: 'GaitNet',
-          description: "A learned footstep planner with no fixed gait. Each tick it picks one step, or none, and a model-based controller lands it.",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/gaitnet/";
             },},{id: "projects-go1-ppo-locomotion",
           title: 'Go1 PPO Locomotion',
           description: "PPO walking policies for the Unitree Go1, trained in MuJoCo MJX on MuJoCo Playground&#39;s flat and rough tasks, with a demo on a real Go1.",
