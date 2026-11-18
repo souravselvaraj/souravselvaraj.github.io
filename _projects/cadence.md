@@ -44,4 +44,6 @@ In the run we analyzed, its gait had no fixed period or stepping order, yet most
 
 Submitted to L4DC 2027: O. Sullivan\*, S. Selvaraj\*, and M. Agheli, "CADENCE: Learning Acyclic Gaits for Model-Based Quadruped Locomotion" \*Equal contribution.
 
+Paper: [arxiv.org/abs/2611.23102](https://arxiv.org/abs/2611.23102)
+
 Code: [github.com/opsullivan85/gaitnet](https://github.com/opsullivan85/gaitnet)
