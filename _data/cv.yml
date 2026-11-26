@@ -14,8 +14,8 @@ cv:
   summary: >-
     I study how legged robots choose where to touch the world and how hard to push. I'm an M.S. student in
     Robotics Engineering at WPI, advised by Dr. Mahdi Agheli in the ALMaS Research Group. My research
-    interests are legged robotics, whole-body control and robot learning, and I'm applying to PhD programs
-    for Fall 2027.
+    interests are contact-rich whole-body control and learning for legged and humanoid robots, and I'm
+    applying to PhD programs for Fall 2027.
 
   social_networks:
     - network: GitHub
@@ -33,6 +33,7 @@ cv:
         start_date: 2025-08
         end_date: 2027-05
         highlights:
+          - "Thesis: Continuous Contact-Constrained Whole-Body MPC for Quadruped Robots"
           - "GPA: 4.0/4.0"
 
       - institution: National Institute of Technology, Tiruchirappalli
@@ -51,6 +52,11 @@ cv:
         summary: >-
           Merit-based tuition award for RBE graduate students. One tuition credit for Fall 2026.
 
+      - title: Provost Scholarship
+        awarder: Worcester Polytechnic Institute
+        date: 2025
+        summary: A $10,000 graduate scholarship.
+
       - title: Winner, Smart India Hackathon 2023
         awarder: Ministry of Education, India
         date: 2023
@@ -65,7 +71,7 @@ cv:
         end_date: present
         summary: >-
           Advisor: Dr. Mahdi Agheli. I lead this project. On our Go1, SCRUB completed 5/5 wall and 5/5
-          column trials at a 10 N target force.
+          column trials at a 10 N target force, and 89 of 90 trials across speeds and forces.
 
       - company: ALMaS Research Group, Worcester Polytechnic Institute
         url: https://www.wpi.edu/people/faculty/mmaghelih
@@ -85,11 +91,21 @@ cv:
         end_date: 2025-05
         summary: "Advisor: Dr. D. Ezhilarasi"
 
+      # AvaWatz: title and May 2024 start from the experience letter (24/10/2024); Mar 2025 end per Sourav.
+      - company: AvaWatz
+        position: Machine Learning Intern
+        location: Remote
+        start_date: 2024-05
+        end_date: 2025-03
+        summary: >-
+          I built text-to-image search with CLIP embeddings and a face-recognition pipeline for a
+          video-analytics product.
+
       - company: IIT Madras
         position: "Research Intern: biomimetic autonomous underwater vehicle (BAUV)"
         location: Chennai, India
-        start_date: 2023-03
-        end_date: 2023-09
+        start_date: 2023-05
+        end_date: 2023-08
         summary: >-
           Advisor: Dr. Asokan Thondiyath. I designed a Jetson Orin interface PCB and CAN motor control for
           the Maxon BLDC propulsion drives.
@@ -134,7 +150,7 @@ cv:
           For my Robot Control course, I wrote an SE(3) controller with L1 adaptation for a Crazyflie. In ROS 2
           and Gazebo simulation, it flies a 360° roll flip. I have not flown it on hardware.
 
-      - name: Autonomous rover for the ISRO Robotics Challenge 2024 (Dec 2022 – Aug 2024)
+      - name: Autonomous rover for the ISRO Robotics Challenge 2024 (Sep 2023 – Aug 2024)
         summary: >-
           Our six-wheeled rocker-bogie rover mapped terrain with ORB-SLAM, planned kinodynamic paths and ran
           on custom control electronics.
@@ -150,18 +166,20 @@ cv:
           **Teaching Assistant and Laboratory Curriculum Developer, RBE 521: Legged Robotics**,
           [Worcester Polytechnic Institute](https://www.wpi.edu/), May – Aug 2026. Instructor: Dr. Mahdi Agheli.
           I built hands-on lab modules for this graduate course on the Unitree Go1 and G1.
+      - bullet: >-
+          **Graduate Grader, RBE 3001**, [Worcester Polytechnic Institute](https://www.wpi.edu/), 2026 – present.
 
     Academic Service & Leadership:
       - bullet: >-
           **Reviewer**, IEEE Transactions on Automation Science and Engineering (T-ASE), Jan – Feb 2026.
       - bullet: >-
-          **Team Lead, ISRO Robotics Challenge 2024**, [NIT Trichy](https://www.nitt.edu/), Dec 2022 – Aug 2024.
+          **Team Lead, ISRO Robotics Challenge 2024**, [NIT Trichy](https://www.nitt.edu/), Sep 2023 – Aug 2024.
           Led a 10-member team building an autonomous rover.
 
     Skills:
       - name: Software
         icon: fa-solid fa-cubes
-        keywords: "ROS 2, MuJoCo, Isaac Lab, Gazebo, PyTorch, OCS2, Pinocchio, Docker"
+        keywords: "ROS 1/2, MuJoCo, Isaac Lab, Gazebo, PyTorch, OCS2, Pinocchio, Docker"
       - name: Programming
         icon: fa-solid fa-code
         keywords: "C/C++, Python, MATLAB/Simulink"
