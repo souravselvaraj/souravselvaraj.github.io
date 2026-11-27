@@ -42,7 +42,7 @@ Even its weakest seed beat the trot by 10.5 points. The baselines are OCS2's sto
 
 In the run we analyzed, its gait had no fixed period or stepping order, yet mostly paired diagonal legs. All results are from simulation.
 
-Submitted to L4DC 2027: O. Sullivan\*, S. Selvaraj\*, and M. Agheli, "CADENCE: Learning Acyclic Gaits for Model-Based Quadruped Locomotion" \*Equal contribution.
+Under review at L4DC 2027: O. Sullivan\*, S. Selvaraj\*, and M. Agheli, "CADENCE: Learning Acyclic Gaits for Model-Based Quadruped Locomotion" \*Equal contribution.
 
 Paper: [arxiv.org/abs/2611.23102](https://arxiv.org/abs/2611.23102)
 

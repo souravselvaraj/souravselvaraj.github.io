@@ -50,7 +50,8 @@ cv:
         awarder: Robotics Engineering Department, Worcester Polytechnic Institute
         date: 2026-08
         summary: >-
-          Merit-based tuition award for RBE graduate students. One tuition credit for Fall 2026.
+          Merit-based tuition award for RBE graduate students; one of 7 recipients among RBE M.S. and Ph.D.
+          students. One tuition credit for Fall 2026.
 
       - title: Provost Scholarship
         awarder: Worcester Polytechnic Institute
@@ -60,7 +61,7 @@ cv:
       - title: Winner, Smart India Hackathon 2023
         awarder: Ministry of Education, India
         date: 2023
-        summary: A nationwide student innovation competition.
+        summary: A nationwide student innovation competition, with 200+ submissions in our problem statement.
 
     Experience:
       - company: ALMaS Research Group, Worcester Polytechnic Institute
@@ -108,18 +109,18 @@ cv:
         end_date: 2023-08
         summary: >-
           Advisor: Dr. Asokan Thondiyath. I designed a Jetson Orin interface PCB and CAN motor control for
-          the Maxon BLDC propulsion drives.
+          the Maxon BLDC propulsion drives of a vehicle tested in a pool.
 
     Publications:
       - title: "SCRUB: Contact-Based Surface-Frame Estimation for Force–Motion Control with an Armless Quadruped"
         url: /projects/scrub/
-        publisher: arXiv:2611.06649 (submitted to IEEE RA-L)
+        publisher: arXiv:2611.06649 (under review at IEEE RA-L)
         releaseDate: 2026
         summary: S. Selvaraj, J. P. Espinosa Chessal, and M. Agheli.
 
       - title: "CADENCE: Learning Acyclic Gaits for Model-Based Quadruped Locomotion"
         url: /projects/cadence/
-        publisher: arXiv:2611.23102 (submitted to L4DC 2027)
+        publisher: arXiv:2611.23102 (under review at L4DC 2027)
         releaseDate: 2026
         summary: >-
           O. Sullivan\*, S. Selvaraj\*, and M. Agheli (\*equal contribution).
@@ -167,7 +168,7 @@ cv:
           [Worcester Polytechnic Institute](https://www.wpi.edu/), May – Aug 2026. Instructor: Dr. Mahdi Agheli.
           I built hands-on lab modules for this graduate course on the Unitree Go1 and G1.
       - bullet: >-
-          **Graduate Grader, RBE 3001**, [Worcester Polytechnic Institute](https://www.wpi.edu/), 2026 – present.
+          **Graduate Grader, Unified Robotics III: Manipulation (RBE 3001)**, [Worcester Polytechnic Institute](https://www.wpi.edu/), 2026 – present.
 
     Academic Service & Leadership:
       - bullet: >-

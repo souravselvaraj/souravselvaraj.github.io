@@ -25,9 +25,9 @@ announcements:
 
 I study how legged robots choose where to touch the world and how hard to push. I'm an M.S. student in Robotics Engineering at [WPI](https://www.wpi.edu/), advised by Dr. Mahdi Agheli in the [ALMaS Research Group](https://www.wpi.edu/people/faculty/mmaghelih).
 
-I lead [SCRUB]({{ '/projects/scrub/' | relative_url }}), in which our Go1 slides a tool along an unmapped wall or column. It works out which way the surface faces from the contact itself. It's on [arXiv](https://arxiv.org/abs/2611.06649) and submitted to IEEE RA-L.
+I lead [SCRUB]({{ '/projects/scrub/' | relative_url }}), in which our Go1 slides a tool along an unmapped wall or column. It works out which way the surface faces from the contact itself. It's on [arXiv](https://arxiv.org/abs/2611.06649) and under review at IEEE RA-L.
 
-In [CADENCE]({{ '/projects/cadence/' | relative_url }}), a learned planner picks each footstep for a model-based controller. I'm co-first author with Owen Sullivan, and it builds on his master's thesis, GaitNet. It's on [arXiv](https://arxiv.org/abs/2611.23102) and submitted to L4DC 2027.
+In [CADENCE]({{ '/projects/cadence/' | relative_url }}), a learned planner picks each footstep for a model-based controller. I'm co-first author with Owen Sullivan, and it builds on his master's thesis, GaitNet. It's on [arXiv](https://arxiv.org/abs/2611.23102) and under review at L4DC 2027.
 
 Other projects include [ice skating]({{ '/projects/g1-ice-skating/' | relative_url }}) and [bimanual lifting]({{ '/projects/g1-bimanual-lifting/' | relative_url }}) on the Unitree G1, and [flow matching policies]({{ '/projects/flow-matching-policies/' | relative_url }}).
 
